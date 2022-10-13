@@ -1,7 +1,7 @@
 #include <Arduino.h> 
 // ---------------------------------------------------------------- //
 // Arduino Ultrasoninc Sensor HC-SR04
-// Re-writed by Arbi Abdul Jabbaar
+// Re-written by Arbi Abdul Jabbaar
 // Using Arduino IDE 1.8.7
 // Using HC-SR04 Module
 // Tested on 17 September 2019
@@ -44,5 +44,5 @@ void loop()
 
 uint8_t get_distance()
 {
-    return distance;
+    return distance; // return
 }
