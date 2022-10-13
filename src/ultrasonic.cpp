@@ -1,4 +1,5 @@
 #include <Arduino.h> 
+#include <Wire.h>
 // ---------------------------------------------------------------- //
 // Arduino Ultrasoninc Sensor HC-SR04
 // Re-written by Arbi Abdul Jabbaar
