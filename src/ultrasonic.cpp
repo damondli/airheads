@@ -1,4 +1,4 @@
-#include <Arduino.h> 
+/*#include <Arduino.h> 
 #include <Wire.h>
 // ---------------------------------------------------------------- //
 // Arduino Ultrasoninc Sensor HC-SR04
@@ -47,3 +47,4 @@ uint8_t get_distance()
 {
     return distance; // return
 }
+*/
