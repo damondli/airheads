@@ -1,6 +1,8 @@
-/*
+/**
 #include <Arduino.h> 
 #include <Wire.h>
+#include "taskshare.h"
+
 // ---------------------------------------------------------------- //
 // Arduino Ultrasoninc Sensor HC-SR04
 // Re-written by Arbi Abdul Jabbaar
@@ -9,8 +11,8 @@
 // Tested on 17 September 2019
 // ---------------------------------------------------------------- //
 
-#define echoPin 12 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin 13 //attach pin D3 Arduino to pin Trig of HC-SR04
+#define echoPin 23 // attach pin D2 Arduino to pin Echo of HC-SR04
+#define trigPin 22 //attach pin D3 Arduino to pin Trig of HC-SR04
 
 // defines variables
 long duration; // variable for the duration of sound wave travel
@@ -48,4 +50,5 @@ uint8_t get_distance()
 {
     return distance; // return
 }
+
 */

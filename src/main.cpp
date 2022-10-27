@@ -1,51 +1,101 @@
-#include <Arduino.h> 
-#include <Wire.h>
-#include "taskshare.h"
 
-// ---------------------------------------------------------------- //
-// Arduino Ultrasoninc Sensor HC-SR04
-// Re-written by Arbi Abdul Jabbaar
-// Using Arduino IDE 1.8.7
-// Using HC-SR04 Module
-// Tested on 17 September 2019
-// ---------------------------------------------------------------- //
+/** @file main.cpp
+ */
 
-#define echoPin 23 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin 22 //attach pin D3 Arduino to pin Trig of HC-SR04
+#include <Arduino.h>
+#include "DRV8871.h"
+#include "PrintStream.h"
 
-// defines variables
-long duration; // variable for the duration of sound wave travel
-float distance; // variable for the distance measurement
+// Motor 1
+#define M1_PIN_A 16
+#define M1_PIN_B 13
+#define CHANNEL_M1A 0
+#define CHANNEL_M1B 1
 
-void setup() 
+// Motor 2
+#define M2_PIN_A 32
+#define M2_PIN_B 33
+#define CHANNEL_M2A 2
+#define CHANNEL_M2B 3
+
+
+/** @brief   
+ *  @details 
+ *  @param   p_params A pointer to parameters passed to this task. This 
+ *           pointer is ignored; it should be set to @c NULL in the 
+ *           call to @c xTaskCreate() which starts this task
+ */
+void task_motor_A (void* p_params)
 {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
-  Serial.begin(115200); // // Serial Communication is starting with 9600 of baudrate speed
-  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
-  Serial.println("with Arduino UNO R3");
+    Serial << "Motor driver A is set. " << endl;
+
+    //DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
+
+    uint8_t duty = 50;
+
+    while (true)
+    {
+      //motor_A.set_duty(duty);
+      vTaskDelay(500);
+    }
 }
 
-void loop() 
+
+
+/** @brief   
+ *  @details 
+ *  @param   p_params An unused pointer to (no) parameters passed to this task
+ */
+void task_motor_B (void* p_params)
 {
-  // Clears the trigPin condition
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-  // Displays the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
+    Serial << "Motor driver B is set. " << endl;
+
+    DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
+
+    while (true)
+    {
+      motor_B.set_duty(75);
+      Serial.print(motor_B.duty);
+      vTaskDelay(500);
+    }
 }
 
-uint8_t get_distance()
+
+/** @brief   The Arduino setup function.
+ *  @details This function is used to set up the microcontroller by starting
+ *           the serial port and creating the tasks.
+ */
+void setup (void) 
 {
-    return distance; // return
+    // The serial port must begin before it may be used
+    Serial.begin (115200);
+
+    // Wait for serial to finish setting up before proceeding
+    while (!Serial) 
+    {
+    }
+
+    Serial << "Serial is ready. " << endl;
+
+    // Create the task which outputs the high frequency square wave.
+    // xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
+    
+    // Create the task which outputs the low frequency square wave.
+    // xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
+
+    DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
+    motor_A.set_duty(50);
+
+}
+
+
+/** @brief   The Arduino loop function.
+ *  @details This function is called periodically by the Arduino system. It
+ *           runs as a low priority task. On some microcontrollers it will
+ *           crash when FreeRTOS is running, so we usually don't use this
+ *           function for anything. 
+ */
+
+void loop (void)
+{
 }
