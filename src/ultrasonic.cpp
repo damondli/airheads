@@ -1,54 +1,78 @@
-/**
-#include <Arduino.h> 
-#include <Wire.h>
+/** @file ultrasonic.cpp
+ *  This Arduino Library operates an HC-SR04 Ultrasonic Sensor
+ *  @author Arielle Sampson and Damond Li
+ *  @date 2022-Nov-03 
+ *  @copyright 
+ */
+
+#include <Arduino.h>
+#include "ultrasonic.h"
 #include "taskshare.h"
+#include <Wire.h>
 
-// ---------------------------------------------------------------- //
-// Arduino Ultrasoninc Sensor HC-SR04
-// Re-written by Arbi Abdul Jabbaar
-// Using Arduino IDE 1.8.7
-// Using HC-SR04 Module
-// Tested on 17 September 2019
-// ---------------------------------------------------------------- //
-
-#define echoPin 23 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin 22 //attach pin D3 Arduino to pin Trig of HC-SR04
-
-// defines variables
-long duration; // variable for the duration of sound wave travel
-float distance; // variable for the distance measurement
-
-void setup() 
+ultrasonic::ultrasonic(uint8_t echo, uint8_t trig)
 {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
-  Serial.begin(115200); // // Serial Communication is starting with 9600 of baudrate speed
-  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
-  Serial.println("with Arduino UNO R3");
+    trigPin = trig;
+    echoPin = echo;
 }
 
-void loop() 
+float ultrasonic::get_distance (void)
 {
-  // Clears the trigPin condition
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-  // Displays the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
+    float echoTime; // define variable to store time it takes for a ping
+                        // to bounce off an object
+    float distance; // variable to store calculated distance
+    long duration; // variable for the duration of sound wave travel
+          
+    // Clears the trigPin condition
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
+
+    // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
+
+    // Reads the echoPin, returns the sound wave travel time in microseconds
+    duration = pulseIn(echoPin, HIGH);
+
+    // Calculating the distance
+    distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+            
+    return distance; // return distance measurement in cm
 }
 
-uint8_t get_distance()
+
+/** @brief   The Arduino setup function.
+ *  @details This function is used to set up the microcontroller by starting
+ *           the serial port and creating the assigned tasks.
+ */
+void setup(void)
 {
-    return distance; // return
+    Serial.begin (115200); // The serial port must begin before it may be used
+    
+    uint8_t trigPin = 12;
+    uint8_t echoPin = 13;
+
+    pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
+    pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
+
+    ultrasonic sensor = ultrasonic(echoPin, trigPin);
 }
 
-*/
+
+/** @brief   The Arduino loop function. Empty for this assignment.
+ *  @details This function is called periodically by the Arduino system. It
+ *           runs as a low priority task. On some microcontrollers it will
+ *           crash when FreeRTOS is running, so we usually don't use this
+ *           function for anything, instead just having it delay itself. 
+ */
+// void loop (void)
+// {
+//     distance = get_distance(); // variable to store the distance measured by the sensor
+
+//     // Displays the distance on the Serial Monitor
+//     Serial.print("Distance: ");
+//     Serial.print(distance);
+//     Serial.println(" cm");
+//     vTaskDelay (10);
+// }
