@@ -13,8 +13,12 @@ DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channe
     uint8_t PIN_A = pin_A;
     uint8_t PIN_B = pin_B;
 
-    uint8_t CHANNEL_A = channel_A;
-    uint8_t CHANNEL_B = channel_B;
+    // uint8_t CHANNEL_A = channel_A;
+    // uint8_t CHANNEL_B = channel_B;
+
+    uint8_t CHANNEL_A = 0;
+    uint8_t CHANNEL_B = 0;
+
 
     // Setup pins
     ledcSetup(CHANNEL_A, frequency, resolution);
@@ -60,16 +64,22 @@ void DRV8871::set_duty(uint8_t duty_cycle)
 
     if (duty > 0) // Use Channel A
     {
+        // ledcWrite(CHANNEL_A, duty);
+        // ledcWrite(CHANNEL_B, 0);
         ledcWrite(CHANNEL_A, duty);
         ledcWrite(CHANNEL_B, 0);
     }
     else if (duty < 0) // Use Channel B
     {
+        // ledcWrite(CHANNEL_B, (-1 * duty));
+        // ledcWrite(CHANNEL_A, 0);
         ledcWrite(CHANNEL_B, (-1 * duty));
         ledcWrite(CHANNEL_A, 0);
     }
     else
     {
+        // ledcWrite(CHANNEL_A, 0);
+        // ledcWrite(CHANNEL_B, 0);
         ledcWrite(CHANNEL_A, 0);
         ledcWrite(CHANNEL_B, 0);
     }
