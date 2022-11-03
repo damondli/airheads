@@ -10,14 +10,12 @@
 DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channel_B)
 {
     // Establish the out pins
-    uint8_t PIN_A = pin_A;
-    uint8_t PIN_B = pin_B;
+    PIN_A = pin_A;
+    PIN_B = pin_B;
 
-    // uint8_t CHANNEL_A = channel_A;
-    // uint8_t CHANNEL_B = channel_B;
-
-    uint8_t CHANNEL_A = 0;
-    uint8_t CHANNEL_B = 0;
+    // Establish the channels
+    CHANNEL_A = channel_A;
+    CHANNEL_B = channel_B;
 
 
     // Setup pins
@@ -31,10 +29,7 @@ DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channe
 
 void DRV8871::enable(void)
 {
-    /*
-    digitalWrite (PIN_A, LOW);
-    digitalWrite (PIN_B, LOW);
-    */
+    // Enable the motor
 }
 
 void DRV8871::disable(void)
@@ -43,10 +38,9 @@ void DRV8871::disable(void)
     ledcWrite(CHANNEL_B, 0);
 }
 
-void DRV8871::set_duty(uint8_t duty_cycle)
+void DRV8871::set_duty(uint16_t duty_cycle)
 {
     // Check max and min boundaries for duty cycle inputs
-    // uint8_t duty;
     if (duty_cycle > 100)
     {
         duty = 100;
@@ -64,22 +58,16 @@ void DRV8871::set_duty(uint8_t duty_cycle)
 
     if (duty > 0) // Use Channel A
     {
-        // ledcWrite(CHANNEL_A, duty);
-        // ledcWrite(CHANNEL_B, 0);
         ledcWrite(CHANNEL_A, duty);
         ledcWrite(CHANNEL_B, 0);
     }
     else if (duty < 0) // Use Channel B
     {
-        // ledcWrite(CHANNEL_B, (-1 * duty));
-        // ledcWrite(CHANNEL_A, 0);
         ledcWrite(CHANNEL_B, (-1 * duty));
         ledcWrite(CHANNEL_A, 0);
     }
     else
     {
-        // ledcWrite(CHANNEL_A, 0);
-        // ledcWrite(CHANNEL_B, 0);
         ledcWrite(CHANNEL_A, 0);
         ledcWrite(CHANNEL_B, 0);
     }

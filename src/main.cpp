@@ -29,13 +29,13 @@ void task_motor_A (void* p_params)
 {
     Serial << "Motor driver A is set. " << endl;
 
-    //DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
+    DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
 
-    uint8_t duty = 50;
+    uint16_t duty = 50;
 
     while (true)
     {
-      //motor_A.set_duty(duty);
+      motor_A.set_duty(duty);
       vTaskDelay(500);
     }
 }
@@ -52,10 +52,11 @@ void task_motor_B (void* p_params)
 
     DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
 
+    uint16_t duty = 50;
+
     while (true)
     {
       motor_B.set_duty(75);
-      Serial.print(motor_B.duty);
       vTaskDelay(500);
     }
 }
@@ -78,13 +79,16 @@ void setup (void)
     Serial << "Serial is ready. " << endl;
 
     // Create the task which outputs the high frequency square wave.
-    // xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
+    xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
     
     // Create the task which outputs the low frequency square wave.
-    // xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
+    xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
 
-    DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
-    motor_A.set_duty(50);
+    // DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
+    // DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
+
+    // motor_A.set_duty(50);
+    // motor_B.set_duty(50);
 
 }
 
