@@ -7,7 +7,7 @@ elevators or rudder, since there is high friction. We can
 direct the motor to turn until it reaches the desired position.
 
 The PID controller will apply to the angle of the plane.
-The control output will be the position of the elevator and
+The control output will be the position of the elevator or
 rudder.
 
 Because we are controlling both pitch and yaw, this is a 
@@ -74,13 +74,16 @@ CONTROLLER
 IMU
     @class IMU
         Methods:
-            Get roll
-            Get pitch
-            Get yaw
-            Get roll vel
-            Get pitch vel
-            Get yaw vel
+            Get angles
+            Get angular velocities
     Objects: planeIMU
+
+ULTRASONIC
+    @class Ultrasonic
+        Methods:
+            Get distance
+    Objects: planeUSS
+
 
 
 */
