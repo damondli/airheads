@@ -32,7 +32,7 @@ void DRV8871::enable(void)
 }
 
 void DRV8871::disable(void)
-{yuop[\]
+{
     ledcWrite(CHANNEL_A, 0);
     ledcWrite(CHANNEL_B, 0);
 }
