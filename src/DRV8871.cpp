@@ -2,7 +2,6 @@
  * 
  */
 
-
 #include <Arduino.h>
 #include "DRV8871.h"
 #include "PrintStream.h"
@@ -38,7 +37,7 @@ void DRV8871::disable(void)
     ledcWrite(CHANNEL_B, 0);
 }
 
-void DRV8871::set_duty(uint16_t duty_cycle)
+void DRV8871::set_duty(int16_t duty_cycle)
 {
     // Check max and min boundaries for duty cycle inputs
     if (duty_cycle > 100)

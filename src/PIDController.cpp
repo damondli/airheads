@@ -10,17 +10,22 @@
 #include <Arduino.h>
 #include "PIDController.h"
 #include "taskshare.h"
+#include "math.h"
 
 
 /** @brief Initialize PIDController class
  */
-PIDController::PIDController() { }
+PIDController::PIDController() 
+{
+
+}
 
 
 
 /** @brief Set gains to user-inputted values
  */
-void PIDController::setGains(float Kp, float Ki, float Kd) {
+void PIDController::setGains(float Kp, float Ki, float Kd) 
+{
     PIDController::Kp = Kp;
     PIDController::Ki = Ki;
     PIDController::Kd = Kd;
@@ -29,7 +34,8 @@ void PIDController::setGains(float Kp, float Ki, float Kd) {
 /** @brief Calculate control surface angle outputted by the
  *  PID controller
  */
-float PIDController::getCtrlSurfAngle() {
+float PIDController::getCtrlSurfAngle() 
+{
     // Get angle from IMU
     // Get angular velocity from IMU
     // Find error in angle and add that to error integral
@@ -38,7 +44,17 @@ float PIDController::getCtrlSurfAngle() {
     // Return control surface angle
 }
 
-
+// We can determine the desired position from a separate function within 
+// this class
+// Current position will be retrieved from the potentiometer
+int8_t PIDController::motorOutput(float currPos, float desPos)
+{
+    // Calculate the differenct between the desired and current position
+    float difference = desPos - currPos;
+    // Multiply by the proportional gain, implement Kd and Ki if needed
+    int8_t duty_cycle = round(difference * k_motor);
+    return duty_cycle;
+}
 
 
 
