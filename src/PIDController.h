@@ -21,12 +21,16 @@ protected:
 
     float errIntegral;  // Integral of error in angle
 
+    float k_motor = 1;  // Gain for the motor
+
 public:
     PIDController(/* Arguments...? */);
 
     void setGains(float Kp, float Ki, float Kd);
     float getCtrlSurfAngle(void);
 
+    // Determine duty cycle to run the motors
+    int8_t motorOutput(float currPos, float desPos);
 };
 
 #endif // _CONTROLLER_
