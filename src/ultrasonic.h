@@ -9,8 +9,6 @@
 #define ULTRASONIC
 
 #include <Arduino.h>
-#include "taskshare.h"
-#include <Wire.h>
 
 class ultrasonic //This class operates an HC_SR04 Ultrasonic Sensor 
 {
@@ -28,7 +26,6 @@ public:
     ultrasonic (uint8_t echoPin, uint8_t trigPin);
 
     float get_distance (void);
-
 };
 
 #endif // ULTRASONIC

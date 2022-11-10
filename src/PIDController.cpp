@@ -7,7 +7,6 @@
 
 #include <Arduino.h>
 #include "PIDController.h"
-#include "taskshare.h"
 #include "math.h"
 
 
@@ -37,13 +36,15 @@ void PIDController::setGains(float Kp, float Ki, float Kd)
 
 /** @brief Calculate PID control output at current time
  */
-float PIDController::getControlOutput(float posCurrent, float posDesired) 
+float PIDController::getCtrlOutput(float posCurrent, float posDesired) 
 {
     float err = posDesired - posCurrent;
-    float ierr = PIDController::errIntegral + err*PIDController::dt;
+    PIDController::errIntegral += err*PIDController::dt;
     float derr = (err - PIDController::errPrev) / PIDController::dt;
 
-    return PIDController::Kp*err + PIDController::Ki*ierr + PIDController::Kd*derr;
+    return ( PIDController::Kp*err 
+           + PIDController::Ki*PIDController::errIntegral 
+           + PIDController::Kd*derr );
 
     PIDController::errPrev = err;
 }

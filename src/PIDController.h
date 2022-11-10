@@ -28,7 +28,7 @@ public:
     PIDController(float Kp, float Ki, float Kd, float dt);
 
     void setGains(float Kp, float Ki, float Kd);
-    float getControlOutput(float posCurrent, float posDesired);
+    float getCtrlOutput(float posCurrent, float posDesired);
 };
 
 #endif // _CONTROLLER_H_
