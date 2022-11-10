@@ -11,7 +11,8 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-void task_elevator (void* p_params)
-void task_rudder (void* p_params)
+void task_elevator (void* p_params);
+
+void task_rudder (void* p_params);
 
 #endif

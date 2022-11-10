@@ -9,6 +9,7 @@
  */
 
 #include <Arduino.h>
+#include "PIDController.h"
 
 int analogInPin = A0;
 int sensorValue = 0;
@@ -16,13 +17,43 @@ int outputValue = 0;
 int transistorPin = 3;
 
 int danger_pitch = 61; // dangerous pitch angle
- 
-/** @brief   Task which moves the elevator of a model airplane.
+
+/** @brief Check control surface angles from IMU and calculate
+ *          the desired rudder and elevator angles. 
+ */
+/** @brief   Task which moves the rudder of a model airplane.
  *  @details This task moves a DC motor in microservo body which
- *             moves the elevator of a model airplane, changing
- *              the airplane's pitch during flight.
+ *             moves the rudder of a model airplane, changing
+ *              the airplane's yaw during flight.
  *  @param   p_params 
  */
+float PIDController::setRudderAngle() 
+{
+    // Inputs: actual yaw from getCtrlSurfAngle(), desired yaw
+    // Outputs: desired rudder angle
+    // If (Actual Yaw) is left from (Desired Yaw), set (Desired Rudder Angle) to the right 
+    // If (Actual Yaw) is right from (Desired Yaw), set (Desired Rudder Angle) to the left
+}
+
+/** @brief Check control surface angles from IMU and calculate
+ *          the desired rudder and elevator angles. 
+ */
+/** @brief   Task which moves the rudder of a model airplane.
+ *  @details This task moves a DC motor in microservo body which
+ *             moves the rudder of a model airplane, changing
+ *              the airplane's yaw during flight.
+ *  @param   p_params 
+ */
+float PIDController::setElevatorAngle() 
+{
+    // Inputs: actual pitch from getCtrlSurfAngle(), desired pitch, speed, desired  speed
+    // Outputs: desired elevator angle
+    // If (Actual Pitch) is above (upper limit), set (Desired Elevator Angle) down  
+    // If (Actual Pitch) is below (lower limit), set (Desired Elevator Angle) up
+        // If (Actual Pitch) is above (Desired Pitch), set (Desired Elevator Angle) down
+        // 
+}
+
 void task_elevator (void* p_params)
 {
     for (;;)
@@ -53,11 +84,8 @@ void task_rudder (void* p_params)
  */
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin (115200); // The serial port must begin before it may be used
 
-    pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
-    pinMode(transistorPin, OUTPUT);
 }
 
 /** @brief   The Arduino loop function. Empty for this assignment.
@@ -80,8 +108,7 @@ analogWrite(transistorPin, sensorValue);
 
     else
     { 
-        digitalWrite(9, HIGH);
-        digitalWrite(8, LOW);
+        
     }
 
     delay(10);   
