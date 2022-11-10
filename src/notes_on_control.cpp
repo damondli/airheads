@@ -1,6 +1,8 @@
 
 
-/**
+/*
+
+OLD. SEE WORD DOCUMENT.
 
 We probably do not need a PID or similar controller on the
 elevators or rudder, since there is high friction. We can 
