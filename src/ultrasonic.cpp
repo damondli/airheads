@@ -46,18 +46,18 @@ float ultrasonic::get_distance (void)
  *  @details This function is used to set up the microcontroller by starting
  *           the serial port and creating the assigned tasks.
  */
-void setup(void)
-{
-    Serial.begin (115200); // The serial port must begin before it may be used
+// void setup(void)
+// {
+//     Serial.begin (115200); // The serial port must begin before it may be used
     
-    uint8_t trigPin = 12;
-    uint8_t echoPin = 13;
+//     uint8_t trigPin = 12;
+//     uint8_t echoPin = 13;
 
-    pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
-    pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
+//     pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
+//     pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
 
-    ultrasonic sensor = ultrasonic(echoPin, trigPin);
-}
+//     ultrasonic sensor = ultrasonic(echoPin, trigPin);
+// }
 
 
 /** @brief   The Arduino loop function. Empty for this assignment.

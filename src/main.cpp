@@ -5,7 +5,9 @@
 #include <Arduino.h>
 #include "DRV8871.h"
 #include "PrintStream.h"
+#include "potentiometer.h"
 
+/*
 // Motor 1
 #define M1_PIN_A 16
 #define M1_PIN_B 13
@@ -17,6 +19,9 @@
 #define M2_PIN_B 33
 #define CHANNEL_M2A 2
 #define CHANNEL_M2B 3
+*/
+
+
 
 
 /** @brief   
@@ -25,20 +30,20 @@
  *           pointer is ignored; it should be set to @c NULL in the 
  *           call to @c xTaskCreate() which starts this task
  */
-void task_motor_A (void* p_params)
-{
-    Serial << "Motor driver A is set. " << endl;
+// void task_motor_A (void* p_params)
+// {
+//     Serial << "Motor driver A is set. " << endl;
 
-    DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
+//     DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
 
-    uint16_t duty = 50;
+//     uint16_t duty = 50;
 
-    while (true)
-    {
-      motor_A.set_duty(duty);
-      vTaskDelay(500);
-    }
-}
+//     while (true)
+//     {
+//       motor_A.set_duty(duty);
+//       vTaskDelay(500);
+//     }
+// }
 
 
 
@@ -46,18 +51,38 @@ void task_motor_A (void* p_params)
  *  @details 
  *  @param   p_params An unused pointer to (no) parameters passed to this task
  */
-void task_motor_B (void* p_params)
+// void task_motor_B (void* p_params)
+// {
+//     Serial << "Motor driver B is set. " << endl;
+
+//     DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
+
+//     uint16_t duty = 50;
+
+//     while (true)
+//     {
+//       motor_B.set_duty(75);
+//       vTaskDelay(500);
+//     }
+// }
+
+/** @brief   
+ *  @details 
+ *  @param   p_params An unused pointer to (no) parameters passed to this task
+ */
+void task_pot (void* p_params)
 {
-    Serial << "Motor driver B is set. " << endl;
+    Serial << "Pot Task is ready. " << endl;
 
-    DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
+    const uint8_t PIN = 13;
+    float offset = 0;
 
-    uint16_t duty = 50;
+    potentiometer pot = potentiometer(PIN, offset);
 
     while (true)
     {
-      motor_B.set_duty(75);
-      vTaskDelay(500);
+      Serial << pot.get_voltage();
+      vTaskDelay(100);
     }
 }
 
@@ -78,11 +103,15 @@ void setup (void)
 
     Serial << "Serial is ready. " << endl;
 
+  
     // Create the task which outputs the high frequency square wave.
-    xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
+    // xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
     
     // Create the task which outputs the low frequency square wave.
-    xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
+    // xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
+
+    // Task for the potentiometer testing
+    xTaskCreate (task_pot, "Motor B", 2048, NULL, 3, NULL);
 
     // DRV8871 motor_A = DRV8871(M1_PIN_A, M1_PIN_B, CHANNEL_M1A, CHANNEL_M1B);
     // DRV8871 motor_B = DRV8871(M2_PIN_A, M2_PIN_B, CHANNEL_M2A, CHANNEL_M2B);
