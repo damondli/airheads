@@ -121,26 +121,35 @@ void task_controller (void* p_params)
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
 
     // Initialize variables
-    float yawC;           // Current yaw (deg)
-    float yawD;           // Desired yaw (deg)
-    float pitchC;         // Current pitch (deg)
-    float pitchD;         // Desired pitch (deg)
+    float yawC;                 // Current yaw (deg)
+    float yawD;                 // Desired yaw (deg)
+    float pitchC;               // Current pitch (deg)
+    float pitchD;               // Desired pitch (deg)   
 
-    float rudderAngleD;   // Desired rudder angle (deg)
-    float rudderAngleC;   // Current rudder angle (deg)
-    float elevAngleD;     // Desired elevator angle (deg)
-    float elevAngleC;     // Current elevator angle (deg)
+    float rudderAngleD;         // Desired rudder angle (deg)
+    float rudderAngleC;         // Current rudder angle (deg)
+    float rudderAngleMin = 0;   // Minimum allowable rudder angle (deg)
+    float rudderAngleMax = 0;   // Maximum allowable rudder angle (deg)
+
+    float elevAngleD;           // Desired elevator angle (deg)
+    float elevAngleC;           // Current elevator angle (deg)
+    float elevAngleMin = 0;     // Minimum allowable elevator angle (deg)
+    float elevAngleMax = 0;     // Maximum allowable elevator angle (deg)
+
+    float rudderDutyD;          // Rudder motor duty cycle (-100% to 100% incl.)
+    float elevDutyD;            // Elev motor duty cycle (-100% to 100% incl.)
+
     
     while (true) 
     {
         // Check whether the glider is near ground
         if (near_ground.get()) 
         {
-            pitchD = 5;
+            pitchD = 5;   // NEEDS TUNING
         }
         else 
         {
-            pitchD = 0;
+            pitchD = 0;   // NEEDS TUNING
         }
 
         yawD = 0;
@@ -149,13 +158,48 @@ void task_controller (void* p_params)
         yawC = /* get yaw from IMU*/ 0;
         pitchC = /* get pitch from IMU*/ 0;
     
-        // Calculate desired control surface angles
+        // Calculate desired rudder angle and then saturate
         rudderAngleD = yaw2rudder.getCtrlOutput(yawC,yawD);
-        rudder_duty.put(rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD));
+        if (rudderAngleD > rudderAngleMax) {
+            rudderAngleD = rudderAngleMax;
+        }
+        else if (rudderAngleD < rudderAngleMin) {
+            rudderAngleD = rudderAngleMin;
+        }
+
+        // Calculate desired rudder motor duty cycle, saturate, then put to share
+        rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD);
+        if (rudderDutyD > 100) {
+            rudder_duty.put(100);
+        }
+        else if (rudderDutyD < -100) {
+            rudder_duty.put(-100);
+        }
+        else {
+            rudder_duty.put((int16_t) round(rudderDutyD));
+        }
         
+        // Calculate desired elecator angle and then saturate
         elevAngleD = pitch2elev.getCtrlOutput(pitchC,pitchD);
-        elev_duty.put(elev2duty.getCtrlOutput(elevAngleC,elevAngleD));
-        
+        if (elevAngleD > elevAngleMax) {
+            elevAngleD = elevAngleMax;
+        }
+        else if (elevAngleD < elevAngleMin) {
+            elevAngleD = elevAngleMin;
+        }
+
+        // Calculate desired elevator motor duty cycle, saturate, then put to share
+        elevDutyD = elev2duty.getCtrlOutput(elevAngleC,elevAngleD);
+        if (elevDutyD > 100) {
+            elev_duty.put(100);
+        }
+        else if (elevDutyD < -100) {
+            elev_duty.put(-100);
+        }
+        else {
+            elev_duty.put((int16_t) round(elevDutyD));
+        }
+
         vTaskDelay(TASK_CONTROLLER_PERIOD);
     }
 }
