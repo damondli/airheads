@@ -111,96 +111,135 @@ void task_controller (void* p_params)
     const uint8_t TASK_CONTROLLER_PERIOD = 10;  // Period of controller task (ms)
 
     // Controller objects
-    PIDController yaw2rudder =    // Controller for rudder angle based on yaw
+    PIDController yaw2rudder =      // Controller for rudder angle based on yaw
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD); 
-    PIDController rudder2duty =   // Controller for duty cycle based on rudder angle
+    PIDController rudder2duty =     // Controller for duty cycle based on rudder angle
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
-    PIDController pitch2elev =    // Controller for elevator angle based on pitch
+    PIDController pitch2elev =      // Controller for elevator angle based on pitch
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
-    PIDController elev2duty =     // Controller for duty cycle based on elevator angle
+    PIDController elev2duty =       // Controller for duty cycle based on elevator angle
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
 
     // Initialize variables
-    float yawC;                 // Current yaw (deg)
-    float yawD;                 // Desired yaw (deg)
-    float pitchC;               // Current pitch (deg)
-    float pitchD;               // Desired pitch (deg)   
+    float yawC;                     // Current yaw (deg)
+    float yawD;                     // Desired yaw (deg)
+    float pitchC;                   // Current pitch (deg)
+    float pitchD;                   // Desired pitch (deg)   
 
-    float rudderAngleD;         // Desired rudder angle (deg)
-    float rudderAngleC;         // Current rudder angle (deg)
-    float rudderAngleMin = 0;   // Minimum allowable rudder angle (deg)
-    float rudderAngleMax = 0;   // Maximum allowable rudder angle (deg)
+    float rudderAngleD;             // Desired rudder angle (deg)
+    float rudderAngleC;             // Current rudder angle (deg)
+    float rudderAngleMin = 0;       // Minimum allowable rudder angle (deg)
+    float rudderAngleMax = 0;       // Maximum allowable rudder angle (deg)
 
-    float elevAngleD;           // Desired elevator angle (deg)
-    float elevAngleC;           // Current elevator angle (deg)
-    float elevAngleMin = 0;     // Minimum allowable elevator angle (deg)
-    float elevAngleMax = 0;     // Maximum allowable elevator angle (deg)
+    float elevAngleD;               // Desired elevator angle (deg)
+    float elevAngleC;               // Current elevator angle (deg)
+    float elevAngleMin = 0;         // Minimum allowable elevator angle (deg)
+    float elevAngleMax = 0;         // Maximum allowable elevator angle (deg)
 
-    float rudderDutyD;          // Rudder motor duty cycle (-100% to 100% incl.)
-    float elevDutyD;            // Elev motor duty cycle (-100% to 100% incl.)
+    float rudderDutyD;              // Rudder motor duty cycle (-100% to 100% incl.)
+    float elevDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
+
+    uint8_t tc_state = 0;           // task_controller state
+    uint8_t delay_time = 0;         // Current amount of time (ms) in inactive delay
 
     
     while (true) 
     {
-        // Check whether the glider is near ground
-        if (near_ground.get()) 
+        if (tc_state == 0)          // STATE 0: CHECK FOR LAUNCH
+        {        
+
+            // If tosser's hand leaves (i.e. ultrasonic no longer detects hand)...
+            if (near_ground.get() == 0) 
+            {
+                delay_time = 0;     // Clear delay counter
+                tc_state = 1;       // Move to inactive delay state
+            }
+            
+        }
+        else if (tc_state == 1)     // STATE 1: KEEP INACTIVE FOR 1 SECOND
         {
-            pitchD = 5;   // NEEDS TUNING
+            // Add one task period to accumulated delay time (ms)
+            delay_time += TASK_CONTROLLER_PERIOD;           
+
+            // If total delay time has reached 1000 ms...
+            if (delay_time >= 1000) 
+            {
+                tc_state = 2;       // Move to active state
+            }
+
         }
-        else 
+        else if (tc_state == 2)     // STATE 2: CONTROLLER ACTIVE
         {
-            pitchD = 0;   // NEEDS TUNING
-        }
+            // Check whether the glider is near ground
+            if (near_ground.get()) 
+            {
+                pitchD = 5;   // NEEDS TUNING
+            }
+            else 
+            {
+                pitchD = 0;   // NEEDS TUNING
+            }
 
-        yawD = 0;
+            yawD = 0;
 
-        // Get current values
-        yawC = /* get yaw from IMU*/ 0;
-        pitchC = /* get pitch from IMU*/ 0;
-    
-        // Calculate desired rudder angle and then saturate
-        rudderAngleD = yaw2rudder.getCtrlOutput(yawC,yawD);
-        if (rudderAngleD > rudderAngleMax) {
-            rudderAngleD = rudderAngleMax;
-        }
-        else if (rudderAngleD < rudderAngleMin) {
-            rudderAngleD = rudderAngleMin;
-        }
-
-        // Calculate desired rudder motor duty cycle, saturate, then put to share
-        rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD);
-        if (rudderDutyD > 100) {
-            rudder_duty.put(100);
-        }
-        else if (rudderDutyD < -100) {
-            rudder_duty.put(-100);
-        }
-        else {
-            rudder_duty.put((int16_t) round(rudderDutyD));
-        }
+            // Get current values
+            yawC = /* get yaw from IMU*/ 0;
+            pitchC = /* get pitch from IMU*/ 0;
         
-        // Calculate desired elecator angle and then saturate
-        elevAngleD = pitch2elev.getCtrlOutput(pitchC,pitchD);
-        if (elevAngleD > elevAngleMax) {
-            elevAngleD = elevAngleMax;
-        }
-        else if (elevAngleD < elevAngleMin) {
-            elevAngleD = elevAngleMin;
-        }
+            // Calculate desired rudder angle and then saturate
+            rudderAngleD = yaw2rudder.getCtrlOutput(yawC,yawD);
+            if (rudderAngleD > rudderAngleMax) 
+            {
+                rudderAngleD = rudderAngleMax;
+            }
+            else if (rudderAngleD < rudderAngleMin) 
+            {
+                rudderAngleD = rudderAngleMin;
+            }
 
-        // Calculate desired elevator motor duty cycle, saturate, then put to share
-        elevDutyD = elev2duty.getCtrlOutput(elevAngleC,elevAngleD);
-        if (elevDutyD > 100) {
-            elev_duty.put(100);
-        }
-        else if (elevDutyD < -100) {
-            elev_duty.put(-100);
-        }
-        else {
-            elev_duty.put((int16_t) round(elevDutyD));
-        }
+            // Calculate desired rudder motor duty cycle, saturate, then put to share
+            rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD);
+            if (rudderDutyD > 100) 
+            {
+                rudder_duty.put(100);
+            }
+            else if (rudderDutyD < -100) 
+            {
+                rudder_duty.put(-100);
+            }
+            else 
+            {
+                rudder_duty.put((int16_t) round(rudderDutyD));
+            }
+            
+            // Calculate desired elecator angle and then saturate
+            elevAngleD = pitch2elev.getCtrlOutput(pitchC,pitchD);
+            if (elevAngleD > elevAngleMax) 
+            {
+                elevAngleD = elevAngleMax;
+            }
+            else if (elevAngleD < elevAngleMin) 
+            {
+                elevAngleD = elevAngleMin;
+            }
 
-        vTaskDelay(TASK_CONTROLLER_PERIOD);
+            // Calculate desired elevator motor duty cycle, saturate, then put to share
+            elevDutyD = elev2duty.getCtrlOutput(elevAngleC,elevAngleD);
+            if (elevDutyD > 100) 
+            {
+                elev_duty.put(100);
+            }
+            else if (elevDutyD < -100) 
+            {
+                elev_duty.put(-100);
+            }
+            else 
+            {
+                elev_duty.put((int16_t) round(elevDutyD));
+            }
+
+            vTaskDelay(TASK_CONTROLLER_PERIOD);
+        }
     }
 }
 
