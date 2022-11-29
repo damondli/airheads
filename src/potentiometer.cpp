@@ -5,14 +5,14 @@
 #include <Arduino.h>
 #include "potentiometer.h"
 
-potentiometer::potentiometer(uint8_t pin, float offset)
+Potentiometer::Potentiometer(uint8_t pin, float offset)
 {
     // Establish the pin that will read the voltage
     ADC_PIN = pin;
     voltage_offset = offset;
 }
 
-float potentiometer::get_voltage(void)
+float Potentiometer::get_voltage(void)
 {
     // Default resolution is 12 bits. Outputs 0 - 4096
     adc_value = analogRead(ADC_PIN);
@@ -23,7 +23,7 @@ float potentiometer::get_voltage(void)
     return voltage;
 }
 
-float potentiometer::get_angle(void)
+float Potentiometer::get_angle(void)
 {
     // Default resolution is 12 bits. Outputs 0 - 4096
     adc_value = analogRead(ADC_PIN);
@@ -39,7 +39,7 @@ float potentiometer::get_angle(void)
     return angle;
 }
 
-void potentiometer::zero(void)
+void Potentiometer::zero(void)
 {  
     // Assuming the potentiometer is positioned at the zero
     // Get current voltage reading

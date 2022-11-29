@@ -8,7 +8,7 @@
 #include <Arduino.h>
 #include "shares.h"
 #include "taskshare.h"
-#include "taskqueue.h"
+//#include "taskqueue.h"
 #include "PrintStream.h"
 
 // Modules
@@ -165,6 +165,7 @@ void task_controller (void* p_params)
             if (delay_time >= 1000) 
             {
                 tc_state = 2;       // Move to active state
+                delay_time = 0;     // Reset counter
             }
 
         }
@@ -251,6 +252,7 @@ void task_controller (void* p_params)
  */
 void task_rudder_motor (void* p_params)
 {
+    /**
     // Motor task period
     const uint8_t period = 10;
 
@@ -263,7 +265,57 @@ void task_rudder_motor (void* p_params)
       rudder.set_duty(rudder_duty.get());
       vTaskDelay(period);
     }
-}
+    */
+
+    // The following is code used for debugging and demo
+
+    // Initialize variables
+    float rudderAngleD;               // Desired elevator angle (deg)
+    float rudderAngleC;               // Current elevator angle (deg)
+    float rudderDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
+
+    // Motor task period
+    const uint8_t PERIOD = 10;
+    char key;
+    const int8_t ANGLE = 50;
+    
+    // Initialize PID contoller
+    PIDController rudder2duty =       // Controller for duty cycle based on elevator angle
+        PIDController(1,0,0, PERIOD);
+
+    // Create motor object
+    DRV8871 rudder = DRV8871(
+        RUDDER_PIN_A, RUDDER_PIN_B, RUDDER_CHANNEL_A, RUDDER_CHANNEL_B);
+
+    // Create potentiometer object and zero the current reading
+    Potentiometer rudderPot = Potentiometer(13, 0);
+    rudderPot.zero();
+
+    while (true)
+    {
+        rudderAngleC = rudderPot.get_angle();
+        // Check if there are any keys pressed
+        if (Serial.available() > 0)
+        {
+            key = Serial.read();
+            if (key == 'a')
+            {
+                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, ANGLE);
+            }
+            else if (key == 'd')
+            {
+                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, -ANGLE);
+            }
+            else if (key == 's')
+            {
+                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, 0);
+            }
+        }
+
+        rudder.set_duty(rudderDutyD);
+        vTaskDelay(PERIOD);    
+    }
+}   
 
 /** @brief   
  *  @details 
@@ -273,6 +325,7 @@ void task_rudder_motor (void* p_params)
  */
 void task_elevator_motor (void* p_params)
 {
+    /**
     // Motor task period
     const uint8_t period = 10;
 
@@ -285,6 +338,56 @@ void task_elevator_motor (void* p_params)
     {
       rudder.set_duty(elev_duty.get());
       vTaskDelay(period);
+    }
+    */
+
+    // The following is code used for debugging and demo
+
+    // Initialize variables
+    float elevAngleD;               // Desired elevator angle (deg)
+    float elevAngleC;               // Current elevator angle (deg)
+    float elevDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
+
+    // Motor task period
+    const uint8_t PERIOD = 10;
+    char key;
+    const int8_t ANGLE = 50;
+    
+    // Initialize PID contoller
+    PIDController elev2duty =       // Controller for duty cycle based on elevator angle
+        PIDController(1,0,0, PERIOD);
+
+    // Create motor object
+    DRV8871 elevator = DRV8871(
+        ELEVATOR_PIN_A, ELEVATOR_PIN_B, ELEVATOR_CHANNEL_A, ELEVATOR_CHANNEL_B);
+
+    // Create potentiometer object and zero the current reading
+    Potentiometer elevPot = Potentiometer(12, 0);
+    elevPot.zero();
+
+    while (true)
+    {
+        elevAngleC = elevPot.get_angle();
+        // Check if there are any keys pressed
+        if (Serial.available() > 0)
+        {
+            key = Serial.read();
+            if (key == '8')
+            {
+                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, ANGLE);
+            }
+            else if (key == '2')
+            {
+                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, -ANGLE);
+            }
+            else if (key == '5')
+            {
+                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, 0);
+            }
+        }
+
+        elevator.set_duty(elevDutyD);
+        vTaskDelay(PERIOD);
     }
 }
 
@@ -319,10 +422,10 @@ void setup (void)
     xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 3, NULL);
     
     // Task for the ultrasonic sensor
-    xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
+    //xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
-    xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 3, NULL);
+    //xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 3, NULL);
 }
 
 
