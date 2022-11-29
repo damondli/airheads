@@ -19,26 +19,26 @@
 
 // Shares
 
-Share<bool> near_ground ("Near Ground");
-Share<int16_t> rudder_duty ("Rudder motor duty cycle");
-Share<int16_t> elev_duty ("Elevator motor duty cycle");
+// Share<bool> near_ground ("Near Ground");
+// Share<int16_t> rudder_duty ("Rudder motor duty cycle");
+// Share<int16_t> elev_duty ("Elevator motor duty cycle");
 
 
 // Rudder Motor
 #define RUDDER_PIN_A 16
-#define RUDDER_PIN_B 13
+#define RUDDER_PIN_B 15
 #define RUDDER_CHANNEL_A 0
 #define RUDDER_CHANNEL_B 1
 
 // Elevator Motor
 #define ELEVATOR_PIN_A 16
-#define ELEVATOR_PIN_B 13
+#define ELEVATOR_PIN_B 10
 #define ELEVATOR_CHANNEL_A 0
 #define ELEVATOR_CHANNEL_B 1
 
 // Ultrasonic
-#define TRIG 2
-#define ECHO 3
+#define TRIG 12
+#define ECHO 13
 
 /** @brief   Ultrasonic sensor measures distance to the ground
  *  @details Ultrasonic sensor mounted on the airplane measures the 
@@ -57,7 +57,7 @@ void task_ultrasonic (void* p_params)
     // Task period
     const uint8_t period = 1;
     // Near ground boolean
-    near_ground.put(true);
+    //near_ground.put(true);
     // Timer
     uint8_t counter = 0;
     // Distance
@@ -75,6 +75,7 @@ void task_ultrasonic (void* p_params)
       distance = ultra.get_distance();
       // If the distance is below height threshold, start counting
       // Stop counting when counter exceeds 10 seconds to prevent overflow
+      Serial.println(distance);
       if (distance < threshold && counter < 10000)
       {
         counter++;
@@ -87,11 +88,11 @@ void task_ultrasonic (void* p_params)
       // Swap boolean to true if below threshold for long enough
       if (counter > time_buffer)
       {
-        near_ground.put(true);
+        //near_ground.put(true);
       }
       else
       {
-        near_ground.put(false);
+        //near_ground.put(false);
       }
       vTaskDelay(period);
     }
@@ -149,11 +150,11 @@ void task_controller (void* p_params)
         {        
 
             // If tosser's hand leaves (i.e. ultrasonic no longer detects hand)...
-            if (near_ground.get() == 0) 
-            {
-                delay_time = 0;     // Clear delay counter
-                tc_state = 1;       // Move to inactive delay state
-            }
+            // if (near_ground.get() == 0) 
+            // {
+            //     delay_time = 0;     // Clear delay counter
+            //     tc_state = 1;       // Move to inactive delay state
+            // }
             
         }
         else if (tc_state == 1)     // STATE 1: KEEP INACTIVE FOR 1 SECOND
@@ -422,7 +423,7 @@ void setup (void)
     xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 3, NULL);
     
     // Task for the ultrasonic sensor
-    //xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
     //xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 3, NULL);
