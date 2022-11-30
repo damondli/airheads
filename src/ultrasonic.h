@@ -15,7 +15,7 @@ class ultrasonic //This class operates an HC_SR04 Ultrasonic Sensor
 protected:
     // uint8_t ultrasonic_address = 0x36;
     float echoTime;
-    long duration;
+    
     float distance;
 
     uint8_t echoPin;
@@ -23,6 +23,7 @@ protected:
 
 
 public: 
+    long duration;
     ultrasonic (uint8_t echoPin, uint8_t trigPin);
 
     float get_distance (void);

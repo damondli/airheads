@@ -12,14 +12,21 @@ ultrasonic::ultrasonic(uint8_t echo, uint8_t trig)
 {
     trigPin = trig;
     echoPin = echo;
+    pinMode(trigPin, OUTPUT);   // Sets the trigPin as an OUTPUT
+    pinMode(echoPin, INPUT);    // Sets the echoPin as an INPUT
+    Serial.print("The trigger and echo pins are");
+    Serial.print(trigPin);
+    Serial.print("and");
+    Serial.print(echoPin);
+    Serial.print("\n");
 }
 
 float ultrasonic::get_distance (void)
 {
-    float echoTime; // define variable to store time it takes for a ping
+    echoTime;       // define variable to store time it takes for a ping
                     // to bounce off an object
-    float distance; // variable to store calculated distance
-    long duration;  // variable for the duration of sound wave travel
+    distance;       // variable to store calculated distance
+    duration;       // variable for the duration of sound wave travel
           
     // Clears the trigPin condition
     digitalWrite(trigPin, LOW);

@@ -16,11 +16,19 @@
 // A share describing whether the glider is near the ground
 extern Share<bool> near_ground;
 
+extern Share<uint8_t> tc_state;
+
 // A share for the duty cycle for the rudder motor
-extern Share<int16_t> rudder_duty ("Rudder motor duty cycle");
+extern Share<int16_t> rudder_duty;
 
 // A share for the duty cycle for the elevator motor
-extern Share<int16_t> elev_duty ("Elevator motor duty cycle");
+extern Share<int16_t> elev_duty;
+
+// A share for the current yaw
+extern Share<float> yawC;
+
+// A share for the current pitch
+extern Share<float> pitchC;
 
 // A queue which triggers a task to print the count at certain times
 //extern Queue<uint16_t> data_queue;
