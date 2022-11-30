@@ -23,6 +23,6 @@ extern Share<int16_t> rudder_duty ("Rudder motor duty cycle");
 extern Share<int16_t> elev_duty ("Elevator motor duty cycle");
 
 // A queue which triggers a task to print the count at certain times
-extern Queue<uint16_t> data_queue;
+//extern Queue<uint16_t> data_queue;
 
 #endif // _SHARES_H_

@@ -13,7 +13,7 @@
 // Include appropriate modules
 #include <Arduino.h>
 
-class potentiometer
+class Potentiometer
 {
 protected:
     // Pin to read voltage from
@@ -27,11 +27,11 @@ protected:
     float voltage_offset;
 
     // Voltage to angle conversion
-    float VOLTAGE_TO_DEGREES = 1;
+    float VOLTAGE_TO_DEGREES = 30;
 
 public:
     // Setup object
-    potentiometer(uint8_t pin, float offset);
+    Potentiometer(uint8_t pin, float offset);
 
     // Value from ADC reading
     uint16_t adc_value;
