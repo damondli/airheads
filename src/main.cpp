@@ -11,6 +11,7 @@
 //#include "taskqueue.h"
 #include "PrintStream.h"
 #include <time.h>
+#include <network.h>
 
 // Modules
 #include "DRV8871.h"
@@ -31,14 +32,14 @@ Share<float> pitchC ("Current pitch from IMU");
 // Shares from webpage
 // Share<bool> web_activate ("Flag to activate controller");
 // Share<bool> web_deactivate ("Flag to activate controller");
-Share<bool> web_calibrate ("Flag to calibrate/zero");
+// Share<bool> web_calibrate ("Flag to calibrate/zero");
 
 
 
 
 // Rudder Motor (Motor 1)
-#define RUDDER_PIN_IN1   15  // 15
-#define RUDDER_PIN_IN2   32  // 32
+#define RUDDER_PIN_IN1   16  // Formerly 15
+#define RUDDER_PIN_IN2   17  // Formerly 32
 #define RUDDER_CHANNEL_A 0
 #define RUDDER_CHANNEL_B 1
 
@@ -49,8 +50,8 @@ Share<bool> web_calibrate ("Flag to calibrate/zero");
 #define ELEVATOR_CHANNEL_B 3
 
 // Potentiometers
-#define ELEVATOR_POT_PIN 26
-#define RUDDER_POT_PIN   25
+#define ELEVATOR_POT_PIN 34
+#define RUDDER_POT_PIN   39
 
 // Ultrasonic
 #define TRIG 12
@@ -169,22 +170,26 @@ void task_controller (void* p_params)
 
             web_calibrate.put(0);
 
+            Serial << "   Calibrated" << endl;
+
         }
 
 
-        if (tc_state.get() == 0)          // STATE 0: CHECK FOR LAUNCH
+        if (tc_state.get() == 0)          // STATE 0: DISABLED
         {        
-            // Passive state waiting for external callback to switch state
-            Serial.print(" tc_state is 0 ");
 
-            // if (web_activate.get() && (web_deactivate.get() == 0)) {
-                tc_state.put(1);
-                delay_time = 0;
-            // }
+            delay_time = 0;
+            rudder_duty.put(0);
+            elev_duty.put(0);
+
+            // Passive state waiting for external callback to switch state
+            Serial.println(" 0 ");
 
         }
-        else if (tc_state.get() == 1)     // STATE 1: KEEP INACTIVE FOR 1 SECOND
+        else if (tc_state.get() == 1)     // STATE 1: WAIT FOR LAUNCH
         {
+
+            Serial.println(" 1 ");
 
             // Add one task period to accumulated delay time (ms)
             if (near_ground.get() == 0) 
@@ -534,8 +539,14 @@ void setup (void)
     // start i2c
     Wire.begin();
 
+    // Setup webpage
+    setup_wifi();
+
     // Initialize web_calibrate to zero
     web_calibrate.put(1);
+
+    // Task which runs the web server. It runs at a low priority
+    xTaskCreate (task_webserver, "Web Server", 8192, NULL, 2, NULL);
 
     // Task for the potentiometer testing
     xTaskCreate (task_rudder_motor, "Rudder Motor", 2048, NULL, 3, NULL);

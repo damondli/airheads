@@ -30,6 +30,9 @@ extern Share<float> yawC;
 // A share for the current pitch
 extern Share<float> pitchC;
 
+// A share for a calibration variable
+extern Share<bool> web_calibrate;
+
 // A queue which triggers a task to print the count at certain times
 //extern Queue<uint16_t> data_queue;
 

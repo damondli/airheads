@@ -19,6 +19,10 @@
 #include "PrintStream.h"
 #include <WiFi.h>
 #include <WebServer.h>
+#include <shares.h>
+#include <taskshare.h>
+
+Share<bool> web_calibrate ("Flag to calibrate/zero");
 
 // #define USE_LAN to have the ESP32 join an existing Local Area Network or 
 // #undef USE_LAN to have the ESP32 act as an access point, forming its own LAN
@@ -166,6 +170,20 @@ void handle_DocumentRoot ()
                         <input type="text" style="width:150px;height:50px;font-size:20px;">
                         <input type="submit" value="Set Elevator (-90, 90)" style="width:250x;height:50px;font-size:20px;">
                     </form>
+                    <br>
+                    <form>
+                        <input type="text" style="width:150px;height:50px;font-size:20px;">
+                        <input type="submit" value="Set Rudder Gain" style="width:250x;height:50px;font-size:20px;">
+                    </form>
+                    <br>
+                    <form>
+                        <input type="text" style="width:150px;height:50px;font-size:20px;">
+                        <input type="submit" value="Set Elevator Gain" style="width:250x;height:50px;font-size:20px;">
+                    </form>
+                    <br>
+                    <form>
+                        <input type="submit" value="Reset Default Gain" style="width:250x;height:50px;font-size:20px;">
+                    </form>
 
                 </div>
             </main>
@@ -193,10 +211,7 @@ void handle_NotFound (void)
  */
 void handle_Activate (void)
 {
-    static bool state = false;
-
-    digitalWrite (ledPin, state);
-    state = !state;
+    tc_state.put(1);
 
     String toggle_page = "<!DOCTYPE html> <html> <head>\n";
     toggle_page += "<meta http-equiv=\"refresh\" content=\"1; url='/'\" />\n";
@@ -214,10 +229,7 @@ void handle_Activate (void)
  */
 void handle_Deactivate (void)
 {
-    static bool state = false;
-
-    digitalWrite (ledPin, state);
-    state = !state;
+    tc_state.put(0);
 
     String toggle_page = "<!DOCTYPE html> <html> <head>\n";
     toggle_page += "<meta http-equiv=\"refresh\" content=\"1; url='/'\" />\n";
@@ -235,22 +247,15 @@ void handle_Deactivate (void)
  */
 void handle_Calibrate (void)
 {
-    // The page will be composed in an Arduino String object, then sent.
-    // The first line will be column headers so we know what the data is
-    String csv_str = "Time, Jumpiness\n";
+    web_calibrate.put(1);
+    tc_state.put(0);
 
-    // Create some fake data and put it into a String object. We could just
-    // as easily have taken values from a data array, if such an array existed
-    for (uint8_t index = 0; index < 20; index++)
-    {
-        csv_str += index;
-        csv_str += ",";
-        csv_str += String (sin (index / 5.4321), 3);       // 3 decimal places
-        csv_str += "\n";
-    }
+    String toggle_page = "<!DOCTYPE html> <html> <head>\n";
+    toggle_page += "<meta http-equiv=\"refresh\" content=\"1; url='/'\" />\n";
+    toggle_page += "</head> <body> <p> <a href='/'>Back to main page</a></p>";
+    toggle_page += "</body> </html>";
 
-    // Send the CSV file as plain text so it can be easily saved as a file
-    server.send (404, "text/plain", csv_str);
+    server.send (200, "text/html", toggle_page); 
 }
 
 /** @brief   Show some simulated data when asked by the web server.
@@ -335,64 +340,37 @@ void task_webserver (void* p_params)
 }
 
 
-/** @brief   Task which sends a high frequency signal to show it can run fast.
- *  @details This task sends a square wave signal with a frequency of 500 Hz 
- *           and a duty cyle of 50%. Its purpose in the WiFi demonstration is
- *           to verify that a fast task can run at higher priority than the
- *           WiFi task and keep relatively accurate timing. 
- *  @param   p_params An unused pointer to (no) parameters passed to this task
- */
-void task_fast (void* p_params)
-{
-    Serial << "Start Task Fast" << endl;
-
-    // Configures the pin as an output
-    pinMode (FAST_PIN, OUTPUT);
-
-    // Sets the delay for 1 ms
-    const TickType_t FAST_DELAY = 1;
-
-    while (true)
-    {
-        digitalWrite (FAST_PIN, HIGH);
-        vTaskDelay (FAST_DELAY);
-        digitalWrite(FAST_PIN, LOW);
-        vTaskDelay (FAST_DELAY);
-    }
-}
-
-
 /** @brief   Arduino setup method which initializes the communication ports and
  *           gets the task(s) running.
  */
-void setup () 
-{
-    Serial.begin (115200);
-    delay (100);
-    while (!Serial) { }                   // Wait for serial port to be working
-    delay (1000);
-    Serial << endl << F("\033[2JTesting Arduino Web Server") << endl;
+// void setup () 
+// {
+//     Serial.begin (115200);
+//     delay (100);
+//     while (!Serial) { }                   // Wait for serial port to be working
+//     delay (1000);
+//     Serial << endl << F("\033[2JTesting Arduino Web Server") << endl;
 
-    // Call function which gets the WiFi working
-    setup_wifi ();
+//     // Call function which gets the WiFi working
+//     setup_wifi ();
 
-    // Set up the pin for the blue LED on the ESP32 board
-    pinMode (ledPin, OUTPUT);
-    digitalWrite (ledPin, LOW);
+//     // Set up the pin for the blue LED on the ESP32 board
+//     pinMode (ledPin, OUTPUT);
+//     digitalWrite (ledPin, LOW);
 
-    // Create the tasks which will do exciting things...
+//     // Create the tasks which will do exciting things...
 
-    // Task which runs the web server. It runs at a low priority
-    xTaskCreate (task_webserver, "Web Server", 8192, NULL, 2, NULL);
+//     // Task which runs the web server. It runs at a low priority
+//     xTaskCreate (task_webserver, "Web Server", 8192, NULL, 2, NULL);
 
-    // Task which produces a square wave (again) at a high priority
-    xTaskCreate (task_fast, "500 Hz", 1024, NULL, 5, NULL);
-}
+//     // Task which produces a square wave (again) at a high priority
+//     xTaskCreate (task_fast, "500 Hz", 1024, NULL, 5, NULL);
+// }
 
 
-/** @brief   Arduino loop method which runs repeatedly, doing nothing much.
- */
-void loop ()
-{
-    vTaskDelay (1000);
-}
+// /** @brief   Arduino loop method which runs repeatedly, doing nothing much.
+//  */
+// void loop ()
+// {
+//     vTaskDelay (1000);
+// }
