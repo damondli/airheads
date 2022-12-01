@@ -219,7 +219,7 @@ void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL
 
 }
 
-void LSM6DSOX::get_angle(float new_time, float& pitch, float& yaw, float& roll)
+void LSM6DSOX::get_angle(float new_time, float& pitch_in, float& yaw_in, float& roll_in)
 {
     sensors_event_t event; 
     Magno.getEvent(&event);
@@ -246,25 +246,27 @@ void LSM6DSOX::get_angle(float new_time, float& pitch, float& yaw, float& roll)
         psi = atan2(AccelY,(sqrt(AccelX*AccelX + AccelZ*AccelZ)));
         
 
-        pitch = 0.98*(pitch + GyroX*dt) + 0.02*phi;
-        roll = 0.98*(roll + GyroY*dt) + 0.02*psi;
+        // pitch_in = 0.98*(pitch + GyroX*dt) + 0.02*phi - pitch_offset;
+        // roll_in = 0.98*(roll + GyroY*dt) + 0.02*psi - roll_offset;
+        pitch_in = round((0.00*(pitch + GyroX*dt) + 1.00*phi - pitch_offset) * 180/M_PI) * M_PI/180;
+        roll_in = round((0.00*(roll + GyroY*dt) + 1.00*psi - roll_offset) * 180/M_PI) * M_PI/180;
 
 
         nMAGX = MAGX*cos(pitch) + MAGZ*sin(pitch);
         nMAGY = MAGX*sin(roll) * sin(pitch) + MAGZ*sin(roll)*cos(pitch);
         
+        yaw_in = atan2(-nMAGY,nMAGX) - yaw_offset;
 
-        if (_init_Angle == 0)
-        {
-            _init_Angle = atan2(-nMAGY,nMAGX);
-        }
-
-        yaw = atan2(-nMAGY,nMAGX) - _init_Angle;
+        pitch = pitch_in;
+        roll = roll_in;
+        yaw = yaw_in;
     }
     last_time = new_time;
-    
-    
+}
 
+void LSM6DSOX::zero(void)
+{
+    yaw_offset = yaw; 
 }
 
 

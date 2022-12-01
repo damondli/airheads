@@ -27,7 +27,7 @@ protected:
     float voltage_offset;
 
     // Voltage to angle conversion
-    float VOLTAGE_TO_DEGREES = 30;
+    float VOLTAGE_TO_DEGREES = 60;
 
 public:
     // Setup object

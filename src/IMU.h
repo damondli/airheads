@@ -69,7 +69,10 @@ private:
     float grav = 9.81;
     int16_t MAGX, MAGY, MAGZ;
     int16_t nMAGX, nMAGY, nMAGZ;
-    float _init_Angle = 0;
+
+    float yaw_offset = 0;
+    float roll_offset = 0;
+    float pitch_offset= 0;
     
 
 
@@ -80,6 +83,8 @@ public:
                     float& ACCEL_Y,float& ACCEL_Z);
 
     void get_angle(float time, float& pitch, float& yaw, float& roll);
+
+    void zero(void);
 
 };
 

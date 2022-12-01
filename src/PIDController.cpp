@@ -12,25 +12,25 @@
 
 /** @brief Initialize PIDController class
  */
-PIDController::PIDController(float Kp, float Ki, float Kd, float dt) 
+PIDController::PIDController(float Kp_in, float Ki_in, float Kd_in, float dt_in) 
 {
-    PIDController::Kp = Kp;
-    PIDController::Ki = Ki;
-    PIDController::Kd = Kd;
-    PIDController::dt = dt;
+    Kp = Kp_in;
+    Ki = Ki_in;
+    Kd = Kd_in;
+    dt = dt_in;
 
-    PIDController::errIntegral = 0;      // Reset integral of error
-    PIDController::errPrev = 0;          // Reset error at previous time
+    errIntegral = 0;      // Reset integral of error
+    errPrev = 0;          // Reset error at previous time
 }
 
 
 /** @brief Set gains to user-inputted values
  */
-void PIDController::setGains(float Kp, float Ki, float Kd) 
+void PIDController::setGains(float Kp_in, float Ki_in, float Kd_in) 
 {
-    PIDController::Kp = Kp;
-    PIDController::Ki = Ki;
-    PIDController::Kd = Kd;
+    Kp = Kp_in;
+    Ki = Ki_in;
+    Kd = Kd_in;
 }
 
 
@@ -39,14 +39,14 @@ void PIDController::setGains(float Kp, float Ki, float Kd)
 float PIDController::getCtrlOutput(float posCurrent, float posDesired) 
 {
     float err = posDesired - posCurrent;
-    PIDController::errIntegral += err*PIDController::dt;
-    float derr = (err - PIDController::errPrev) / PIDController::dt;
+    errIntegral += err*dt;
+    float derr = (err - errPrev) / dt;
 
-    return ( PIDController::Kp*err 
-           + PIDController::Ki*PIDController::errIntegral 
-           + PIDController::Kd*derr );
+    return ( Kp*err 
+           + Ki*errIntegral 
+           + Kd*derr );
 
-    PIDController::errPrev = err;
+    errPrev = err;
 }
 
 

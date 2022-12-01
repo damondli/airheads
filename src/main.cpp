@@ -10,12 +10,14 @@
 #include "taskshare.h"
 //#include "taskqueue.h"
 #include "PrintStream.h"
+#include <time.h>
 
 // Modules
 #include "DRV8871.h"
 #include "ultrasonic.h"
 #include "potentiometer.h"
 #include "PIDController.h"
+#include "IMU.h"
 
 // Shares
 
@@ -25,6 +27,12 @@ Share<int16_t> rudder_duty ("Rudder motor duty cycle");
 Share<int16_t> elev_duty ("Elevator motor duty cycle");
 Share<float> yawC ("Current yaw from IMU");
 Share<float> pitchC ("Current pitch from IMU");
+
+// Shares from webpage
+// Share<bool> web_activate ("Flag to activate controller");
+// Share<bool> web_deactivate ("Flag to activate controller");
+Share<bool> web_calibrate ("Flag to calibrate/zero");
+
 
 
 
@@ -64,14 +72,12 @@ void task_ultrasonic (void* p_params)
 
     // Task period
     const uint8_t period = 100;
-    // Near ground boolean
-    //near_ground.put(true);
 
     // Distance
     float distance;
+
     // Height and timer threshold
     const uint8_t threshold = 20;               // cm
-    const uint8_t time_buffer = period * 20;    // ms
 
     // Create object
     Serial.println("Constructing the ultrasonic object");
@@ -100,17 +106,17 @@ void task_controller (void* p_params)
 {
     Serial << "Controller Task Begin" << endl;
   
-    const uint8_t TASK_CONTROLLER_PERIOD = 10;  // Period of controller task (ms)
+    const uint8_t TASK_CONTROLLER_PERIOD = 50;  // Period of controller task (ms)
 
     // Controller objects
     PIDController yaw2rudder =      // Controller for rudder angle based on yaw
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD); 
     PIDController rudder2duty =     // Controller for duty cycle based on rudder angle
-        PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
+        PIDController(3,0,0,TASK_CONTROLLER_PERIOD);
     PIDController pitch2elev =      // Controller for elevator angle based on pitch
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
     PIDController elev2duty =       // Controller for duty cycle based on elevator angle
-        PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
+        PIDController(3,0,0,TASK_CONTROLLER_PERIOD);
 
     // Create potentiometer object and zero the current reading
     Potentiometer rudderPot = Potentiometer(RUDDER_POT_PIN, 0);
@@ -122,17 +128,21 @@ void task_controller (void* p_params)
 
     // Initialize variables
     float yawD;                     // Desired yaw (deg)
-    float pitchD;                   // Desired pitch (deg)   
+    float pitchD;                   // Desired pitch (deg)  
+
+    // Variables to keep track of previous potentiometer reading
+    float prev_rudder = 0;
+    float prev_elevator = 0; 
 
     float rudderAngleD;             // Desired rudder angle (deg)
     float rudderAngleC;             // Current rudder angle (deg)
-    float rudderAngleMin = -120;    // Minimum allowable rudder angle (deg)
-    float rudderAngleMax = 120;     // Maximum allowable rudder angle (deg)
+    float rudderAngleMin = -50;     // Minimum allowable rudder angle (deg)
+    float rudderAngleMax = 50;      // Maximum allowable rudder angle (deg)
 
     float elevAngleD;               // Desired elevator angle (deg)
     float elevAngleC;               // Current elevator angle (deg)
-    float elevAngleMin = -120;      // Minimum allowable elevator angle (deg)
-    float elevAngleMax = 120;       // Maximum allowable elevator angle (deg)
+    float elevAngleMin = -50;       // Minimum allowable elevator angle (deg)
+    float elevAngleMax = 50;        // Maximum allowable elevator angle (deg)
 
     float rudderDutyD;              // Rudder motor duty cycle (-100% to 100% incl.)
     float elevDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
@@ -140,21 +150,41 @@ void task_controller (void* p_params)
     uint16_t delay_time = 0;        // Current amount of time (ms) in inactive delay
     tc_state.put(0);
 
+
+    // Establish initial conditions for rudder and elecator
+    rudderAngleC = rudderPot.get_angle();
+    prev_rudder = rudderAngleC;
+
+    elevAngleC = elevPot.get_angle();
+    prev_elevator = elevAngleC;
+
     
     while (true) 
     {
+
+        if (web_calibrate.get()) {
+
+            rudderPot.zero();
+            elevPot.zero();
+
+            web_calibrate.put(0);
+
+        }
+
+
         if (tc_state.get() == 0)          // STATE 0: CHECK FOR LAUNCH
         {        
             // Passive state waiting for external callback to switch state
             Serial.print(" tc_state is 0 ");
 
-            tc_state.put(1);
+            // if (web_activate.get() && (web_deactivate.get() == 0)) {
+                tc_state.put(1);
+                delay_time = 0;
+            // }
 
         }
         else if (tc_state.get() == 1)     // STATE 1: KEEP INACTIVE FOR 1 SECOND
         {
-
-            Serial.print(" 1 ");
 
             // Add one task period to accumulated delay time (ms)
             if (near_ground.get() == 0) 
@@ -169,7 +199,6 @@ void task_controller (void* p_params)
             // If total delay time has reached 1000 ms...
             if (delay_time >= 2000) 
             {
-                Serial.print("1");
 
                 tc_state.put(2);       // Move to active state
                 delay_time = 0;     // Reset counter
@@ -178,8 +207,6 @@ void task_controller (void* p_params)
         }
         else if (tc_state.get() == 2)     // STATE 2: CONTROLLER ACTIVE
         {
-
-            Serial.print(" 2 ");
 
             if (near_ground.get() == 1) 
             {
@@ -203,17 +230,14 @@ void task_controller (void* p_params)
             // Check whether the glider is near ground
             if (near_ground.get()) 
             {
-                pitchD = 5;   // NEEDS TUNING
+                pitchD = 10;   // NEEDS TUNING
             }
             else 
             {
                 pitchD = 0;   // NEEDS TUNING
             }
 
-            yawD = 0;    
-
-            yawC.put(0);
-            pitchC.put(0);     
+            yawD = 0;  
         
             // Calculate desired rudder angle and then saturate
             rudderAngleD = yaw2rudder.getCtrlOutput(yawC.get(),yawD);
@@ -228,22 +252,29 @@ void task_controller (void* p_params)
 
             // Get current rudder angle
             rudderAngleC = rudderPot.get_angle();
-            Serial.print(rudderAngleC);
-            Serial.print(" ");
-
-            // Calculate desired rudder motor duty cycle, saturate, then put to share
-            rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD);
-            if (rudderDutyD > 100) 
+            // Check if the difference in rudder angles are less than 30 degrees
+            if (fabs(rudderAngleC - prev_rudder) < 30)
             {
-                rudder_duty.put(100);
-            }
-            else if (rudderDutyD < -100) 
-            {
-                rudder_duty.put(-100);
+                // Serial.println(fabs(rudderAngleC - prev_rudder));
+                prev_rudder = rudderAngleC;
+                // Calculate desired rudder motor duty cycle, saturate, then put to share
+                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC,rudderAngleD);
+                if (rudderDutyD > 100) 
+                {
+                    rudder_duty.put(100);
+                }
+                else if (rudderDutyD < -100) 
+                {
+                    rudder_duty.put(-100);
+                }
+                else
+                {
+                    rudder_duty.put((int16_t) round(rudderDutyD));
+                }
             }
             else
             {
-                rudder_duty.put((int16_t) rudderDutyD);
+                rudder_duty.put(0);
             }
             
 
@@ -260,22 +291,32 @@ void task_controller (void* p_params)
 
             // Get current elevator angle
             elevAngleC = elevPot.get_angle();
-            Serial.println(elevAngleC);
+            if (fabs(elevAngleC - prev_elevator) < 30)
+            {
+                // Calculate desired elevator motor duty cycle, saturate, then put to share
+                elevDutyD = elev2duty.getCtrlOutput(elevAngleC,elevAngleD);
+                if (elevDutyD > 100) 
+                {
+                    elev_duty.put(100);
+                }
+                else if (elevDutyD < -100) 
+                {
+                    elev_duty.put(-100);
+                }
+                else 
+                {
+                    elev_duty.put((int16_t) round(elevDutyD));
+                }
+            }
+            else
+            {
+                elev_duty.put(0);
+            }
 
-            // Calculate desired elevator motor duty cycle, saturate, then put to share
-            elevDutyD = elev2duty.getCtrlOutput(elevAngleC,elevAngleD);
-            if (elevDutyD > 100) 
-            {
-                elev_duty.put(100);
-            }
-            else if (elevDutyD < -100) 
-            {
-                elev_duty.put(-100);
-            }
-            else 
-            {
-                elev_duty.put((int16_t) round(elevDutyD));
-            }
+            Serial << "C: " << elevAngleC << "; D: " << elevAngleD << "; Duty: " << elev_duty.get() << endl;
+
+            prev_elevator = elevAngleC;
+            prev_rudder = rudderAngleC;
 
         }
 
@@ -292,7 +333,7 @@ void task_controller (void* p_params)
  */
 void task_rudder_motor (void* p_params)
 {
-    
+
     // Motor task period
     const uint8_t period = 10;
 
@@ -300,10 +341,13 @@ void task_rudder_motor (void* p_params)
     // Create object
     DRV8871 rudder = DRV8871(RUDDER_PIN_IN1, RUDDER_PIN_IN2, RUDDER_CHANNEL_A, RUDDER_CHANNEL_B);
 
+    rudder.set_duty(0);
+
     while (true)
     {
-      rudder.set_duty(rudder_duty.get());
-      vTaskDelay(period);
+        // Serial.println(rudder_duty.get());
+        rudder.set_duty(rudder_duty.get());
+        vTaskDelay(period);
     }
     
 
@@ -373,12 +417,14 @@ void task_elevator_motor (void* p_params)
 
     Serial << "Elevator Motor Task Begin" << endl;
     // Create object
-    DRV8871 rudder = DRV8871(
+    DRV8871 elevator = DRV8871(
         ELEVATOR_PIN_IN1, ELEVATOR_PIN_IN2, ELEVATOR_CHANNEL_A, ELEVATOR_CHANNEL_B);
+
+    elevator.set_duty(0);
 
     while (true)
     {
-      rudder.set_duty(elev_duty.get());
+      elevator.set_duty(elev_duty.get());
       vTaskDelay(period);
     }
     
@@ -437,6 +483,38 @@ void task_elevator_motor (void* p_params)
 }
 
 
+void task_IMU(void* p_params) 
+{
+  
+    // INIT
+    LSM6DSOX imu;
+    // declare float
+    float pitch, yaw, roll;
+
+    // READ VALUES
+    while(true)
+    {
+
+        // SEND IT AND THE DATA BACK IN RADIANS
+        imu.get_angle((float)time(0), pitch, yaw, roll);
+
+        // Serial << "P: " << pitch*180/M_PI << ";  R: " << roll*180/M_PI << endl;
+
+        // PUT ANGLES TO SHARES FOR CONTROLLER
+        pitchC.put(pitch*180/M_PI);
+        yawC.put(roll*180/M_PI);
+
+        // PRINT IT
+        // Serial << pitch * 180/M_PI << ", " << yaw * 180/M_PI << ", " << roll * 180/M_PI << endl;
+        
+        vTaskDelay(1);
+    }
+
+  
+
+}
+
+
 /** @brief   The Arduino setup function.
  *  @details This function is used to set up the microcontroller by starting
  *           the serial port and creating the tasks.
@@ -453,24 +531,26 @@ void setup (void)
 
     Serial << "Serial is ready. " << endl;
 
-  
-    // Create the task which outputs the high frequency square wave.
-    // xTaskCreate (task_motor_A, "Motor A", 2048, NULL, 4, NULL);
-    
-    // Create the task which outputs the low frequency square wave.
-    // xTaskCreate (task_motor_B, "Motor B", 2048, NULL, 3, NULL);
+    // start i2c
+    Wire.begin();
+
+    // Initialize web_calibrate to zero
+    web_calibrate.put(1);
 
     // Task for the potentiometer testing
-    // xTaskCreate (task_rudder_motor, "Rudder Motor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_rudder_motor, "Rudder Motor", 2048, NULL, 3, NULL);
 
     // Task for the potentiometer testing
-    // xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 3, NULL);
     
     // Task for the ultrasonic sensor
     xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
-    xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 3, NULL);
+    xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 5, NULL);
+
+    // Task for the flight surface controls (rudder and elevator)
+    xTaskCreate (task_IMU, "IMU", 2048, NULL, 10, NULL);
 }
 
 
