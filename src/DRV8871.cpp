@@ -1,14 +1,23 @@
 /** @file DRV8841.cpp
+ * The source file for a DRV8871 motor driver. This contains the methods that
+ * construct an instance of the DRV8871 motor object and set the desired duty cycle.
  * 
+ * @author  Damond Li
+ * @date    2022-Oct-27 Original file
  */
 
 #include <Arduino.h>
 #include "DRV8871.h"
-#include "PrintStream.h"
 
+/** @brief   Constructor for the DRV8871 motor driver class
+ *  @param   pin_A The GPIO pin from the ESP32 (non-zero PWM for a positive duty cycle)
+ *  @param   pin_B The GPIO pin from the ESP32 (non-zero PWM for a negative duty cycle)
+ *  @param   channel_A The timing channel for pin_A
+ *  @param   channel_B The timing channel for pin_B
+ */
 DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channel_B)
 {
-    // Establish the out pins
+    // Establish the output pins
     PIN_A = pin_A;
     PIN_B = pin_B;
 
@@ -17,7 +26,7 @@ DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channe
     CHANNEL_B = channel_B;
 
 
-    // Setup pins
+    // Setup pins with the appropriate resolution and frequency
     ledcSetup(CHANNEL_A, frequency, resolution);
     ledcSetup(CHANNEL_B, frequency, resolution);
 
@@ -26,17 +35,9 @@ DRV8871::DRV8871(uint8_t pin_A, uint8_t pin_B, uint8_t channel_A, uint8_t channe
     ledcAttachPin(PIN_B, CHANNEL_B);
 }   
 
-void DRV8871::enable(void)
-{
-    // Enable the motor
-}
-
-void DRV8871::disable(void)
-{
-    ledcWrite(CHANNEL_A, 0);
-    ledcWrite(CHANNEL_B, 0);
-}
-
+/** @brief   Outputs the desired PWM signal to the appropriate output pin given a duty cycle
+ *  @param   duty_cycle The duty cycle to run the motors
+ */
 void DRV8871::set_duty(int16_t duty_cycle)
 {
     // Check max and min boundaries for duty cycle inputs
@@ -53,19 +54,21 @@ void DRV8871::set_duty(int16_t duty_cycle)
         duty = duty_cycle;
     }
 
+    // Scale the duty cycle according to the resolution of the channel
     duty = duty * max_duty / 100;
 
-    if (duty > 0) // Use Channel A
+    // Check to see which channel to use given the signage of the duty cycle
+    if (duty > 0)                           // Use Channel A
     {
         ledcWrite(CHANNEL_A, duty);
         ledcWrite(CHANNEL_B, 0);
     }
-    else if (duty < 0) // Use Channel B
+    else if (duty < 0)                      // Use Channel B
     {
         ledcWrite(CHANNEL_B, (-1 * duty));
         ledcWrite(CHANNEL_A, 0);
     }
-    else
+    else                                    // Both channels set to zero duty cycle
     {
         ledcWrite(CHANNEL_A, 0);
         ledcWrite(CHANNEL_B, 0);
