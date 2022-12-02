@@ -2,8 +2,15 @@
  * The source file for a DRV8871 motor driver. This contains the methods that
  * construct an instance of the DRV8871 motor object and set the desired duty cycle.
  * 
- * @author  Damond Li
- * @date    2022-Oct-27 Original file
+ *  Based on an examples by A. Sinha at 
+ *  @c https://randomnerdtutorials.com/esp32-pwm-arduino-ide/
+ * 
+ *  @author  Rui Santos
+ *  @author  Sara Santos
+ *  @author  Damond Li
+ *  @date    2018-Oct Original file
+ *  @date    2022-Oct-27 Modified for a motor driver class by Li
+ *  @copyright 2018 by the authors
  */
 
 #include <Arduino.h>
