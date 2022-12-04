@@ -43,7 +43,7 @@ void PIDController::setGains(float Kp_in, float Ki_in, float Kd_in)
 
 /** @brief Calculate PID control output at current time
  *  @param posCurrent The current value or position that is being measured
- *  @param posDesired The desired position that the actuator should be at
+ *  @param posDesired The desired value or position that the actuator should be at
  *  @returns The controller output
  */
 float PIDController::getCtrlOutput(float posCurrent, float posDesired) 
