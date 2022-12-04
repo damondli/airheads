@@ -100,7 +100,8 @@ void task_ultrasonic (void* p_params)
 /** @brief   Controller for both rudder and elevator control surfaces
  *  @details Retrieves IMU, potentiometer, and ultrasonic sensor data and writes 
  *           motor duty cycles to shares. The motor tasks use the duty cycles
- *           to move the rudder and elevator control surfaces.
+ *           to move the rudder and elevator control surfaces. The states within
+ *           this task are set internally and by the webpage task.
  *  @param   p_params An unused pointer to (no) parameters passed to this task
  */
 void task_controller (void* p_params)
@@ -132,8 +133,8 @@ void task_controller (void* p_params)
     float pitchD;                   // Desired pitch (deg)  
 
     // Variables to keep track of previous potentiometer reading
-    float prev_rudder = 0;
-    float prev_elevator = 0; 
+    float prev_rudder = 0;          // Rudder position at previous time (deg)
+    float prev_elevator = 0;        // Elevator position at previous time (deg)
 
     float rudderAngleD;             // Desired rudder angle (deg)
     float rudderAngleC;             // Current rudder angle (deg)
@@ -152,7 +153,7 @@ void task_controller (void* p_params)
     tc_state.put(0);
 
 
-    // Establish initial conditions for rudder and elecator
+    // Establish initial conditions for rudder and elevator
     rudderAngleC = rudderPot.get_angle();
     prev_rudder = rudderAngleC;
 
@@ -163,12 +164,12 @@ void task_controller (void* p_params)
     while (true) 
     {
 
-        if (web_calibrate.get()) {
+        if (web_calibrate.get()) {        // If the webpage calls for calibration
 
-            rudderPot.zero();
+            rudderPot.zero();             // Stop power to motors
             elevPot.zero();
 
-            web_calibrate.put(0);
+            web_calibrate.put(0);         // Reset the calibrate flag
 
             Serial << "   Calibrated" << endl;
 
@@ -178,8 +179,8 @@ void task_controller (void* p_params)
         if (tc_state.get() == 0)          // STATE 0: DISABLED
         {        
 
-            delay_time = 0;
-            rudder_duty.put(0);
+            delay_time = 0;               // Reset delay counter
+            rudder_duty.put(0);           // Stop power to motors
             elev_duty.put(0);
 
             // Passive state waiting for external callback to switch state
@@ -213,6 +214,7 @@ void task_controller (void* p_params)
         else if (tc_state.get() == 2)     // STATE 2: CONTROLLER ACTIVE
         {
 
+            // Time how long the plane is near the ground
             if (near_ground.get() == 1) 
             {
                 delay_time += TASK_CONTROLLER_PERIOD;         
@@ -222,11 +224,11 @@ void task_controller (void* p_params)
                 delay_time = 0;
             }
 
-            // If total delay time has reached 1000 ms...
+            // If total delay time has reached 2000 ms...
             if (delay_time >= 2000) 
             {
-                tc_state.put(0);       // Move to active state
-                delay_time = 0;     // Reset counter
+                tc_state.put(0);         // Move to active state
+                delay_time = 0;          // Reset counter
             }
 
 
@@ -235,14 +237,14 @@ void task_controller (void* p_params)
             // Check whether the glider is near ground
             if (near_ground.get()) 
             {
-                pitchD = 10;   // NEEDS TUNING
+                pitchD = 10;   // If it is, set pitch
             }
             else 
             {
-                pitchD = 0;   // NEEDS TUNING
+                pitchD = 0;    // If not, set different pitch
             }
 
-            yawD = 0;  
+            yawD = 0;          
         
             // Calculate desired rudder angle and then saturate
             rudderAngleD = yaw2rudder.getCtrlOutput(yawC.get(),yawD);
@@ -258,6 +260,7 @@ void task_controller (void* p_params)
             // Get current rudder angle
             rudderAngleC = rudderPot.get_angle();
             // Check if the difference in rudder angles are less than 30 degrees
+            // to prevent undesired response to flickering measurements
             if (fabs(rudderAngleC - prev_rudder) < 30)
             {
                 // Serial.println(fabs(rudderAngleC - prev_rudder));
@@ -558,7 +561,7 @@ void setup (void)
     xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
-    xTaskCreate (task_controller, "Flight Controls", 2048, NULL, 5, NULL);
+    xTaskCreate (task_controller, "Flight Controls", 2048,  NULL, 5, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
     xTaskCreate (task_IMU, "IMU", 2048, NULL, 10, NULL);
