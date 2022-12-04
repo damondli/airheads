@@ -227,7 +227,7 @@ void task_controller (void* p_params)
             // If total delay time has reached 2000 ms...
             if (delay_time >= 2000) 
             {
-                tc_state.put(0);         // Move to active state
+                tc_state.put(0);         // Move to deactivated state
                 delay_time = 0;          // Reset counter
             }
 
