@@ -1,4 +1,4 @@
-/** @file main.cpp
+/** @file network.cpp
  *  This program runs a very simple web server, demonstrating how to serve a
  *  static web page and how to use a web link to get the microcontroller to do
  *  something simple. 
@@ -22,6 +22,7 @@
 #include <shares.h>
 #include <taskshare.h>
 
+// A share containing a boolean flagging the main script to zero the potentiometers
 Share<bool> web_calibrate ("Flag to calibrate/zero");
 
 // #define USE_LAN to have the ESP32 join an existing Local Area Network or 
