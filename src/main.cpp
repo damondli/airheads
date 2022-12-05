@@ -8,7 +8,6 @@
 #include <Arduino.h>
 #include "shares.h"
 #include "taskshare.h"
-//#include "taskqueue.h"
 #include "PrintStream.h"
 #include <time.h>
 #include <network.h>
@@ -21,7 +20,6 @@
 #include "IMU.h"
 
 // Shares
-
 Share<bool> near_ground ("Near Ground");
 Share<uint8_t> tc_state ("Task Controller State");
 Share<int16_t> rudder_duty ("Rudder motor duty cycle");
@@ -29,25 +27,17 @@ Share<int16_t> elev_duty ("Elevator motor duty cycle");
 Share<float> yawC ("Current yaw from IMU");
 Share<float> pitchC ("Current pitch from IMU");
 
-// Shares from webpage
-// Share<bool> web_activate ("Flag to activate controller");
-// Share<bool> web_deactivate ("Flag to activate controller");
-// Share<bool> web_calibrate ("Flag to calibrate/zero");
-
-
-
-
-// Rudder Motor (Motor 1)
-#define RUDDER_PIN_IN1   16  // Formerly 15
-#define RUDDER_PIN_IN2   17  // Formerly 32
-#define RUDDER_CHANNEL_A 0
-#define RUDDER_CHANNEL_B 1
-
 // Elevator Motor (Motor 0)
-#define ELEVATOR_PIN_IN1   27  // 27
-#define ELEVATOR_PIN_IN2   33  // 33
+#define ELEVATOR_PIN_IN1   27
+#define ELEVATOR_PIN_IN2   33
 #define ELEVATOR_CHANNEL_A 2
 #define ELEVATOR_CHANNEL_B 3
+
+// Rudder Motor (Motor 1)
+#define RUDDER_PIN_IN1   16
+#define RUDDER_PIN_IN2   17
+#define RUDDER_CHANNEL_A 0
+#define RUDDER_CHANNEL_B 1
 
 // Potentiometers
 #define ELEVATOR_POT_PIN 34
@@ -231,9 +221,6 @@ void task_controller (void* p_params)
                 delay_time = 0;          // Reset counter
             }
 
-
-
-            
             // Check whether the glider is near ground
             if (near_ground.get()) 
             {
@@ -357,58 +344,6 @@ void task_rudder_motor (void* p_params)
         rudder.set_duty(rudder_duty.get());
         vTaskDelay(period);
     }
-    
-
-    // The following is code used for debugging and demo
-
-    /*
-    // Initialize variables
-    float rudderAngleD;               // Desired elevator angle (deg)
-    float rudderAngleC;               // Current elevator angle (deg)
-    float rudderDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
-
-    // Motor task period
-    const uint8_t PERIOD = 10;
-    char key;
-    const int8_t ANGLE = 50;
-    
-    // Initialize PID contoller
-    PIDController rudder2duty =       // Controller for duty cycle based on elevator angle
-        PIDController(1,0,0, PERIOD);
-
-    // Create motor object
-    DRV8871 rudder = DRV8871(
-        RUDDER_PIN_IN1, RUDDER_PIN_IN2, RUDDER_CHANNEL_A, RUDDER_CHANNEL_B);
-
-    // Create potentiometer object and zero the current reading
-    Potentiometer rudderPot = Potentiometer(13, 0);
-    rudderPot.zero();
-
-    while (true)
-    {
-        rudderAngleC = rudderPot.get_angle();
-        // Check if there are any keys pressed
-        if (Serial.available() > 0)
-        {
-            key = Serial.read();
-            if (key == 'a')
-            {
-                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, ANGLE);
-            }
-            else if (key == 'd')
-            {
-                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, -ANGLE);
-            }
-            else if (key == 's')
-            {
-                rudderDutyD = rudder2duty.getCtrlOutput(rudderAngleC, 0);
-            }
-        }
-
-        rudder.set_duty(rudderDutyD);
-        vTaskDelay(PERIOD);   
-    }
-    */
 }   
 
 /** @brief   
@@ -435,65 +370,11 @@ void task_elevator_motor (void* p_params)
       elevator.set_duty(elev_duty.get());
       vTaskDelay(period);
     }
-    
-
-    // The following is code used for debugging and demo
-
-    /*
-    // Initialize variables
-    float elevAngleD;               // Desired elevator angle (deg)
-    float elevAngleC;               // Current elevator angle (deg)
-    float elevDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
-
-    // Motor task period
-    const uint8_t PERIOD = 10;
-    char key;
-    const int8_t ANGLE = 50;
-    
-    // Initialize PID contoller
-    PIDController elev2duty =       // Controller for duty cycle based on elevator angle
-        PIDController(1,0,0, PERIOD);
-
-    // Create motor object
-    DRV8871 elevator = DRV8871(
-        ELEVATOR_PIN_IN1, ELEVATOR_PIN_IN2, ELEVATOR_CHANNEL_A, ELEVATOR_CHANNEL_B);
-
-    // Create potentiometer object and zero the current reading
-    Potentiometer elevPot = Potentiometer(12, 0);
-    elevPot.zero();
-
-    while (true)
-    {
-        elevAngleC = elevPot.get_angle();
-        // Check if there are any keys pressed
-        if (Serial.available() > 0)
-        {
-            key = Serial.read();
-            if (key == '8')
-            {
-                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, ANGLE);
-            }
-            else if (key == '2')
-            {
-                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, -ANGLE);
-            }
-            else if (key == '5')
-            {
-                elevDutyD = elev2duty.getCtrlOutput(elevAngleC, 0);
-            }
-        }
-
-        elevator.set_duty(elevDutyD);
-        vTaskDelay(PERIOD);
-    }
-
-    */
 }
 
 
 void task_IMU(void* p_params) 
 {
-  
     // INIT
     LSM6DSOX imu;
     // declare float
@@ -517,9 +398,6 @@ void task_IMU(void* p_params)
         
         vTaskDelay(1);
     }
-
-  
-
 }
 
 

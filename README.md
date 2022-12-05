@@ -1,4 +1,4 @@
-#  ME507 Airhead's Glider Project
+#  ME507 Airheads Glider Project
 
 <div class="title_screenshot">
 
@@ -22,7 +22,7 @@ This is a term project for Cal Poly's ME507 class. The scope of our project cons
 
 ## Hardware Design
 
-To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
+To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
 
 ## Custom PCB Design
 

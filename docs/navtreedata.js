@@ -25,6 +25,12 @@
 var NAVTREE =
 [
   [ "ME507 Airheads Project", "index.html", [
+    [ "ME507 Airheads Glider Project", "index.html", [
+      [ "Background", "index.html#autotoc_md1", null ],
+      [ "Hardware Design", "index.html#autotoc_md2", null ],
+      [ "Custom PCB Design", "index.html#autotoc_md3", null ],
+      [ "Software Design", "index.html#autotoc_md4", null ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
