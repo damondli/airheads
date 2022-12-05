@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ME507 Airheads Glider Project", "index.html", [
+  [ "ME507 Airheads Project", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
