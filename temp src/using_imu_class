@@ -1,34 +1,32 @@
-#include <Arduino.h> 
-#include <Wire.h>
-#include "PrintStream.h"
-#include "taskshare.h"
-#include "IMU.h" // CLASS
-#include <time.h> // NEED TO ADD 
-#include <Adafruit_LSM6DSOX.h>
+// #include <Arduino.h> 
+// #include <Wire.h>
+// #include "PrintStream.h"
+// #include "taskshare.h"
+// #include "IMU.h" // CLASS
+// #include <time.h> // NEED TO ADD 
+// #include <Adafruit_LSM6DSOX.h>
 
-void vTaskIMU(void* p_params) 
-{
+// void vTaskIMU(void* p_params) 
+// {
   
-  Serial.begin(115200); 
-  while(!Serial){}
-  // start i2c
-  Wire.begin();
-  // INIT
-  LSM6DSOX imu;
-  // declare float
-  float pitch, yaw, roll;
+//   Serial.begin(115200); 
+//   while(!Serial){}
+//   // start i2c
+//   Wire.begin();
+//   // INIT
+//   LSM6DSOX imu;
+//   // declare float
+//   float pitch, yaw, roll;
 
-  // READ VALUES
-  while(true)
-  {
-  // FIND TIME RIGHT BEFORE MEASURING
-  time_t start = time(0);
-  // SEND IT AND THE DATA BACK IN RADIANS
-  imu.get_angle((float)time(0),pitch, yaw, roll);
-  // PRINT IT
-  Serial << pitch * 180/M_PI << ", " << yaw* 180/M_PI << ", " << roll* 180/M_PI << endl;
-  }
+//   // READ VALUES
+//   while(true)
+//   {
+//   // FIND TIME RIGHT BEFORE MEASURING
+//   time_t start = time(0);
+//   // SEND IT AND THE DATA BACK IN RADIANS
+//   imu.get_angle((float)time(0),pitch, yaw, roll);
+//   // PRINT IT
+//   Serial << pitch * 180/M_PI << ", " << yaw* 180/M_PI << ", " << roll* 180/M_PI << endl;
+//   }
 
-}
-
-
+// }

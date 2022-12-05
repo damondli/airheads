@@ -14,7 +14,7 @@
 
 /** @brief  Class for an HC_SR04 Ultrasonic Sensor
  */
-class ultrasonic //This class operates an HC_SR04 Ultrasonic Sensor 
+class Ultrasonic //This class operates an HC_SR04 Ultrasonic Sensor 
 {
 protected:
     float distance;         ///< The distance between the ultrasonic sensor and the object in front of it
@@ -24,7 +24,7 @@ protected:
 
 
 public:
-    ultrasonic (uint8_t echoPin, uint8_t trigPin);          ///< Constructor for the ultrasonic sensor class
+    Ultrasonic (uint8_t echoPin, uint8_t trigPin);          ///< Constructor for the ultrasonic sensor class
     float get_distance (void);                              ///< The method to get the distance measured from the ultrasonic sensor
 };
 
