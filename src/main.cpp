@@ -82,7 +82,7 @@ void task_ultrasonic (void* p_params)
 
     // Create object
     Serial.println("Constructing the ultrasonic object");
-    ultrasonic ultra = ultrasonic(ECHO, TRIG);
+    Ultrasonic ultra = Ultrasonic(ECHO, TRIG);
 
     while (true)
     {

@@ -1,15 +1,9 @@
 /** @file ultrasonic.h
  *  The header file for an HC_SR04 Ultrasonic Sensor class
  * 
- *  Based on an examples by Arbi Abdul Jabbaar at 
- *  @c https://create.arduino.cc/projecthub/abdularbi17/ultrasonic-sensor-hc-sr04-with-arduino-tutorial-327ff6
- * 
- *  @author Arbi Abdul Jabbaar
  *  @author Damond Li
  *  @author Arielle Sampson
- *  @date 2019-Sept-17 Original file
- *  @date 2022-Nov-30 Modified for Airheads Glider Project use by Li and Sampson
- *  @copyright 2019 by the author
+ *  @date 2022-Nov-30 Original file
  */
 
 // Compile the header file only once
