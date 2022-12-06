@@ -117,7 +117,7 @@ Custom PCB Design</h1>
 <p ><img src="img/PCB_Board.png" alt="" class="inline"/> </p>
 <p >The board supports:</p><ul>
 <li>Two <a class="el" href="class_d_r_v8871.html" title="Class for a motor driver using the DRV8871 chip. Primarily responsible for setting the appropriate PW...">DRV8871</a> Motor Driver Chips</li>
-<li>Two <a href="/class_potentiometer.html">Potentiometers</a></li>
+<li>Two Potentiometers</li>
 <li>One HC-SR04 <a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> Sensor</li>
 <li>One <a class="el" href="class_l_i_s3_m_d_l.html" title="Class to interface witch the magnetometer.">LIS3MDL</a> + <a class="el" href="class_l_s_m6_d_s_o_x.html" title="Class to interface and get pitch, yaw, roll data from the accelerometer and gyroscope.">LSM6DSOX</a> IMU Breakout Board</li>
 </ul>
@@ -131,11 +131,16 @@ Software Design</h1>
 <li>Webserver</li>
 <li>IMU</li>
 </ul>
-<p >Our program uses cooperative multitasking with FreeRTOS to "simultaneously" run every task.</p>
+<p  align="center">The tasks are organized as shown below in the task diagram. </p>
+<p ><img src="img/Task.png" alt="" class="inline"/> </p>
+<p  align="center">Our controller task is structured as a finite state machine with three states. </p>
+<p ><img src="img/FSM.png" alt="" class="inline"/> </p>
+<p >Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.</p>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Internet of Things (IoT)</h1>
 <p >To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the user can interact with the flight control system.</p>
 <p ><img src="img/Webpage.png" alt="" class="inline"/> </p>
+<p >Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Documentation</h1>
 <p >For full documentation of our code, please visit <a href="https://damondli.github.io/">here</a>. </p>

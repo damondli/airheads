@@ -40,7 +40,7 @@ Our custom PCB is designed to fit on an ESP32 feather board.
 
 The board supports:
 - Two DRV8871 Motor Driver Chips
-- Two [Potentiometers](/class_potentiometer.html)
+- Two Potentiometers
 - One HC-SR04 Ultrasonic Sensor
 - One LIS3MDL + LSM6DSOX IMU Breakout Board
 
@@ -54,7 +54,17 @@ The software includes the following tasks:
 - Webserver
 - IMU
 
-Our program uses cooperative multitasking with FreeRTOS to "simultaneously" run every task.
+The tasks are organized as shown below in the task diagram.
+<p align="center">
+<img src="img/Task.png">
+</p>
+
+Our controller task is structured as a finite state machine with three states.
+<p align="center">
+<img src="img/FSM.png">
+</p>
+
+Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.
 
 ## Internet of Things (IoT)
 
@@ -64,6 +74,8 @@ To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the
 <img src="img/Webpage.png">
 </p>
 <!--  ![Webpage Control Panel](img/Webpage.png) -->
+
+Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration. 
 
 ## Documentation
 
