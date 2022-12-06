@@ -1,7 +1,7 @@
 #  ME507 Airheads Glider Project
 
 <div class="title_screenshot">
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/Glider.png">
 </p>
 </div>
@@ -24,7 +24,7 @@ This is a term project for Cal Poly's ME507 class. The scope of our project cons
 
 To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
 
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/Mount.png">
 </p>
 <!--  ![Custom Motor Bracket](img/Mount.png) -->
@@ -33,7 +33,7 @@ To make this project more challenging and more fitting for ME507, we decided to 
 
 Our custom PCB is designed to fit on an ESP32 feather board.
 
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/PCB_Board.png">
 </p>
 <!-- ![Custom PCB](img/PCB_Board.png) -->
@@ -55,12 +55,12 @@ The software includes the following tasks:
 - IMU
 
 The tasks are organized as shown below in the task diagram.
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/Task.png">
 </p>
 
 Our controller task is structured as a finite state machine with three states.
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/FSM.png">
 </p>
 
@@ -70,7 +70,7 @@ Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.
 
 To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the user can interact with the flight control system.
 
-<p align="center">
+<p style="width:600; align:center;">
 <img src="img/Webpage.png">
 </p>
 <!--  ![Webpage Control Panel](img/Webpage.png) -->
