@@ -98,16 +98,16 @@ void task_controller (void* p_params)
 {
     Serial << "Controller Task Begin" << endl;
   
-    const uint8_t TASK_CONTROLLER_PERIOD = 50;  // Period of controller task (ms)
+    const uint8_t TASK_CONTROLLER_PERIOD = 50;  ///< Period of controller task (ms)
 
     // Controller objects
-    PIDController yaw2rudder =      // Controller for rudder angle based on yaw
+    PIDController yaw2rudder =      ///< Controller for rudder angle based on yaw
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD); 
-    PIDController rudder2duty =     // Controller for duty cycle based on rudder angle
+    PIDController rudder2duty =     ///< Controller for duty cycle based on rudder angle
         PIDController(3,0,0,TASK_CONTROLLER_PERIOD);
-    PIDController pitch2elev =      // Controller for elevator angle based on pitch
+    PIDController pitch2elev =      ///< Controller for elevator angle based on pitch
         PIDController(1,0,0,TASK_CONTROLLER_PERIOD);
-    PIDController elev2duty =       // Controller for duty cycle based on elevator angle
+    PIDController elev2duty =       ///< Controller for duty cycle based on elevator angle
         PIDController(3,0,0,TASK_CONTROLLER_PERIOD);
 
     // Create potentiometer object and zero the current reading
@@ -119,28 +119,28 @@ void task_controller (void* p_params)
     elevPot.zero();
 
     // Initialize variables
-    float yawD;                     // Desired yaw (deg)
-    float pitchD;                   // Desired pitch (deg)  
+    float yawD;                     ///< Desired yaw (deg)
+    float pitchD;                   ///< Desired pitch (deg)  
 
     // Variables to keep track of previous potentiometer reading
-    float prev_rudder = 0;          // Rudder position at previous time (deg)
-    float prev_elevator = 0;        // Elevator position at previous time (deg)
+    float prev_rudder = 0;          ///< Rudder position at previous time (deg)
+    float prev_elevator = 0;        ///< Elevator position at previous time (deg)
 
-    float rudderAngleD;             // Desired rudder angle (deg)
-    float rudderAngleC;             // Current rudder angle (deg)
-    float rudderAngleMin = -50;     // Minimum allowable rudder angle (deg)
-    float rudderAngleMax = 50;      // Maximum allowable rudder angle (deg)
+    float rudderAngleD;             ///< Desired rudder angle (deg)
+    float rudderAngleC;             ///< Current rudder angle (deg)
+    float rudderAngleMin = -50;     ///< Minimum allowable rudder angle (deg)
+    float rudderAngleMax = 50;      ///< Maximum allowable rudder angle (deg)
 
-    float elevAngleD;               // Desired elevator angle (deg)
-    float elevAngleC;               // Current elevator angle (deg)
-    float elevAngleMin = -50;       // Minimum allowable elevator angle (deg)
-    float elevAngleMax = 50;        // Maximum allowable elevator angle (deg)
+    float elevAngleD;               ///< Desired elevator angle (deg)
+    float elevAngleC;               ///< Current elevator angle (deg)
+    float elevAngleMin = -50;       ///< Minimum allowable elevator angle (deg)
+    float elevAngleMax = 50;        ///< Maximum allowable elevator angle (deg)
 
-    float rudderDutyD;              // Rudder motor duty cycle (-100% to 100% incl.)
-    float elevDutyD;                // Elev motor duty cycle (-100% to 100% incl.)
+    float rudderDutyD;              ///< Rudder motor duty cycle (-100% to 100% incl.)
+    float elevDutyD;                ///< Elev motor duty cycle (-100% to 100% incl.)
 
-    uint16_t delay_time = 0;        // Current amount of time (ms) in inactive delay
-    tc_state.put(0);
+    uint16_t delay_time = 0;        ///< Current amount of time (ms) in inactive delay
+    tc_state.put(0);                // Initialize at state 0
 
 
     // Establish initial conditions for rudder and elevator
