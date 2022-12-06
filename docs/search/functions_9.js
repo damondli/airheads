@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['read_5fdata_0',['read_data',['../class_l_s_m6_d_s_o_x.html#a0af34bbf464f879cc53b50a8b22a9557',1,'LSM6DSOX']]],
-  ['read_5fxyz_5fmag_1',['read_xyz_mag',['../class_l_i_s3_m_d_l.html#a2b70abb68b05536178b0d12bf1ef7f56',1,'LIS3MDL']]],
-  ['readregister_2',['readRegister',['../class_l_i_s3_m_d_l.html#a6f1e38b0efefbdc085cb903647157301',1,'LIS3MDL']]]
+  ['server_0',['server',['../network_8cpp.html#a48f3f185be3ea2d153c347a157b38d42',1,'network.cpp']]],
+  ['set_5fduty_1',['set_duty',['../class_d_r_v8871.html#a2ab166df0eecae854e4f534e551b7228',1,'DRV8871']]],
+  ['setgains_2',['setGains',['../class_p_i_d_controller.html#a95f613f549bd12fe3195cfc22dc82c69',1,'PIDController']]],
+  ['setup_3',['setup',['../main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f',1,'main.cpp']]],
+  ['setup_5fwifi_4',['setup_wifi',['../network_8cpp.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp'],['../network_8h.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp']]],
+  ['subnet_5',['subnet',['../network_8cpp.html#a89cf134ada28d8ce0192d9fcbc83614a',1,'network.cpp']]]
 ];

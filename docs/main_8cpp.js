@@ -12,17 +12,17 @@ var main_8cpp =
     [ "RUDDER_PIN_IN2", "main_8cpp.html#aee35c0980097f40d3a63d9295e62d46e", null ],
     [ "RUDDER_POT_PIN", "main_8cpp.html#a8fa2b3d860dc1068fe5aab458960f88d", null ],
     [ "TRIG", "main_8cpp.html#a84de9f6984c497dba22f318773f00f50", null ],
+    [ "elev_duty", "main_8cpp.html#af36f1f05de03f4dd32de73a3bb218c02", null ],
     [ "loop", "main_8cpp.html#a0b33edabd7f1c4e4a0bf32c67269be2f", null ],
+    [ "near_ground", "main_8cpp.html#a4495a131c357c05a92912b88d48d0940", null ],
+    [ "pitchC", "main_8cpp.html#afd442e43064c3d19c3c268c772932a67", null ],
+    [ "rudder_duty", "main_8cpp.html#ad3cf54f5b403eda73c94825b9b8a4cd2", null ],
     [ "setup", "main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f", null ],
     [ "task_controller", "main_8cpp.html#a74b64ac7c32e03d8bc92f15573618b3b", null ],
     [ "task_elevator_motor", "main_8cpp.html#a21055d4ac1f0170d766395eb25e9070b", null ],
     [ "task_IMU", "main_8cpp.html#ad34c28b7e77e784ff26a914b58f53c77", null ],
     [ "task_rudder_motor", "main_8cpp.html#ad83deaef084ca08588b3c2a303d3100b", null ],
     [ "task_ultrasonic", "main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500", null ],
-    [ "elev_duty", "main_8cpp.html#a55312c2bf1188e95fd8778694bb728af", null ],
-    [ "near_ground", "main_8cpp.html#abc23533e4c22c7f5dd0ed74abc6a87f7", null ],
-    [ "pitchC", "main_8cpp.html#a551c6948727a71a5c7a8fa4a5a7f1420", null ],
-    [ "rudder_duty", "main_8cpp.html#a1f7dd866a2866905bcf7092cc16c1123", null ],
-    [ "tc_state", "main_8cpp.html#a377b7b1e742ccaae1ba9bb39515731dc", null ],
-    [ "yawC", "main_8cpp.html#a7dab5f0a3dbec03cc879e12a43cfb3f3", null ]
+    [ "tc_state", "main_8cpp.html#abec804d74e7942f30ade24257d4e7f3d", null ],
+    [ "yawC", "main_8cpp.html#a94bc49213dc8289b37fdba34245d8a33", null ]
 ];

@@ -12,7 +12,7 @@ var network_8cpp =
     [ "setup_wifi", "network_8cpp.html#a2db7e734a3678bd61b7b9556caf2d933", null ],
     [ "subnet", "network_8cpp.html#a89cf134ada28d8ce0192d9fcbc83614a", null ],
     [ "task_webserver", "network_8cpp.html#a577f28c6d870b5b9f1c4510d8195094a", null ],
+    [ "web_calibrate", "network_8cpp.html#adaac6d4569dbd114602a562e7c5686b5", null ],
     [ "password", "network_8cpp.html#aa4a2ebcb494493f648ae1e6975672575", null ],
-    [ "ssid", "network_8cpp.html#a587ba0cb07f02913598610049a3bbb79", null ],
-    [ "web_calibrate", "network_8cpp.html#ad37776ea78ea27521b79e7f42a5edd95", null ]
+    [ "ssid", "network_8cpp.html#a587ba0cb07f02913598610049a3bbb79", null ]
 ];

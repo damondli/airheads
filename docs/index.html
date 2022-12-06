@@ -95,7 +95,11 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">ME507 Airheads Glider Project </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p  style="width:600; align:center;"><a class="anchor" id="md_README"></a> </p><div class="title_screenshot"> </div><div class="title_screenshot"> <img src="img/Glider.png" alt="" class="inline"/> </div><div class="title_screenshot"> </div><p >This repository documents the development of a flight stabilization system for a glider.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> </p><div class="title_screenshot"></div><div class="title_screenshot"><div class="image">
+<img src="Glider.png" alt=""/>
+<div class="caption">
+Figure 1. Custom Motor Bracket</div></div>
+    </div><div class="title_screenshot"></div><p >This repository documents the development of a flight stabilization system for a glider.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Background</h1>
 <p >This is a term project for Cal Poly's ME507 class. The scope of our project consists of:</p>
@@ -110,12 +114,18 @@ Background</h1>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Hardware Design</h1>
 <p >To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.</p>
-<p ><img src="img/Mount.png" alt="" class="inline"/> </p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<div class="image">
+<img src="Mount.png" alt=""/>
+<div class="caption">
+Figure 2. Custom Motor Bracket</div></div>
+    <h1><a class="anchor" id="autotoc_md3"></a>
 Custom PCB Design</h1>
 <p >Our custom PCB is designed to fit on an ESP32 feather board.</p>
-<p ><img src="img/PCB_Board.png" alt="" class="inline"/> </p>
-<p >The board supports:</p><ul>
+<div class="image">
+<img src="PCB_Board.png" alt=""/>
+<div class="caption">
+Figure 3. Custom PCB Design</div></div>
+    <p >The board supports:</p><ul>
 <li>Two <a class="el" href="class_d_r_v8871.html" title="Class for a motor driver using the DRV8871 chip. Primarily responsible for setting the appropriate PW...">DRV8871</a> Motor Driver Chips</li>
 <li>Two Potentiometers</li>
 <li>One HC-SR04 <a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> Sensor</li>
@@ -131,19 +141,28 @@ Software Design</h1>
 <li>Webserver</li>
 <li>IMU</li>
 </ul>
-<p  style="width:600; align:center;">The tasks are organized as shown below in the task diagram. </p>
-<p ><img src="img/Task.png" alt="" class="inline"/> </p>
-<p  style="width:600; align:center;">Our controller task is structured as a finite state machine with three states. </p>
-<p ><img src="img/FSM.png" alt="" class="inline"/> </p>
-<p >Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.</p>
+<p >The tasks are organized as shown below in the task diagram.</p>
+<div class="image">
+<img src="Task.png" alt=""/>
+<div class="caption">
+Figure 4. Task Diagram</div></div>
+    <p >Our controller task is structured as a finite state machine with three states.</p>
+<div class="image">
+<img src="FSM.png" alt=""/>
+<div class="caption">
+Figure 5. Finite State Machine</div></div>
+    <p >Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.</p>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Internet of Things (IoT)</h1>
 <p >To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the user can interact with the flight control system.</p>
-<p ><img src="img/Webpage.png" alt="" class="inline"/> </p>
-<p >Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration.</p>
+<div class="image">
+<img src="Webpage.png" alt=""/>
+<div class="caption">
+Figure 6. Webpage Control Panel</div></div>
+    <p >Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Documentation</h1>
-<p >For full documentation of our code, please visit <a href="https://damondli.github.io/">here</a>. </p>
+<p >For full documentation of our code, please visit <a href="https://damondli.github.io/airheads/">here</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

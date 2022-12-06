@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ssid_0',['ssid',['../network_8cpp.html#a587ba0cb07f02913598610049a3bbb79',1,'network.cpp']]]
+  ['tc_5fstate_0',['tc_state',['../shares_8h.html#a3903a133bbdc4aa2affa1a25fe6efb0e',1,'shares.h']]],
+  ['trigpin_1',['trigPin',['../class_ultrasonic.html#a149802e219b2c42642598e069d92b009',1,'Ultrasonic']]]
 ];

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['server_0',['server',['../network_8cpp.html#a48f3f185be3ea2d153c347a157b38d42',1,'network.cpp']]],
-  ['set_5fduty_1',['set_duty',['../class_d_r_v8871.html#a2ab166df0eecae854e4f534e551b7228',1,'DRV8871']]],
-  ['setgains_2',['setGains',['../class_p_i_d_controller.html#a95f613f549bd12fe3195cfc22dc82c69',1,'PIDController']]],
-  ['setup_3',['setup',['../main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f',1,'main.cpp']]],
-  ['setup_5fwifi_4',['setup_wifi',['../network_8cpp.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp'],['../network_8h.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp']]],
-  ['share_5',['Share',['../class_share.html#a0948b04d00aef072f25af2f49ecfa259',1,'Share']]],
-  ['subnet_6',['subnet',['../network_8cpp.html#a89cf134ada28d8ce0192d9fcbc83614a',1,'network.cpp']]]
+  ['task_5fcontroller_0',['task_controller',['../main_8cpp.html#a74b64ac7c32e03d8bc92f15573618b3b',1,'main.cpp']]],
+  ['task_5felevator_5fmotor_1',['task_elevator_motor',['../main_8cpp.html#a21055d4ac1f0170d766395eb25e9070b',1,'main.cpp']]],
+  ['task_5fimu_2',['task_IMU',['../main_8cpp.html#ad34c28b7e77e784ff26a914b58f53c77',1,'main.cpp']]],
+  ['task_5frudder_5fmotor_3',['task_rudder_motor',['../main_8cpp.html#ad83deaef084ca08588b3c2a303d3100b',1,'main.cpp']]],
+  ['task_5fultrasonic_4',['task_ultrasonic',['../main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500',1,'main.cpp']]],
+  ['task_5fwebserver_5',['task_webserver',['../network_8cpp.html#a577f28c6d870b5b9f1c4510d8195094a',1,'task_webserver(void *p_params):&#160;network.cpp'],['../network_8h.html#a577f28c6d870b5b9f1c4510d8195094a',1,'task_webserver(void *p_params):&#160;network.cpp']]],
+  ['tc_5fstate_6',['tc_state',['../main_8cpp.html#abec804d74e7942f30ade24257d4e7f3d',1,'main.cpp']]]
 ];

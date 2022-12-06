@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writeregister_0',['writeRegister',['../class_l_i_s3_m_d_l.html#ae240639b905eb0fedbc1d3ab30a19bb9',1,'LIS3MDL']]]
+  ['yawc_0',['yawC',['../main_8cpp.html#a94bc49213dc8289b37fdba34245d8a33',1,'main.cpp']]]
 ];

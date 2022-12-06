@@ -1,13 +1,5 @@
 var searchData=
 [
-  ['task_5fcontroller_0',['task_controller',['../main_8cpp.html#a74b64ac7c32e03d8bc92f15573618b3b',1,'main.cpp']]],
-  ['task_5felevator_5fmotor_1',['task_elevator_motor',['../main_8cpp.html#a21055d4ac1f0170d766395eb25e9070b',1,'main.cpp']]],
-  ['task_5fimu_2',['task_IMU',['../main_8cpp.html#ad34c28b7e77e784ff26a914b58f53c77',1,'main.cpp']]],
-  ['task_5frudder_5fmotor_3',['task_rudder_motor',['../main_8cpp.html#ad83deaef084ca08588b3c2a303d3100b',1,'main.cpp']]],
-  ['task_5fultrasonic_4',['task_ultrasonic',['../main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500',1,'main.cpp']]],
-  ['task_5fwebserver_5',['task_webserver',['../network_8cpp.html#a577f28c6d870b5b9f1c4510d8195094a',1,'task_webserver(void *p_params):&#160;network.cpp'],['../network_8h.html#a577f28c6d870b5b9f1c4510d8195094a',1,'task_webserver(void *p_params):&#160;network.cpp']]],
-  ['taskshare_2eh_6',['taskshare.h',['../taskshare_8h.html',1,'']]],
-  ['tc_5fstate_7',['tc_state',['../main_8cpp.html#a377b7b1e742ccaae1ba9bb39515731dc',1,'tc_state():&#160;main.cpp'],['../shares_8h.html#a3903a133bbdc4aa2affa1a25fe6efb0e',1,'tc_state():&#160;shares.h']]],
-  ['trig_8',['TRIG',['../main_8cpp.html#a84de9f6984c497dba22f318773f00f50',1,'main.cpp']]],
-  ['trigpin_9',['trigPin',['../class_ultrasonic.html#a149802e219b2c42642598e069d92b009',1,'Ultrasonic']]]
+  ['web_5fcalibrate_0',['web_calibrate',['../shares_8h.html#ae5392aa5b9de7394df93ad1e269690de',1,'web_calibrate():&#160;shares.h'],['../network_8cpp.html#adaac6d4569dbd114602a562e7c5686b5',1,'web_calibrate(&quot;Flag to calibrate/zero&quot;):&#160;network.cpp']]],
+  ['writeregister_1',['writeRegister',['../class_l_i_s3_m_d_l.html#ae240639b905eb0fedbc1d3ab30a19bb9',1,'LIS3MDL']]]
 ];

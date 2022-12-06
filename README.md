@@ -1,9 +1,9 @@
 #  ME507 Airheads Glider Project
 
 <div class="title_screenshot">
-<p style="width:600; align:center;">
-<img src="img/Glider.png">
-</p>
+
+![Figure 1. Custom Motor Bracket](img/Glider.png)
+
 </div>
 
 This repository documents the development of a flight stabilization system for a glider.
@@ -24,19 +24,13 @@ This is a term project for Cal Poly's ME507 class. The scope of our project cons
 
 To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
 
-<p style="width:600; align:center;">
-<img src="img/Mount.png">
-</p>
-<!--  ![Custom Motor Bracket](img/Mount.png) -->
+![Figure 2. Custom Motor Bracket](img/Mount.png)
 
 ## Custom PCB Design
 
 Our custom PCB is designed to fit on an ESP32 feather board.
 
-<p style="width:600; align:center;">
-<img src="img/PCB_Board.png">
-</p>
-<!-- ![Custom PCB](img/PCB_Board.png) -->
+![Figure 3. Custom PCB Design](img/PCB_Board.png)
 
 The board supports:
 - Two DRV8871 Motor Driver Chips
@@ -55,14 +49,12 @@ The software includes the following tasks:
 - IMU
 
 The tasks are organized as shown below in the task diagram.
-<p style="width:600; align:center;">
-<img src="img/Task.png">
-</p>
+
+![Figure 4. Task Diagram](img/Task.png)
 
 Our controller task is structured as a finite state machine with three states.
-<p style="width:600; align:center;">
-<img src="img/FSM.png">
-</p>
+
+![Figure 5. Finite State Machine](img/FSM.png)
 
 Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.
 
@@ -70,13 +62,10 @@ Every task runs "simultaneously" though cooperative multitasking with FreeRTOS.
 
 To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the user can interact with the flight control system.
 
-<p style="width:600; align:center;">
-<img src="img/Webpage.png">
-</p>
-<!--  ![Webpage Control Panel](img/Webpage.png) -->
+![Figure 6. Webpage Control Panel](img/Webpage.png)
 
 Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration. 
 
 ## Documentation
 
-For full documentation of our code, please visit [here](https://damondli.github.io/).
+For full documentation of our code, please visit [here](https://damondli.github.io/airheads/).

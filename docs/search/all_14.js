@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['ultrasonic_0',['Ultrasonic',['../class_ultrasonic.html',1,'Ultrasonic'],['../class_ultrasonic.html#aebcd70c417dc5cc1f01cbf24f87bd541',1,'Ultrasonic::Ultrasonic()']]],
-  ['ultrasonic_2ecpp_1',['ultrasonic.cpp',['../ultrasonic_8cpp.html',1,'']]],
-  ['ultrasonic_2eh_2',['ultrasonic.h',['../ultrasonic_8h.html',1,'']]]
+  ['yawc_0',['yawC',['../shares_8h.html#ae79b14682483539ebf83885978aca655',1,'yawC():&#160;shares.h'],['../main_8cpp.html#a94bc49213dc8289b37fdba34245d8a33',1,'yawC(&quot;Current yaw from IMU&quot;):&#160;main.cpp']]]
 ];

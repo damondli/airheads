@@ -94,8 +94,7 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -104,7 +103,7 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="shares_8h_source.html">shares.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="taskshare_8h_source.html">taskshare.h</a>&quot;</code><br />
+<code>#include &quot;taskshare.h&quot;</code><br />
 <code>#include &quot;PrintStream.h&quot;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="network_8h_source.html">network.h</a>&gt;</code><br />
@@ -167,6 +166,30 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a4495a131c357c05a92912b88d48d0940"><td class="memItemLeft" align="right" valign="top"><a id="a4495a131c357c05a92912b88d48d0940" name="a4495a131c357c05a92912b88d48d0940"></a>
+Share&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>near_ground</b> (&quot;Near Ground&quot;)</td></tr>
+<tr class="memdesc:a4495a131c357c05a92912b88d48d0940"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share boolean that reads true if the glider is near ground. <br /></td></tr>
+<tr class="separator:a4495a131c357c05a92912b88d48d0940"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec804d74e7942f30ade24257d4e7f3d"><td class="memItemLeft" align="right" valign="top"><a id="abec804d74e7942f30ade24257d4e7f3d" name="abec804d74e7942f30ade24257d4e7f3d"></a>
+Share&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tc_state</b> (&quot;Task Controller State&quot;)</td></tr>
+<tr class="memdesc:abec804d74e7942f30ade24257d4e7f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share integer for finite state machine. <br /></td></tr>
+<tr class="separator:abec804d74e7942f30ade24257d4e7f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3cf54f5b403eda73c94825b9b8a4cd2"><td class="memItemLeft" align="right" valign="top"><a id="ad3cf54f5b403eda73c94825b9b8a4cd2" name="ad3cf54f5b403eda73c94825b9b8a4cd2"></a>
+Share&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rudder_duty</b> (&quot;Rudder motor duty cycle&quot;)</td></tr>
+<tr class="memdesc:ad3cf54f5b403eda73c94825b9b8a4cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing the duty cycle for rudder motor. <br /></td></tr>
+<tr class="separator:ad3cf54f5b403eda73c94825b9b8a4cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af36f1f05de03f4dd32de73a3bb218c02"><td class="memItemLeft" align="right" valign="top"><a id="af36f1f05de03f4dd32de73a3bb218c02" name="af36f1f05de03f4dd32de73a3bb218c02"></a>
+Share&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>elev_duty</b> (&quot;Elevator motor duty cycle&quot;)</td></tr>
+<tr class="memdesc:af36f1f05de03f4dd32de73a3bb218c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing the duty cycle for elevator motor. <br /></td></tr>
+<tr class="separator:af36f1f05de03f4dd32de73a3bb218c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94bc49213dc8289b37fdba34245d8a33"><td class="memItemLeft" align="right" valign="top"><a id="a94bc49213dc8289b37fdba34245d8a33" name="a94bc49213dc8289b37fdba34245d8a33"></a>
+Share&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>yawC</b> (&quot;Current yaw from IMU&quot;)</td></tr>
+<tr class="memdesc:a94bc49213dc8289b37fdba34245d8a33"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing current yaw of the glider. <br /></td></tr>
+<tr class="separator:a94bc49213dc8289b37fdba34245d8a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd442e43064c3d19c3c268c772932a67"><td class="memItemLeft" align="right" valign="top"><a id="afd442e43064c3d19c3c268c772932a67" name="afd442e43064c3d19c3c268c772932a67"></a>
+Share&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pitchC</b> (&quot;Current pitch from IMU&quot;)</td></tr>
+<tr class="memdesc:afd442e43064c3d19c3c268c772932a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing current pitch of the glider. <br /></td></tr>
+<tr class="separator:afd442e43064c3d19c3c268c772932a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad20ab8374d00b9e7802d95de13e4e500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500">task_ultrasonic</a> (void *p_params)</td></tr>
 <tr class="memdesc:ad20ab8374d00b9e7802d95de13e4e500"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> sensor measures distance to the ground.  <a href="main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500">More...</a><br /></td></tr>
 <tr class="separator:ad20ab8374d00b9e7802d95de13e4e500"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,33 +213,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a0b33edabd7f1c4e4a0bf32c67269be2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0b33edabd7f1c4e4a0bf32c67269be2f">loop</a> (void)</td></tr>
 <tr class="memdesc:a0b33edabd7f1c4e4a0bf32c67269be2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino loop function.  <a href="main_8cpp.html#a0b33edabd7f1c4e4a0bf32c67269be2f">More...</a><br /></td></tr>
 <tr class="separator:a0b33edabd7f1c4e4a0bf32c67269be2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:abc23533e4c22c7f5dd0ed74abc6a87f7"><td class="memItemLeft" align="right" valign="top"><a id="abc23533e4c22c7f5dd0ed74abc6a87f7" name="abc23533e4c22c7f5dd0ed74abc6a87f7"></a>
-<a class="el" href="class_share.html">Share</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>near_ground</b> (&quot;Near Ground&quot;)</td></tr>
-<tr class="memdesc:abc23533e4c22c7f5dd0ed74abc6a87f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share boolean that reads true if the glider is near ground. <br /></td></tr>
-<tr class="separator:abc23533e4c22c7f5dd0ed74abc6a87f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a377b7b1e742ccaae1ba9bb39515731dc"><td class="memItemLeft" align="right" valign="top"><a id="a377b7b1e742ccaae1ba9bb39515731dc" name="a377b7b1e742ccaae1ba9bb39515731dc"></a>
-<a class="el" href="class_share.html">Share</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tc_state</b> (&quot;Task Controller State&quot;)</td></tr>
-<tr class="memdesc:a377b7b1e742ccaae1ba9bb39515731dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share integer for finite state machine. <br /></td></tr>
-<tr class="separator:a377b7b1e742ccaae1ba9bb39515731dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f7dd866a2866905bcf7092cc16c1123"><td class="memItemLeft" align="right" valign="top"><a id="a1f7dd866a2866905bcf7092cc16c1123" name="a1f7dd866a2866905bcf7092cc16c1123"></a>
-<a class="el" href="class_share.html">Share</a>&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rudder_duty</b> (&quot;Rudder motor duty cycle&quot;)</td></tr>
-<tr class="memdesc:a1f7dd866a2866905bcf7092cc16c1123"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing the duty cycle for rudder motor. <br /></td></tr>
-<tr class="separator:a1f7dd866a2866905bcf7092cc16c1123"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55312c2bf1188e95fd8778694bb728af"><td class="memItemLeft" align="right" valign="top"><a id="a55312c2bf1188e95fd8778694bb728af" name="a55312c2bf1188e95fd8778694bb728af"></a>
-<a class="el" href="class_share.html">Share</a>&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>elev_duty</b> (&quot;Elevator motor duty cycle&quot;)</td></tr>
-<tr class="memdesc:a55312c2bf1188e95fd8778694bb728af"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing the duty cycle for elevator motor. <br /></td></tr>
-<tr class="separator:a55312c2bf1188e95fd8778694bb728af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dab5f0a3dbec03cc879e12a43cfb3f3"><td class="memItemLeft" align="right" valign="top"><a id="a7dab5f0a3dbec03cc879e12a43cfb3f3" name="a7dab5f0a3dbec03cc879e12a43cfb3f3"></a>
-<a class="el" href="class_share.html">Share</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>yawC</b> (&quot;Current yaw from IMU&quot;)</td></tr>
-<tr class="memdesc:a7dab5f0a3dbec03cc879e12a43cfb3f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing current yaw of the glider. <br /></td></tr>
-<tr class="separator:a7dab5f0a3dbec03cc879e12a43cfb3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551c6948727a71a5c7a8fa4a5a7f1420"><td class="memItemLeft" align="right" valign="top"><a id="a551c6948727a71a5c7a8fa4a5a7f1420" name="a551c6948727a71a5c7a8fa4a5a7f1420"></a>
-<a class="el" href="class_share.html">Share</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pitchC</b> (&quot;Current pitch from IMU&quot;)</td></tr>
-<tr class="memdesc:a551c6948727a71a5c7a8fa4a5a7f1420"><td class="mdescLeft">&#160;</td><td class="mdescRight">A share containing current pitch of the glider. <br /></td></tr>
-<tr class="separator:a551c6948727a71a5c7a8fa4a5a7f1420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Main file for ME 507 Airheads project. Safely lands an unpowered model airplane. </p>

@@ -196,12 +196,12 @@ void task_controller (void* p_params)
             if (delay_time >= 2000) 
             {
 
-                tc_state.put(2);       // Move to active state
-                delay_time = 0;     // Reset counter
+                tc_state.put(2);                // Move to active state
+                delay_time = 0;                 // Reset counter
             }
 
         }
-        else if (tc_state.get() == 2)     // STATE 2: CONTROLLER ACTIVE
+        else if (tc_state.get() == 2)           // STATE 2: CONTROLLER ACTIVE
         {
 
             // Time how long the plane is near the ground
@@ -217,18 +217,18 @@ void task_controller (void* p_params)
             // If total delay time has reached 2000 ms...
             if (delay_time >= 2000) 
             {
-                tc_state.put(0);         // Move to deactivated state
-                delay_time = 0;          // Reset counter
+                tc_state.put(0);                // Move to deactivated state
+                delay_time = 0;                 // Reset counter
             }
 
             // Check whether the glider is near ground
             if (near_ground.get()) 
             {
-                pitchD = 10;   // If it is, set pitch
+                pitchD = 10;                    // If it is, set pitch
             }
             else 
             {
-                pitchD = 0;    // If not, set different pitch
+                pitchD = 0;                     // If not, set different pitch
             }
 
             yawD = 0;          
