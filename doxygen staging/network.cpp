@@ -22,8 +22,7 @@
 #include <shares.h>
 #include <taskshare.h>
 
-// A share containing a boolean flagging the main script to zero the potentiometers
-Share<bool> web_calibrate ("Flag to calibrate/zero");
+Share<bool> web_calibrate ("Flag to calibrate/zero");       ///< A share containing a boolean flagging the main script to zero the potentiometers
 
 // #define USE_LAN to have the ESP32 join an existing Local Area Network or 
 // #undef USE_LAN to have the ESP32 act as an access point, forming its own LAN
@@ -38,13 +37,13 @@ Share<bool> web_calibrate ("Flag to calibrate/zero");
 // parameters here; do not use any personally identifying or sensitive data
 
 #else
-const char* ssid = "AirHeads 507";   // SSID, network name seen on LAN lists
-const char* password = "??what??";   // ESP32 WiFi password (min. 8 characters)
+const char* ssid = "AirHeads 507";          ///< SSID, network name seen on LAN lists
+const char* password = "??what??";          ///< ESP32 WiFi password (min. 8 characters)
 
 /* Put IP Address details */
-IPAddress local_ip (192, 168, 5, 1); // Address of ESP32 on its own network
-IPAddress gateway (192, 168, 5, 1);  // The ESP32 acts as its own gateway
-IPAddress subnet (255, 255, 255, 0); // Network mask; just leave this as is
+IPAddress local_ip (192, 168, 5, 1);        ///< Address of ESP32 on its own network
+IPAddress gateway (192, 168, 5, 1);         ///< The ESP32 acts as its own gateway
+IPAddress subnet (255, 255, 255, 0);        ///< Network mask; just leave this as is
 #endif
 
 

@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['adc_5fpin_0',['ADC_PIN',['../class_potentiometer.html#a59de7aef09d7f544fdfbf7dbc145e03c',1,'Potentiometer']]],
-  ['adc_5frange_1',['ADC_RANGE',['../class_potentiometer.html#ab08f92ffaa3bbe160cd67dd4c917d904',1,'Potentiometer']]],
-  ['adc_5fvalue_2',['adc_value',['../class_potentiometer.html#a87ea271953c39970b61ca57ad70baf85',1,'Potentiometer']]]
+  ['_5fctrl_5freg1_0',['_CTRL_REG1',['../class_l_i_s3_m_d_l.html#a834b39e8fbb606e4dbac215d64d16135',1,'LIS3MDL']]],
+  ['_5fctrl_5freg2_1',['_CTRL_REG2',['../class_l_i_s3_m_d_l.html#a2899bb58c26c334e3b46cd4941de358b',1,'LIS3MDL']]],
+  ['_5fctrl_5freg3_2',['_CTRL_REG3',['../class_l_i_s3_m_d_l.html#a074d14828aaa304c4354f10544689552',1,'LIS3MDL']]],
+  ['_5fctrl_5freg4_3',['_CTRL_REG4',['../class_l_i_s3_m_d_l.html#aece62c16a0e51fc4c8bf97027e0abebd',1,'LIS3MDL']]],
+  ['_5fctrl_5freg5_4',['_CTRL_REG5',['../class_l_i_s3_m_d_l.html#ab895eeb764965458d553f81dd0d44283',1,'LIS3MDL']]],
+  ['_5fint_5fcfg_5',['_INT_CFG',['../class_l_i_s3_m_d_l.html#a4439241965c8fc631387f9c742c002a9',1,'LIS3MDL']]],
+  ['_5fint_5fths_5fh_6',['_INT_THS_H',['../class_l_i_s3_m_d_l.html#a40f23efdfb85bd42470136edf5c4d0de',1,'LIS3MDL']]],
+  ['_5fint_5fths_5fl_7',['_INT_THS_L',['../class_l_i_s3_m_d_l.html#a498a3fd2efadf1e57b311ebd5545c92e',1,'LIS3MDL']]],
+  ['_5flis3mdladdress_8',['_LIS3MDLAddress',['../class_l_i_s3_m_d_l.html#aa818b81b63fc986945059f9cbcaeee6a',1,'LIS3MDL']]],
+  ['_5fout_5fx_5fh_9',['_OUT_X_H',['../class_l_i_s3_m_d_l.html#a99f3e2887b4bc97b1f1323bbdd331c32',1,'LIS3MDL']]],
+  ['_5fout_5fx_5fl_10',['_OUT_X_L',['../class_l_i_s3_m_d_l.html#a8c3689d1601052ac075af64275f1888d',1,'LIS3MDL']]],
+  ['_5fout_5fy_5fh_11',['_OUT_Y_H',['../class_l_i_s3_m_d_l.html#a11763938a990a5e4300bb21767304430',1,'LIS3MDL']]],
+  ['_5fout_5fy_5fl_12',['_OUT_Y_L',['../class_l_i_s3_m_d_l.html#a3532bd9763479c04abe6f754c1ad614b',1,'LIS3MDL']]],
+  ['_5fout_5fz_5fh_13',['_OUT_Z_H',['../class_l_i_s3_m_d_l.html#a67b01f3ce7825abc70daf655cfa55ef5',1,'LIS3MDL']]],
+  ['_5fout_5fz_5fl_14',['_OUT_Z_L',['../class_l_i_s3_m_d_l.html#abf2f75e36cd94c852cf6ae7781d4fab7',1,'LIS3MDL']]],
+  ['_5fstatus_5freg_15',['_STATUS_REG',['../class_l_i_s3_m_d_l.html#a64b7f7234d44e05f1cdde20389e7e98f',1,'LIS3MDL']]]
 ];

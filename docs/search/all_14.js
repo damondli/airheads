@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['voltage_0',['voltage',['../class_potentiometer.html#a64c115516fe935d0e12bf1a8335f830d',1,'Potentiometer']]],
-  ['voltage_5foffset_1',['voltage_offset',['../class_potentiometer.html#aebb416db039c26dfc78a8a784ba636cf',1,'Potentiometer']]],
-  ['voltage_5fsource_2',['VOLTAGE_SOURCE',['../class_potentiometer.html#afe5d141e714bd6c4d84a0617e7cddcda',1,'Potentiometer']]],
-  ['voltage_5fto_5fdegrees_3',['VOLTAGE_TO_DEGREES',['../class_potentiometer.html#aa04a54fcdff6ff03d8359c6f1627a389',1,'Potentiometer']]]
+  ['ultrasonic_0',['Ultrasonic',['../class_ultrasonic.html',1,'Ultrasonic'],['../class_ultrasonic.html#aebcd70c417dc5cc1f01cbf24f87bd541',1,'Ultrasonic::Ultrasonic()']]],
+  ['ultrasonic_2ecpp_1',['ultrasonic.cpp',['../ultrasonic_8cpp.html',1,'']]],
+  ['ultrasonic_2eh_2',['ultrasonic.h',['../ultrasonic_8h.html',1,'']]]
 ];

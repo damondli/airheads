@@ -22,8 +22,7 @@
 #include <shares.h>
 #include <taskshare.h>
 
-// A share containing a boolean flagging the main script to zero the potentiometers
-Share<bool> web_calibrate ("Flag to calibrate/zero");
+Share<bool> web_calibrate ("Flag to calibrate/zero");       ///< A share containing a boolean flagging the main script to zero the potentiometers
 
 // #define USE_LAN to have the ESP32 join an existing Local Area Network or 
 // #undef USE_LAN to have the ESP32 act as an access point, forming its own LAN

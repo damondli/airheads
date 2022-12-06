@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['baseshare_0',['BaseShare',['../class_base_share.html',1,'BaseShare'],['../class_base_share.html#a73741a4ad0b9b54f6f6da20855c2e30b',1,'BaseShare::BaseShare()']]],
-  ['baseshare_2ecpp_1',['baseshare.cpp',['../baseshare_8cpp.html',1,'']]],
-  ['baseshare_2eh_2',['baseshare.h',['../baseshare_8h.html',1,'']]]
+  ['adc_5fpin_0',['ADC_PIN',['../class_potentiometer.html#a59de7aef09d7f544fdfbf7dbc145e03c',1,'Potentiometer']]],
+  ['adc_5frange_1',['ADC_RANGE',['../class_potentiometer.html#ab08f92ffaa3bbe160cd67dd4c917d904',1,'Potentiometer']]],
+  ['adc_5fvalue_2',['adc_value',['../class_potentiometer.html#a87ea271953c39970b61ca57ad70baf85',1,'Potentiometer']]]
 ];

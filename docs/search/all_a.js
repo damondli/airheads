@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['lis3mdl_0',['LIS3MDL',['../class_l_i_s3_m_d_l.html',1,'LIS3MDL'],['../class_l_i_s3_m_d_l.html#ad3400aaebaa4b0169eec383cbf64dfcc',1,'LIS3MDL::LIS3MDL()']]],
-  ['loop_1',['loop',['../main_8cpp.html#a0b33edabd7f1c4e4a0bf32c67269be2f',1,'main.cpp']]],
-  ['lsm6dsox_2',['LSM6DSOX',['../class_l_s_m6_d_s_o_x.html',1,'LSM6DSOX'],['../class_l_s_m6_d_s_o_x.html#ae60b0159fd0175206c7c20a6efb7f6ef',1,'LSM6DSOX::LSM6DSOX()']]]
+  ['kd_0',['Kd',['../class_p_i_d_controller.html#a22ef7c93498970edb0b04bef3ae3d2f9',1,'PIDController']]],
+  ['ki_1',['Ki',['../class_p_i_d_controller.html#a8acd1f19045a89a9dbd1848e56ae6ae0',1,'PIDController']]],
+  ['kp_2',['Kp',['../class_p_i_d_controller.html#a5c3eb07a0c4a00b86e1433b84e458a56',1,'PIDController']]]
 ];

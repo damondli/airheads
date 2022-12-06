@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['channel_5fa_0',['CHANNEL_A',['../class_d_r_v8871.html#a78da206b1d84b25fdac6f5d731cb8bcb',1,'DRV8871']]],
-  ['channel_5fb_1',['CHANNEL_B',['../class_d_r_v8871.html#a0ae41b2d9c70821d46d8d3943b692a19',1,'DRV8871']]]
+  ['adc_5fpin_0',['ADC_PIN',['../class_potentiometer.html#a59de7aef09d7f544fdfbf7dbc145e03c',1,'Potentiometer']]],
+  ['adc_5frange_1',['ADC_RANGE',['../class_potentiometer.html#ab08f92ffaa3bbe160cd67dd4c917d904',1,'Potentiometer']]],
+  ['adc_5fvalue_2',['adc_value',['../class_potentiometer.html#a87ea271953c39970b61ca57ad70baf85',1,'Potentiometer']]]
 ];

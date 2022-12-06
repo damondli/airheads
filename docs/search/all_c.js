@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_0',['name',['../class_base_share.html#abc438f82d56097f13a1e791dcd617a72',1,'BaseShare']]],
-  ['network_2ecpp_1',['network.cpp',['../network_8cpp.html',1,'']]],
-  ['network_2eh_2',['network.h',['../network_8h.html',1,'']]]
+  ['main_2ecpp_0',['main.cpp',['../main_8cpp.html',1,'']]],
+  ['max_5fduty_1',['max_duty',['../class_d_r_v8871.html#a490fae4f74c942a4e38ae137f36d6225',1,'DRV8871']]],
+  ['me507_20airheads_20glider_20project_2',['ME507 Airheads Glider Project',['../index.html',1,'']]]
 ];

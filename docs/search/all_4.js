@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['echopin_0',['echoPin',['../class_ultrasonic.html#a846d5a9deffd01b9829255fea90efc69',1,'Ultrasonic']]],
-  ['errintegral_1',['errIntegral',['../class_p_i_d_controller.html#a318561ada6624db6f74b29a628ea7dcd',1,'PIDController']]],
-  ['errprev_2',['errPrev',['../class_p_i_d_controller.html#aeebe9579609051a5a7407edcf16b3aa6',1,'PIDController']]]
+  ['distance_0',['distance',['../class_ultrasonic.html#a1dadb45062d0a88af8fa874f71156e96',1,'Ultrasonic']]],
+  ['drv8871_1',['DRV8871',['../class_d_r_v8871.html',1,'DRV8871'],['../class_d_r_v8871.html#a9505740e6487dfd2291fce39d66c4e4e',1,'DRV8871::DRV8871()']]],
+  ['drv8871_2ecpp_2',['DRV8871.cpp',['../_d_r_v8871_8cpp.html',1,'']]],
+  ['drv8871_2eh_3',['DRV8871.h',['../_d_r_v8871_8h.html',1,'']]],
+  ['dt_4',['dt',['../class_p_i_d_controller.html#a6482ae96162b913e236a9817914d667c',1,'PIDController']]],
+  ['duration_5',['duration',['../class_ultrasonic.html#af52893205c13a8d17c1c3d89a7813837',1,'Ultrasonic']]],
+  ['duty_6',['duty',['../class_d_r_v8871.html#a3baa182ea2cefc63c2a260fb07aed0a1',1,'DRV8871']]]
 ];

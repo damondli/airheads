@@ -5,5 +5,6 @@ var searchData=
   ['setgains_2',['setGains',['../class_p_i_d_controller.html#a95f613f549bd12fe3195cfc22dc82c69',1,'PIDController']]],
   ['setup_3',['setup',['../main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f',1,'main.cpp']]],
   ['setup_5fwifi_4',['setup_wifi',['../network_8cpp.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp'],['../network_8h.html#a2db7e734a3678bd61b7b9556caf2d933',1,'setup_wifi(void):&#160;network.cpp']]],
-  ['share_5',['Share',['../class_share.html#a0948b04d00aef072f25af2f49ecfa259',1,'Share']]]
+  ['share_5',['Share',['../class_share.html#a0948b04d00aef072f25af2f49ecfa259',1,'Share']]],
+  ['subnet_6',['subnet',['../network_8cpp.html#a89cf134ada28d8ce0192d9fcbc83614a',1,'network.cpp']]]
 ];
