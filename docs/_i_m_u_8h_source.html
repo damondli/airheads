@@ -95,102 +95,112 @@ $(document).ready(function(){initNavTree('_i_m_u_8h_source.html',''); initResiza
   <div class="headertitle"><div class="title">IMU.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;Wire.h&gt;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;PrintStream.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;Adafruit_LSM6DSOX.h&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;Adafruit_LIS3MDL.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef _IMU_H_</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define _IMU_H_</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_l_i_s3_m_d_l.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_l_i_s3_m_d_l.html">LIS3MDL</a></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    uint8_t _LIS3MDLAddress = 0x1E;</div>
+<a href="_i_m_u_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;Wire.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;PrintStream.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;Adafruit_LSM6DSOX.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;Adafruit_LIS3MDL.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef _IMU_H_</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define _IMU_H_</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG1 = 0x20;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG2 = 0x21;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG3 = 0x22;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG4 = 0x23;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG5 = 0x24;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _STATUS_REG = 0x27;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_X_L = 0x28;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_X_H = 0x29;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Y_L = 0x2A;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Y_H = 0x2B;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Z_L = 0x2C;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Z_H = 0x2D;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_CFG = 0x30;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_THS_L = 0x32;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_THS_H = 0x33;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    TwoWire* p_i2c;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> writeRegister(<span class="keywordtype">byte</span> Register, <span class="keywordtype">byte</span> RegData);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    uint8_t readRegister(<span class="keywordtype">byte</span> Register);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">enum</span> OM{LPM = 0b00 ,MPM = 0b01 ,HPM =0b10,UHPM = 0b11};</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">enum</span> FS{GAUSS_4 = 0b00, GAUSS_8 = 0b01, GAUSS_12 = 0b10, GAUSS_16 = 0b11};</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">enum</span> MD{CONTINUOUS_CONVERSION = 0b00, SINGLE_CONVERSION = 0b01, POWER_DOWN = 0b11};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">enum</span> BLE{LSB = 0b1, MSB = 0b1};</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="class_l_i_s3_m_d_l.html">LIS3MDL</a>(TwoWire&amp; i2c, uint8_t address = 0x1E);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> config_reg1(<span class="keywordtype">bool</span> temp_en = 0, OM OMXY = LPM, uint8_t DOR = 5, <span class="keywordtype">bool</span> FAST_ODR = 0, <span class="keywordtype">bool</span> ST = 0);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> config_reg2(FS FULL_SCALE = GAUSS_4, <span class="keywordtype">bool</span> REBOOT = 0, <span class="keywordtype">bool</span> SOFT_RST = 0);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> config_reg3(<span class="keywordtype">bool</span> LP = 0, <span class="keywordtype">bool</span> SIM = 0, MD SYS_OP_MODE = CONTINUOUS_CONVERSION);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> config_reg4(OM OMZ = LPM, BLE Endian_Data_Selec = LSB);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> config_reg5(<span class="keywordtype">bool</span> FAST_READ = 0, <span class="keywordtype">bool</span> BDU = 1);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> read_xyz_mag(int16_t&amp; MAG_X, int16_t&amp; MAG_Y,int16_t&amp; MAG_Z);    </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    float magnetic_heading(void);</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_l_s_m6_d_s_o_x.html">   59</a></span><span class="keyword">class </span><a class="code hl_class" href="class_l_s_m6_d_s_o_x.html">LSM6DSOX</a></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Adafruit_LSM6DSOX imu;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    Adafruit_LIS3MDL Magno;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">float</span> GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">float</span> pitch = 0;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">float</span> yaw = 0;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">float</span> roll = 0;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">float</span> last_time = 0;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">float</span> grav = 9.81;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    int16_t MAGX, MAGY, MAGZ;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    int16_t nMAGX, nMAGY, nMAGZ;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">float</span> yaw_offset = 0;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">float</span> roll_offset = 0;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">float</span> pitch_offset= 0;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="class_l_s_m6_d_s_o_x.html">LSM6DSOX</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> read_data(<span class="keywordtype">float</span>&amp; GYRO_X, <span class="keywordtype">float</span>&amp; GYRO_Y,<span class="keywordtype">float</span>&amp; GYRO_Z,<span class="keywordtype">float</span>&amp; ACCEL_X, </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                    <span class="keywordtype">float</span>&amp; ACCEL_Y,<span class="keywordtype">float</span>&amp; ACCEL_Z);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">void</span> get_angle(<span class="keywordtype">float</span> time, <span class="keywordtype">float</span>&amp; pitch, <span class="keywordtype">float</span>&amp; yaw, <span class="keywordtype">float</span>&amp; roll);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">void</span> zero(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_l_i_s3_m_d_l.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="class_l_i_s3_m_d_l.html">LIS3MDL</a></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    uint8_t _LIS3MDLAddress = 0x1E;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">// register addresses</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG1 = 0x20;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG2 = 0x21;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG3 = 0x22;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG4 = 0x23;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _CTRL_REG5 = 0x24;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _STATUS_REG = 0x27;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_X_L = 0x28;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_X_H = 0x29;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Y_L = 0x2A;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Y_H = 0x2B;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Z_L = 0x2C;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _OUT_Z_H = 0x2D;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_CFG = 0x30;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_THS_L = 0x32;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">const</span> <span class="keywordtype">byte</span> _INT_THS_H = 0x33;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    TwoWire* p_i2c;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#ae240639b905eb0fedbc1d3ab30a19bb9">writeRegister</a>(<span class="keywordtype">byte</span> Register, <span class="keywordtype">byte</span> RegData); </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    uint8_t <a class="code hl_function" href="class_l_i_s3_m_d_l.html#a6f1e38b0efefbdc085cb903647157301">readRegister</a>(<span class="keywordtype">byte</span> Register); </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">enum</span> OM{LPM = 0b00 ,MPM = 0b01 ,HPM =0b10,UHPM = 0b11}; </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">enum</span> FS{GAUSS_4 = 0b00, GAUSS_8 = 0b01, GAUSS_12 = 0b10, GAUSS_16 = 0b11}; </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">enum</span> MD{CONTINUOUS_CONVERSION = 0b00, SINGLE_CONVERSION = 0b01, POWER_DOWN = 0b11}; </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">enum</span> BLE{LSB = 0b1, MSB = 0b1}; </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="class_l_i_s3_m_d_l.html">LIS3MDL</a>(TwoWire&amp; i2c, uint8_t address = 0x1E);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#a397d5e943729f533ee04cfb8862b48ea">config_reg1</a>(<span class="keywordtype">bool</span> temp_en = 0, OM OMXY = LPM, uint8_t DOR = 5, <span class="keywordtype">bool</span> FAST_ODR = 0, <span class="keywordtype">bool</span> ST = 0);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#a5821a0e35b186fcc785a199fffbaf7d8">config_reg2</a>(FS FULL_SCALE = GAUSS_4, <span class="keywordtype">bool</span> REBOOT = 0, <span class="keywordtype">bool</span> SOFT_RST = 0);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#aa1623bca4c7fb78e4fe1fa2147f7fdb4">config_reg3</a>(<span class="keywordtype">bool</span> LP = 0, <span class="keywordtype">bool</span> SIM = 0, MD SYS_OP_MODE = CONTINUOUS_CONVERSION);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#aa7ad8ea25afe7bdf6946543358f0b83d">config_reg4</a>(OM OMZ = LPM, BLE Endian_Data_Selec = LSB);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#abbc7d8edf86b4352e46a265bf290abbe">config_reg5</a>(<span class="keywordtype">bool</span> FAST_READ = 0, <span class="keywordtype">bool</span> BDU = 1);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_i_s3_m_d_l.html#a2b70abb68b05536178b0d12bf1ef7f56">read_xyz_mag</a>(int16_t&amp; MAG_X, int16_t&amp; MAG_Y,int16_t&amp; MAG_Z);    </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_l_s_m6_d_s_o_x.html">   71</a></span><span class="keyword">class </span><a class="code hl_class" href="class_l_s_m6_d_s_o_x.html">LSM6DSOX</a></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    Adafruit_LSM6DSOX imu; </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    Adafruit_LIS3MDL Magno; </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">float</span> GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ; </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">float</span> pitch = 0; </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">float</span> yaw = 0; </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">float</span> roll = 0; </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">float</span> last_time = 0;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    int16_t MAGX, MAGY, MAGZ; </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    int16_t nMAGX, nMAGY, nMAGZ;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">float</span> yaw_offset = 0; </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">float</span> roll_offset = 0; </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> pitch_offset= 0; </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif </span><span class="comment">//_IMU_H_</span></div>
-<div class="ttc" id="aclass_l_i_s3_m_d_l_html"><div class="ttname"><a href="class_l_i_s3_m_d_l.html">LIS3MDL</a></div><div class="ttdef"><b>Definition:</b> IMU.h:15</div></div>
-<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html">LSM6DSOX</a></div><div class="ttdef"><b>Definition:</b> IMU.h:60</div></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_function" href="class_l_s_m6_d_s_o_x.html#ae60b0159fd0175206c7c20a6efb7f6ef">LSM6DSOX</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_s_m6_d_s_o_x.html#a0af34bbf464f879cc53b50a8b22a9557">read_data</a>(<span class="keywordtype">float</span>&amp; GYRO_X, <span class="keywordtype">float</span>&amp; GYRO_Y,<span class="keywordtype">float</span>&amp; GYRO_Z,<span class="keywordtype">float</span>&amp; ACCEL_X, </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    <span class="keywordtype">float</span>&amp; ACCEL_Y,<span class="keywordtype">float</span>&amp; ACCEL_Z);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_s_m6_d_s_o_x.html#abc0f0deac6bc19d3e103a06d076a82bd">get_angle</a>(<span class="keywordtype">float</span> time, <span class="keywordtype">float</span>&amp; pitch, <span class="keywordtype">float</span>&amp; yaw, <span class="keywordtype">float</span>&amp; roll);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_l_s_m6_d_s_o_x.html#ad81e32f6c922cd936919fb87e466cc6d">zero</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#endif </span><span class="comment">//_IMU_H_</span></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html"><div class="ttname"><a href="class_l_i_s3_m_d_l.html">LIS3MDL</a></div><div class="ttdoc">Class to interface witch the magnetometer.</div><div class="ttdef"><b>Definition:</b> IMU.h:21</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_a2b70abb68b05536178b0d12bf1ef7f56"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#a2b70abb68b05536178b0d12bf1ef7f56">LIS3MDL::read_xyz_mag</a></div><div class="ttdeci">void read_xyz_mag(int16_t &amp;MAG_X, int16_t &amp;MAG_Y, int16_t &amp;MAG_Z)</div><div class="ttdoc">header to read all magnetometer data at once</div><div class="ttdef"><b>Definition:</b> IMU.cpp:166</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_a397d5e943729f533ee04cfb8862b48ea"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#a397d5e943729f533ee04cfb8862b48ea">LIS3MDL::config_reg1</a></div><div class="ttdeci">void config_reg1(bool temp_en=0, OM OMXY=LPM, uint8_t DOR=5, bool FAST_ODR=0, bool ST=0)</div><div class="ttdoc">header to configure register 1</div><div class="ttdef"><b>Definition:</b> IMU.cpp:47</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_a5821a0e35b186fcc785a199fffbaf7d8"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#a5821a0e35b186fcc785a199fffbaf7d8">LIS3MDL::config_reg2</a></div><div class="ttdeci">void config_reg2(FS FULL_SCALE=GAUSS_4, bool REBOOT=0, bool SOFT_RST=0)</div><div class="ttdoc">header to configure register 2</div><div class="ttdef"><b>Definition:</b> IMU.cpp:93</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_a6f1e38b0efefbdc085cb903647157301"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#a6f1e38b0efefbdc085cb903647157301">LIS3MDL::readRegister</a></div><div class="ttdeci">uint8_t readRegister(byte Register)</div><div class="ttdoc">header function to read from registers</div><div class="ttdef"><b>Definition:</b> IMU.cpp:201</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_aa1623bca4c7fb78e4fe1fa2147f7fdb4"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#aa1623bca4c7fb78e4fe1fa2147f7fdb4">LIS3MDL::config_reg3</a></div><div class="ttdeci">void config_reg3(bool LP=0, bool SIM=0, MD SYS_OP_MODE=CONTINUOUS_CONVERSION)</div><div class="ttdoc">header to configure register 3</div><div class="ttdef"><b>Definition:</b> IMU.cpp:114</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_aa7ad8ea25afe7bdf6946543358f0b83d"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#aa7ad8ea25afe7bdf6946543358f0b83d">LIS3MDL::config_reg4</a></div><div class="ttdeci">void config_reg4(OM OMZ=LPM, BLE Endian_Data_Selec=LSB)</div><div class="ttdoc">header to configure register 4</div><div class="ttdef"><b>Definition:</b> IMU.cpp:133</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_abbc7d8edf86b4352e46a265bf290abbe"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#abbc7d8edf86b4352e46a265bf290abbe">LIS3MDL::config_reg5</a></div><div class="ttdeci">void config_reg5(bool FAST_READ=0, bool BDU=1)</div><div class="ttdoc">header to configure register 5</div><div class="ttdef"><b>Definition:</b> IMU.cpp:148</div></div>
+<div class="ttc" id="aclass_l_i_s3_m_d_l_html_ae240639b905eb0fedbc1d3ab30a19bb9"><div class="ttname"><a href="class_l_i_s3_m_d_l.html#ae240639b905eb0fedbc1d3ab30a19bb9">LIS3MDL::writeRegister</a></div><div class="ttdeci">void writeRegister(byte Register, byte RegData)</div><div class="ttdoc">header function to write to registers</div><div class="ttdef"><b>Definition:</b> IMU.cpp:190</div></div>
+<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html">LSM6DSOX</a></div><div class="ttdoc">Class to interface and get pitch, yaw, roll data from the accelerometer and gyroscope.</div><div class="ttdef"><b>Definition:</b> IMU.h:72</div></div>
+<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html_a0af34bbf464f879cc53b50a8b22a9557"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html#a0af34bbf464f879cc53b50a8b22a9557">LSM6DSOX::read_data</a></div><div class="ttdeci">void read_data(float &amp;GYRO_X, float &amp;GYRO_Y, float &amp;GYRO_Z, float &amp;ACCEL_X, float &amp;ACCEL_Y, float &amp;ACCEL_Z)</div><div class="ttdoc">header function to read gyro and accelerometer data</div><div class="ttdef"><b>Definition:</b> IMU.cpp:244</div></div>
+<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html_abc0f0deac6bc19d3e103a06d076a82bd"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html#abc0f0deac6bc19d3e103a06d076a82bd">LSM6DSOX::get_angle</a></div><div class="ttdeci">void get_angle(float time, float &amp;pitch, float &amp;yaw, float &amp;roll)</div><div class="ttdoc">header function to get pitch, yaw, and roll data</div><div class="ttdef"><b>Definition:</b> IMU.cpp:270</div></div>
+<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html_ad81e32f6c922cd936919fb87e466cc6d"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html#ad81e32f6c922cd936919fb87e466cc6d">LSM6DSOX::zero</a></div><div class="ttdeci">void zero(void)</div><div class="ttdoc">header function to zero yaw</div><div class="ttdef"><b>Definition:</b> IMU.cpp:331</div></div>
+<div class="ttc" id="aclass_l_s_m6_d_s_o_x_html_ae60b0159fd0175206c7c20a6efb7f6ef"><div class="ttname"><a href="class_l_s_m6_d_s_o_x.html#ae60b0159fd0175206c7c20a6efb7f6ef">LSM6DSOX::LSM6DSOX</a></div><div class="ttdeci">LSM6DSOX(void)</div><div class="ttdoc">header function for LSM6DSOX to initialize object</div><div class="ttdef"><b>Definition:</b> IMU.cpp:217</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_435708dc8276f0c828e3f9d6fa0f7553.html">doxygen staging</a></li><li class="navelem"><b>IMU.h</b></li>
+    <li class="navelem"><a class="el" href="dir_435708dc8276f0c828e3f9d6fa0f7553.html">doxygen staging</a></li><li class="navelem"><a class="el" href="_i_m_u_8h.html">IMU.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

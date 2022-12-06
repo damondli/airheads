@@ -3,7 +3,7 @@
  *         the LISM3MDL magnetometer chip and the LSM6DSOX accelerometer 
  *         and gyroscope chip. 
  * 
- * @author Daniel Xu and the Aiheads Team
+ * @author Daniel Xu and the Airheads Team
  * @date 2022-Nov-28 Original file
  */
 #include <Arduino.h>
@@ -11,11 +11,11 @@
 #include "PrintStream.h"
 
 /// @brief Constructor for LIS3MDL object, which operates with the magnetometer
-/// @param i2c default two wire method, default set to Wire
-/// @param address address for i2c communication, default set to 0x1E
+/// @param i2c Default two wire method, default set to Wire
+/// @param address Address for i2c communication, default set to 0x1E
 LIS3MDL::LIS3MDL(TwoWire& i2c, uint8_t address)
 {
-    // checks to see if address is right, if not switch to alternative address
+    // Checks to see if address is right, if not switch to alternative address
     byte error;
     p_i2c = &i2c;
     p_i2c-> beginTransmission((byte)address);
@@ -35,15 +35,15 @@ LIS3MDL::LIS3MDL(TwoWire& i2c, uint8_t address)
     config_reg3();
     config_reg4();
     config_reg5();
-
 }
 
-/// @brief Constructor function for configuring Reg1
-/// @param temp_en bool to enable temp sensor or not
+
+/// @brief Function to configure Register 1
+/// @param temp_en Bool to enable temp sensor or not
 /// @param OMXY Set operating mode of XY sensors
 /// @param DOR Set data output rate
-/// @param FAST_ODR bool to enable fast output data rate
-/// @param ST bool to enable, disable ST
+/// @param FAST_ODR Bool to enable fast output data rate
+/// @param ST Bool to enable, disable ST
 void LIS3MDL::config_reg1(bool temp_en, OM OMXY, uint8_t DOR, bool FAST_ODR, bool ST)
 {
     byte _settings;
@@ -82,14 +82,14 @@ void LIS3MDL::config_reg1(bool temp_en, OM OMXY, uint8_t DOR, bool FAST_ODR, boo
 
     _settings |= ST ;
 
-    writeRegister(_CTRL_REG1,_settings);
-    
+    writeRegister(_CTRL_REG1,_settings); 
 }
 
-/// @brief function to config reg2
-/// @param FULL_SCALE setts the full scale value
-/// @param REBOOT bool to reboot memory content
-/// @param SOFT_RST bools to configure registers and user register reset function
+
+/// @brief Function to configure Register 2
+/// @param FULL_SCALE Sets the full scale value
+/// @param REBOOT Bool to reboot memory content
+/// @param SOFT_RST Bool to configure registers and user register reset function
 void LIS3MDL::config_reg2(FS FULL_SCALE, bool REBOOT, bool SOFT_RST)
 {
     byte _settings;
@@ -104,13 +104,13 @@ void LIS3MDL::config_reg2(FS FULL_SCALE, bool REBOOT, bool SOFT_RST)
     _settings |= SOFT_RST<<2;
 
     writeRegister(_CTRL_REG2,_settings);
-
-
 }
-/// @brief function to config reg3
+
+
+/// @brief Function to configure Register 3
 /// @param LP Set Low-power mode configuration
-/// @param SIM set SPI serial interface mode configuration
-/// @param SYS_OP_MODE set system operating mode selection
+/// @param SIM Set SPI serial interface mode configuration
+/// @param SYS_OP_MODE Set system operating mode selection
 void LIS3MDL::config_reg3(bool LP, bool SIM, MD SYS_OP_MODE)
 {
     byte _settings;
@@ -127,7 +127,8 @@ void LIS3MDL::config_reg3(bool LP, bool SIM, MD SYS_OP_MODE)
     writeRegister(_CTRL_REG3, _settings);
 }
 
-/// @brief function to config Reg4
+
+/// @brief Function to configure Register 4
 /// @param OMZ Z-axis operative mode selection
 /// @param Endian_Data_Selec Big/little endian data selection
 void LIS3MDL::config_reg4(OM OMZ, BLE Endian_Data_Selec)
@@ -142,7 +143,9 @@ void LIS3MDL::config_reg4(OM OMZ, BLE Endian_Data_Selec)
 
     writeRegister(_CTRL_REG4,_settings);
 }
-/// @brief configs Reg 5
+
+
+/// @brief Function to configure Register 5
 /// @param FAST_READ Enable or disable fast read
 /// @param BDU Sets block data update for magnetic data
 void LIS3MDL::config_reg5(bool FAST_READ, bool BDU)
@@ -156,9 +159,9 @@ void LIS3MDL::config_reg5(bool FAST_READ, bool BDU)
     _settings |= BDU << 6;
 
     writeRegister(_CTRL_REG5,_settings);
-
-
 }
+
+
 /// @brief Reads the data for X, Y, and Z magnetometer data
 /// @param MAG_X Reference parameter for X-reading for magnetometer.
 /// @param MAG_Y Reference parameter for Y-reading for magnetometer.
@@ -180,13 +183,13 @@ void LIS3MDL::read_xyz_mag(int16_t &MAG_X,int16_t &MAG_Y,int16_t &MAG_Z)
     MAG_X = xyz_reading[1] << 8| xyz_reading[0];
     MAG_Y = xyz_reading[3] << 8| xyz_reading[2];
     MAG_Z = xyz_reading[5] << 8| xyz_reading[4];
-
     }
 }
 
+
 /// @brief Writes to register
-/// @param Register register address to write to
-/// @param RegData data to write to address
+/// @param Register Register address to write to
+/// @param RegData Data to write to address
 void LIS3MDL::writeRegister(byte Register, byte RegData)
 {
     p_i2c->beginTransmission(_LIS3MDLAddress);
@@ -195,9 +198,10 @@ void LIS3MDL::writeRegister(byte Register, byte RegData)
     p_i2c->endTransmission();
 }
 
+
 /// @brief Reads from register
-/// @param Register register to read from
-/// @return reading from register
+/// @param Register Register to read from
+/// @returns Reading from register
 uint8_t LIS3MDL::readRegister(byte Register)
 {
     p_i2c->beginTransmission(_LIS3MDLAddress);
@@ -213,10 +217,12 @@ uint8_t LIS3MDL::readRegister(byte Register)
 
     return _reading;
 }
+
+
 /// @brief Constructor for LSM6DSOX object, which handles the accelerometer and gyroscope sensors
 LSM6DSOX::LSM6DSOX(void)
 {
-    // for initial setup for i2C communication, set up i2c using the Adafruit libraray method
+    // For initial setup for i2C communication, set up i2c using the Adafruit libraray method
     if (!imu.begin_I2C()) {
 
         while (1) {
@@ -230,19 +236,17 @@ LSM6DSOX::LSM6DSOX(void)
     Magno.setDataRate(LIS3MDL_DATARATE_1000_HZ);
 
     Serial.println("LSM6DSOX Initialized");
-
-
 }
 
+
 /// @brief Reads the data for gyroscope and accelerometer
-/// @param GYRO_X reference parameter for Gyro X reading in rad/s
-/// @param GYRO_Y reference parameter for Gyro Y reading in rad/s
-/// @param GYRO_Z reference parameter for Gyro Z reading in rad/s
-/// @param ACCEL_X reference parameter for Accelerometer X reading in m/s^2
-/// @param ACCEL_Y reference parameter for Accelerometer Y reading in m/s^2
-/// @param ACCEL_Z reference parameter for Accelerometer Z reading in m/s^2
-void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL_X, 
-    float& ACCEL_Y,float& ACCEL_Z)
+/// @param GYRO_X Reference parameter for Gyro X reading in rad/s
+/// @param GYRO_Y Reference parameter for Gyro Y reading in rad/s
+/// @param GYRO_Z Reference parameter for Gyro Z reading in rad/s
+/// @param ACCEL_X Reference parameter for Accelerometer X reading in m/s^2
+/// @param ACCEL_Y Reference parameter for Accelerometer Y reading in m/s^2
+/// @param ACCEL_Z Reference parameter for Accelerometer Z reading in m/s^2
+void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL_X, float& ACCEL_Y,float& ACCEL_Z)
 {
     sensors_event_t accel;
     sensors_event_t gyro;
@@ -262,14 +266,15 @@ void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL
 
 }
 
+
 /// @brief Calculates the pitch, yaw, and roll from sensor data
-/// @param new_time time at which the function is called using time.h
-/// @param pitch_in reference parameter to pitch
-/// @param yaw_in reference parameter to yaw
-/// @param roll_in reference parameter for roll_in
+/// @param new_time Time at which the function is called using time.h
+/// @param pitch_in Reference parameter to pitch
+/// @param yaw_in Reference parameter to yaw
+/// @param roll_in Reference parameter for roll_in
 void LSM6DSOX::get_angle(float new_time, float& pitch_in, float& yaw_in, float& roll_in)
 {
-    // read magnetometer data
+    // Read magnetometer data
     sensors_event_t event; 
     Magno.getEvent(&event);
     MAGX = event.magnetic.x;
@@ -332,6 +337,3 @@ void LSM6DSOX::zero(void)
 {
     yaw_offset = yaw; 
 }
-
-
-

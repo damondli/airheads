@@ -1,9 +1,21 @@
+/** @file IMU.cpp
+ *  @brief This file contains the implementation code for interfacing with 
+ *         the LISM3MDL magnetometer chip and the LSM6DSOX accelerometer 
+ *         and gyroscope chip. 
+ * 
+ * @author Daniel Xu and the Aiheads Team
+ * @date 2022-Nov-28 Original file
+ */
 #include <Arduino.h>
 #include "IMU.h"
 #include "PrintStream.h"
 
+/// @brief Constructor for LIS3MDL object, which operates with the magnetometer
+/// @param i2c default two wire method, default set to Wire
+/// @param address address for i2c communication, default set to 0x1E
 LIS3MDL::LIS3MDL(TwoWire& i2c, uint8_t address)
 {
+    // checks to see if address is right, if not switch to alternative address
     byte error;
     p_i2c = &i2c;
     p_i2c-> beginTransmission((byte)address);
@@ -25,6 +37,13 @@ LIS3MDL::LIS3MDL(TwoWire& i2c, uint8_t address)
     config_reg5();
 
 }
+
+/// @brief Constructor function for configuring Reg1
+/// @param temp_en bool to enable temp sensor or not
+/// @param OMXY Set operating mode of XY sensors
+/// @param DOR Set data output rate
+/// @param FAST_ODR bool to enable fast output data rate
+/// @param ST bool to enable, disable ST
 void LIS3MDL::config_reg1(bool temp_en, OM OMXY, uint8_t DOR, bool FAST_ODR, bool ST)
 {
     byte _settings;
@@ -66,7 +85,11 @@ void LIS3MDL::config_reg1(bool temp_en, OM OMXY, uint8_t DOR, bool FAST_ODR, boo
     writeRegister(_CTRL_REG1,_settings);
     
 }
-    
+
+/// @brief function to config reg2
+/// @param FULL_SCALE setts the full scale value
+/// @param REBOOT bool to reboot memory content
+/// @param SOFT_RST bools to configure registers and user register reset function
 void LIS3MDL::config_reg2(FS FULL_SCALE, bool REBOOT, bool SOFT_RST)
 {
     byte _settings;
@@ -84,7 +107,10 @@ void LIS3MDL::config_reg2(FS FULL_SCALE, bool REBOOT, bool SOFT_RST)
 
 
 }
-
+/// @brief function to config reg3
+/// @param LP Set Low-power mode configuration
+/// @param SIM set SPI serial interface mode configuration
+/// @param SYS_OP_MODE set system operating mode selection
 void LIS3MDL::config_reg3(bool LP, bool SIM, MD SYS_OP_MODE)
 {
     byte _settings;
@@ -101,6 +127,9 @@ void LIS3MDL::config_reg3(bool LP, bool SIM, MD SYS_OP_MODE)
     writeRegister(_CTRL_REG3, _settings);
 }
 
+/// @brief function to config Reg4
+/// @param OMZ Z-axis operative mode selection
+/// @param Endian_Data_Selec Big/little endian data selection
 void LIS3MDL::config_reg4(OM OMZ, BLE Endian_Data_Selec)
 {
     byte _settings;
@@ -113,7 +142,9 @@ void LIS3MDL::config_reg4(OM OMZ, BLE Endian_Data_Selec)
 
     writeRegister(_CTRL_REG4,_settings);
 }
-
+/// @brief configs Reg 5
+/// @param FAST_READ Enable or disable fast read
+/// @param BDU Sets block data update for magnetic data
 void LIS3MDL::config_reg5(bool FAST_READ, bool BDU)
 {
     byte _settings;
@@ -128,7 +159,10 @@ void LIS3MDL::config_reg5(bool FAST_READ, bool BDU)
 
 
 }
-
+/// @brief Reads the data for X, Y, and Z magnetometer data
+/// @param MAG_X Reference parameter for X-reading for magnetometer.
+/// @param MAG_Y Reference parameter for Y-reading for magnetometer.
+/// @param MAG_Z Reference parameter for Z-reading for magnetometer.
 void LIS3MDL::read_xyz_mag(int16_t &MAG_X,int16_t &MAG_Y,int16_t &MAG_Z)
 {
     p_i2c->beginTransmission(_LIS3MDLAddress);
@@ -150,13 +184,9 @@ void LIS3MDL::read_xyz_mag(int16_t &MAG_X,int16_t &MAG_Y,int16_t &MAG_Z)
     }
 }
 
-/*
-float LIS3MDL::magnetic_heading(void)
-{
-
-}
-*/
-
+/// @brief Writes to register
+/// @param Register register address to write to
+/// @param RegData data to write to address
 void LIS3MDL::writeRegister(byte Register, byte RegData)
 {
     p_i2c->beginTransmission(_LIS3MDLAddress);
@@ -165,6 +195,9 @@ void LIS3MDL::writeRegister(byte Register, byte RegData)
     p_i2c->endTransmission();
 }
 
+/// @brief Reads from register
+/// @param Register register to read from
+/// @return reading from register
 uint8_t LIS3MDL::readRegister(byte Register)
 {
     p_i2c->beginTransmission(_LIS3MDLAddress);
@@ -180,16 +213,20 @@ uint8_t LIS3MDL::readRegister(byte Register)
 
     return _reading;
 }
-
+/// @brief Constructor for LSM6DSOX object, which handles the accelerometer and gyroscope sensors
 LSM6DSOX::LSM6DSOX(void)
 {
+    // for initial setup for i2C communication, set up i2c using the Adafruit libraray method
     if (!imu.begin_I2C()) {
 
         while (1) {
         delay(10);
         }
     }
+
+    // Set mode to start with continuous mode, which continuously collects data
     Magno.setOperationMode(LIS3MDL_CONTINUOUSMODE);
+    // Collect data as fast as possible
     Magno.setDataRate(LIS3MDL_DATARATE_1000_HZ);
 
     Serial.println("LSM6DSOX Initialized");
@@ -197,7 +234,13 @@ LSM6DSOX::LSM6DSOX(void)
 
 }
 
-
+/// @brief Reads the data for gyroscope and accelerometer
+/// @param GYRO_X reference parameter for Gyro X reading in rad/s
+/// @param GYRO_Y reference parameter for Gyro Y reading in rad/s
+/// @param GYRO_Z reference parameter for Gyro Z reading in rad/s
+/// @param ACCEL_X reference parameter for Accelerometer X reading in m/s^2
+/// @param ACCEL_Y reference parameter for Accelerometer Y reading in m/s^2
+/// @param ACCEL_Z reference parameter for Accelerometer Z reading in m/s^2
 void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL_X, 
     float& ACCEL_Y,float& ACCEL_Z)
 {
@@ -219,8 +262,14 @@ void LSM6DSOX::read_data(float& GYRO_X, float& GYRO_Y,float& GYRO_Z,float& ACCEL
 
 }
 
+/// @brief Calculates the pitch, yaw, and roll from sensor data
+/// @param new_time time at which the function is called using time.h
+/// @param pitch_in reference parameter to pitch
+/// @param yaw_in reference parameter to yaw
+/// @param roll_in reference parameter for roll_in
 void LSM6DSOX::get_angle(float new_time, float& pitch_in, float& yaw_in, float& roll_in)
 {
+    // read magnetometer data
     sensors_event_t event; 
     Magno.getEvent(&event);
     MAGX = event.magnetic.x;
@@ -229,34 +278,47 @@ void LSM6DSOX::get_angle(float new_time, float& pitch_in, float& yaw_in, float& 
 
 
     // https://www.analog.com/en/app-notes/an-1057.html
-
     float theta, psi, phi;
+    //
     if(last_time == 0)
     {
         last_time = new_time;
     }
     else
     {
+        // used to find change in time to use in integrating gyroscope
         float dt = difftime(new_time, last_time);
         
+        // read data values for gyro and accelerometer
         read_data(GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ);
 
-        
+        // calculate phi and psi for pitch and roll
+        // phi is used to determine pitch
+        // psi is used to determine roll
         phi = atan2(AccelX,(sqrt(AccelY*AccelY + AccelZ*AccelZ)));
         psi = atan2(AccelY,(sqrt(AccelX*AccelX + AccelZ*AccelZ)));
         
 
-        // pitch_in = 0.98*(pitch + GyroX*dt) + 0.02*phi - pitch_offset;
-        // roll_in = 0.98*(roll + GyroY*dt) + 0.02*psi - roll_offset;
+        // Calculate pitch and roll
+        // Equations for both integration of gyroscope with accelerometer
+        // and equations that do not use gyroscope
+
+        // equations with gyro integration
+        // pitch_in = 0.98*(pitch + GyroX*dt) + 0.02*phi - pitch_offset; 
+        // roll_in = 0.98*(roll + GyroY*dt) + 0.02*psi - roll_offset;   
+
+        // equations without gyro integration   
         pitch_in = round((0.00*(pitch + GyroX*dt) + 1.00*phi - pitch_offset) * 180/M_PI) * M_PI/180;
         roll_in = round((0.00*(roll + GyroY*dt) + 1.00*psi - roll_offset) * 180/M_PI) * M_PI/180;
 
-
+        // Calculates new Magnetometer angles with tilt compensations
         nMAGX = MAGX*cos(pitch) + MAGZ*sin(pitch);
         nMAGY = MAGX*sin(roll) * sin(pitch) + MAGZ*sin(roll)*cos(pitch);
         
+        // calculates yaw using new magnetometer readings
         yaw_in = atan2(-nMAGY,nMAGX) - yaw_offset;
 
+        // sets pitch, roll, and yaw to be stored for future use
         pitch = pitch_in;
         roll = roll_in;
         yaw = yaw_in;
@@ -264,6 +326,8 @@ void LSM6DSOX::get_angle(float new_time, float& pitch_in, float& yaw_in, float& 
     last_time = new_time;
 }
 
+
+/// @brief Sets current yaw angle to be the offset
 void LSM6DSOX::zero(void)
 {
     yaw_offset = yaw; 

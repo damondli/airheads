@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ultrasonic_0',['ultrasonic',['../classultrasonic.html',1,'']]]
+  ['ultrasonic_0',['Ultrasonic',['../class_ultrasonic.html',1,'']]]
 ];

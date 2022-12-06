@@ -112,22 +112,10 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 <code>#include &quot;<a class="el" href="ultrasonic_8h_source.html">ultrasonic.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="potentiometer_8h_source.html">potentiometer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_p_i_d_controller_8h_source.html">PIDController.h</a>&quot;</code><br />
-<code>#include &quot;IMU.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_i_m_u_8h_source.html">IMU.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a720a5d14ecb16592144dfbb59cc0ecd0"><td class="memItemLeft" align="right" valign="top"><a id="a720a5d14ecb16592144dfbb59cc0ecd0" name="a720a5d14ecb16592144dfbb59cc0ecd0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_PIN_IN1</b>&#160;&#160;&#160;16</td></tr>
-<tr class="separator:a720a5d14ecb16592144dfbb59cc0ecd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee35c0980097f40d3a63d9295e62d46e"><td class="memItemLeft" align="right" valign="top"><a id="aee35c0980097f40d3a63d9295e62d46e" name="aee35c0980097f40d3a63d9295e62d46e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_PIN_IN2</b>&#160;&#160;&#160;17</td></tr>
-<tr class="separator:aee35c0980097f40d3a63d9295e62d46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae13981b2be84791dd198623ca8271672"><td class="memItemLeft" align="right" valign="top"><a id="ae13981b2be84791dd198623ca8271672" name="ae13981b2be84791dd198623ca8271672"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_CHANNEL_A</b>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:ae13981b2be84791dd198623ca8271672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54243cdab88c4f31981849671e1ec781"><td class="memItemLeft" align="right" valign="top"><a id="a54243cdab88c4f31981849671e1ec781" name="a54243cdab88c4f31981849671e1ec781"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_CHANNEL_B</b>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:a54243cdab88c4f31981849671e1ec781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27179a85c5e1fc0e986852d772306637"><td class="memItemLeft" align="right" valign="top"><a id="a27179a85c5e1fc0e986852d772306637" name="a27179a85c5e1fc0e986852d772306637"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ELEVATOR_PIN_IN1</b>&#160;&#160;&#160;27</td></tr>
 <tr class="separator:a27179a85c5e1fc0e986852d772306637"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +128,18 @@ Macros</h2></td></tr>
 <tr class="memitem:a9a74da2833448c67d04dd1eb1f146460"><td class="memItemLeft" align="right" valign="top"><a id="a9a74da2833448c67d04dd1eb1f146460" name="a9a74da2833448c67d04dd1eb1f146460"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ELEVATOR_CHANNEL_B</b>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:a9a74da2833448c67d04dd1eb1f146460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a720a5d14ecb16592144dfbb59cc0ecd0"><td class="memItemLeft" align="right" valign="top"><a id="a720a5d14ecb16592144dfbb59cc0ecd0" name="a720a5d14ecb16592144dfbb59cc0ecd0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_PIN_IN1</b>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a720a5d14ecb16592144dfbb59cc0ecd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee35c0980097f40d3a63d9295e62d46e"><td class="memItemLeft" align="right" valign="top"><a id="aee35c0980097f40d3a63d9295e62d46e" name="aee35c0980097f40d3a63d9295e62d46e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_PIN_IN2</b>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:aee35c0980097f40d3a63d9295e62d46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae13981b2be84791dd198623ca8271672"><td class="memItemLeft" align="right" valign="top"><a id="ae13981b2be84791dd198623ca8271672" name="ae13981b2be84791dd198623ca8271672"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_CHANNEL_A</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ae13981b2be84791dd198623ca8271672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54243cdab88c4f31981849671e1ec781"><td class="memItemLeft" align="right" valign="top"><a id="a54243cdab88c4f31981849671e1ec781" name="a54243cdab88c4f31981849671e1ec781"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RUDDER_CHANNEL_B</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a54243cdab88c4f31981849671e1ec781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a436d648c71d1af236453666eefa2698f"><td class="memItemLeft" align="right" valign="top"><a id="a436d648c71d1af236453666eefa2698f" name="a436d648c71d1af236453666eefa2698f"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ELEVATOR_POT_PIN</b>&#160;&#160;&#160;34</td></tr>
 <tr class="separator:a436d648c71d1af236453666eefa2698f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,7 +156,7 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad20ab8374d00b9e7802d95de13e4e500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500">task_ultrasonic</a> (void *p_params)</td></tr>
-<tr class="memdesc:ad20ab8374d00b9e7802d95de13e4e500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ultrasonic sensor measures distance to the ground.  <a href="main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500">More...</a><br /></td></tr>
+<tr class="memdesc:ad20ab8374d00b9e7802d95de13e4e500"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> sensor measures distance to the ground.  <a href="main_8cpp.html#ad20ab8374d00b9e7802d95de13e4e500">More...</a><br /></td></tr>
 <tr class="separator:ad20ab8374d00b9e7802d95de13e4e500"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74b64ac7c32e03d8bc92f15573618b3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a74b64ac7c32e03d8bc92f15573618b3b">task_controller</a> (void *p_params)</td></tr>
 <tr class="memdesc:a74b64ac7c32e03d8bc92f15573618b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controller for both rudder and elevator control surfaces.  <a href="main_8cpp.html#a74b64ac7c32e03d8bc92f15573618b3b">More...</a><br /></td></tr>
@@ -169,8 +169,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a21055d4ac1f0170d766395eb25e9070b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><br  />
   <a href="main_8cpp.html#a21055d4ac1f0170d766395eb25e9070b">More...</a><br /></td></tr>
 <tr class="separator:a21055d4ac1f0170d766395eb25e9070b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad34c28b7e77e784ff26a914b58f53c77"><td class="memItemLeft" align="right" valign="top"><a id="ad34c28b7e77e784ff26a914b58f53c77" name="ad34c28b7e77e784ff26a914b58f53c77"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>task_IMU</b> (void *p_params)</td></tr>
+<tr class="memitem:ad34c28b7e77e784ff26a914b58f53c77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad34c28b7e77e784ff26a914b58f53c77">task_IMU</a> (void *p_params)</td></tr>
+<tr class="memdesc:ad34c28b7e77e784ff26a914b58f53c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task function to interface with IMU.  <a href="main_8cpp.html#ad34c28b7e77e784ff26a914b58f53c77">More...</a><br /></td></tr>
 <tr class="separator:ad34c28b7e77e784ff26a914b58f53c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dfd9b79bc5a37d7df40207afbc5431f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f">setup</a> (void)</td></tr>
 <tr class="memdesc:a7dfd9b79bc5a37d7df40207afbc5431f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Arduino setup function.  <a href="main_8cpp.html#a7dfd9b79bc5a37d7df40207afbc5431f">More...</a><br /></td></tr>
@@ -270,6 +270,27 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p >&lt; Period of controller task (ms)</p>
+<p >&lt; Controller for rudder angle based on yaw</p>
+<p >&lt; Controller for duty cycle based on rudder angle</p>
+<p >&lt; Controller for elevator angle based on pitch</p>
+<p >&lt; Controller for duty cycle based on elevator angle</p>
+<p >&lt; Desired yaw (deg)</p>
+<p >&lt; Desired pitch (deg) <br  />
+</p>
+<p >&lt; Rudder position at previous time (deg)</p>
+<p >&lt; Elevator position at previous time (deg)</p>
+<p >&lt; Desired rudder angle (deg)</p>
+<p >&lt; Current rudder angle (deg)</p>
+<p >&lt; Minimum allowable rudder angle (deg)</p>
+<p >&lt; Maximum allowable rudder angle (deg)</p>
+<p >&lt; Desired elevator angle (deg)</p>
+<p >&lt; Current elevator angle (deg)</p>
+<p >&lt; Minimum allowable elevator angle (deg)</p>
+<p >&lt; Maximum allowable elevator angle (deg)</p>
+<p >&lt; Rudder motor duty cycle (-100% to 100% incl.)</p>
+<p >&lt; Elev motor duty cycle (-100% to 100% incl.)</p>
+<p >&lt; Current amount of time (ms) in inactive delay</p>
 
 </div>
 </div>
@@ -292,6 +313,32 @@ Variables</h2></td></tr>
 <p><br  />
  </p>
 <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_params</td><td>A pointer to parameters passed to this task. This pointer is ignored; it should be set to <code>NULL</code> in the call to <code>xTaskCreate()</code> which starts this task </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad34c28b7e77e784ff26a914b58f53c77" name="ad34c28b7e77e784ff26a914b58f53c77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad34c28b7e77e784ff26a914b58f53c77">&#9670;&#160;</a></span>task_IMU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void task_IMU </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p_params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Task function to interface with IMU. </p>
+<p >This task reads from the IMU to get pitch, yaw, and roll measurements. It then puts the data into shaes for the controller to use. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p_params</td><td>A pointer to parameters passed to this task. This pointer is ignored; it should be set to <code>NULL</code> in the call to <code>xTaskCreate()</code> which starts this task </td></tr>
   </table>
@@ -343,8 +390,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ultrasonic sensor measures distance to the ground. </p>
-<p >Ultrasonic sensor mounted on the airplane measures the distance from the airplane to the ground. When the airplane is within 1 foot of the ground, the airplane's control surfaces will move into "landing configuration" where the pitch will be x degrees up for a soft landing. </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> sensor measures distance to the ground. </p>
+<p ><a class="el" href="class_ultrasonic.html" title="Class for an HC_SR04 Ultrasonic Sensor.">Ultrasonic</a> sensor mounted on the airplane measures the distance from the airplane to the ground. When the airplane is within 1 foot of the ground, the airplane's control surfaces will move into "landing configuration" where the pitch will be x degrees up for a soft landing. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">p_params</td><td>A pointer to parameters passed to this task. This pointer is ignored; it should be set to <code>NULL</code> in the call to <code>xTaskCreate()</code> which starts this task </td></tr>
   </table>

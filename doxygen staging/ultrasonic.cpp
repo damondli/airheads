@@ -19,7 +19,7 @@
  *  @param   echo The GPIO pin used to measure the time between ultrasonic pulses
  *  @param   trig The GPIO pin used to send out ultrasonic pulses
  */
-ultrasonic::ultrasonic(uint8_t echo, uint8_t trig)
+Ultrasonic::Ultrasonic(uint8_t echo, uint8_t trig)
 {
     // Establish the trigger and echo pins
     trigPin = trig;
@@ -33,7 +33,7 @@ ultrasonic::ultrasonic(uint8_t echo, uint8_t trig)
 /** @brief   Measure the distance between the sensor and the object in front of it
  *  @returns The distance, in centimeters, between the sensor and the object in front of it
  */
-float ultrasonic::get_distance (void)
+float Ultrasonic::get_distance (void)
 {
     distance;       // variable to store calculated distance
     duration;       // variable for the duration of sound wave travel

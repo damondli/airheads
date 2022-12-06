@@ -20,32 +20,32 @@
 #include "IMU.h"
 
 // Shares
-Share<bool> near_ground ("Near Ground");
-Share<uint8_t> tc_state ("Task Controller State");
-Share<int16_t> rudder_duty ("Rudder motor duty cycle");
-Share<int16_t> elev_duty ("Elevator motor duty cycle");
-Share<float> yawC ("Current yaw from IMU");
-Share<float> pitchC ("Current pitch from IMU");
+Share<bool> near_ground ("Near Ground");                    ///< A share boolean that reads true if the glider is near ground
+Share<uint8_t> tc_state ("Task Controller State");          ///< A share integer for finite state machine
+Share<int16_t> rudder_duty ("Rudder motor duty cycle");     ///< A share containing the duty cycle for rudder motor
+Share<int16_t> elev_duty ("Elevator motor duty cycle");     ///< A share containing the duty cycle for elevator motor
+Share<float> yawC ("Current yaw from IMU");                 ///< A share containing current yaw of the glider
+Share<float> pitchC ("Current pitch from IMU");             ///< A share containing current pitch of the glider
 
 // Elevator Motor (Motor 0)
-#define ELEVATOR_PIN_IN1   27
-#define ELEVATOR_PIN_IN2   33
-#define ELEVATOR_CHANNEL_A 2
-#define ELEVATOR_CHANNEL_B 3
+#define ELEVATOR_PIN_IN1   27       ///< GPIO 27 on ESP32: non-zero signal for (+) duty cycle
+#define ELEVATOR_PIN_IN2   33       ///< GPIO 33 on ESP32: non-zero signal for (-) duty cycle
+#define ELEVATOR_CHANNEL_A 2        ///< GPIO 2 on ESP32: unique channel
+#define ELEVATOR_CHANNEL_B 3        ///< GPIO 3 on ESP32: unique channel
 
 // Rudder Motor (Motor 1)
-#define RUDDER_PIN_IN1   16
-#define RUDDER_PIN_IN2   17
-#define RUDDER_CHANNEL_A 0
-#define RUDDER_CHANNEL_B 1
+#define RUDDER_PIN_IN1   16         ///< GPIO 16 on ESP32: non-zero signal for (+) duty cycle
+#define RUDDER_PIN_IN2   17         ///< GPIO 17 on ESP32: non-zero signal for (-) duty cycle
+#define RUDDER_CHANNEL_A 0          ///< GPIO 0 on ESP32: unique channel
+#define RUDDER_CHANNEL_B 1          ///< GPIO 1 on ESP32: unique channel
 
 // Potentiometers
-#define ELEVATOR_POT_PIN 34
-#define RUDDER_POT_PIN   39
+#define ELEVATOR_POT_PIN 34         ///< GPIO 34 on ESP32: reads voltage from elevator potentiometer
+#define RUDDER_POT_PIN   39         ///< GPIO 39 on ESP32: reads voltage from rudder potentiometer
 
 // Ultrasonic
-#define TRIG 12
-#define ECHO 13
+#define TRIG 12                     ///< GPIO 12 on ESP32: ultrasonic trigger pin
+#define ECHO 13                     ///< GPIO 1 on ESP32: ultrasonic echo pin
 
 /** @brief   Ultrasonic sensor measures distance to the ground
  *  @details Ultrasonic sensor mounted on the airplane measures the 

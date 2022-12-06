@@ -8,5 +8,5 @@ var hierarchy =
     [ "LSM6DSOX", "class_l_s_m6_d_s_o_x.html", null ],
     [ "PIDController", "class_p_i_d_controller.html", null ],
     [ "Potentiometer", "class_potentiometer.html", null ],
-    [ "ultrasonic", "classultrasonic.html", null ]
+    [ "Ultrasonic", "class_ultrasonic.html", null ]
 ];
