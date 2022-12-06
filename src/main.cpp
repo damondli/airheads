@@ -327,10 +327,10 @@ void task_controller (void* p_params)
  *           call to @c xTaskCreate() which starts this task
  */
 void task_rudder_motor (void* p_params)
-{
+{ 
 
     // Motor task period
-    const uint8_t period = 10;
+    const uint8_t period = 50;
 
     Serial << "Rudder Motor Task Begin" << endl;
     // Create object
@@ -356,7 +356,7 @@ void task_elevator_motor (void* p_params)
 {
     
     // Motor task period
-    const uint8_t period = 10;
+    const uint8_t period = 50;
 
     Serial << "Elevator Motor Task Begin" << endl;
     // Create object
@@ -434,22 +434,22 @@ void setup (void)
     web_calibrate.put(1);
 
     // Task which runs the web server. It runs at a low priority
-    xTaskCreate (task_webserver, "Web Server", 8192, NULL, 2, NULL);
+    xTaskCreate (task_webserver, "Web Server", 8192, NULL, 10, NULL);
 
     // Task for the potentiometer testing
-    xTaskCreate (task_rudder_motor, "Rudder Motor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_rudder_motor, "Rudder Motor", 2048, NULL, 20, NULL);
 
     // Task for the potentiometer testing
-    xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_elevator_motor, "Elevator Motor", 2048, NULL, 40, NULL);
     
     // Task for the ultrasonic sensor
-    xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 3, NULL);
+    xTaskCreate (task_ultrasonic, "Ultrasonic Sensor", 2048, NULL, 50, NULL);
 
     // Task for the flight surface controls (rudder and elevator)
-    xTaskCreate (task_controller, "Flight Controls", 2048,  NULL, 5, NULL);
+    xTaskCreate (task_controller, "Flight Controls", 2048,  NULL, 60, NULL);
 
     // Task for the IMU readings
-    xTaskCreate (task_IMU, "IMU", 2048, NULL, 10, NULL);
+    xTaskCreate (task_IMU, "IMU", 2048, NULL, 30, NULL);
 }
 
 
