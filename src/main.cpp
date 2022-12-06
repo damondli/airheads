@@ -372,7 +372,14 @@ void task_elevator_motor (void* p_params)
     }
 }
 
-
+/** @brief   Task function to interface with IMU
+ *  @details This task reads from the IMU to get pitch, yaw, and roll
+ *           measurements. It then puts the data into shaes for the 
+ *           controller to use. 
+ *  @param   p_params A pointer to parameters passed to this task. This 
+ *           pointer is ignored; it should be set to @c NULL in the 
+ *           call to @c xTaskCreate() which starts this task
+ */
 void task_IMU(void* p_params) 
 {
     // INIT
@@ -441,7 +448,7 @@ void setup (void)
     // Task for the flight surface controls (rudder and elevator)
     xTaskCreate (task_controller, "Flight Controls", 2048,  NULL, 5, NULL);
 
-    // Task for the flight surface controls (rudder and elevator)
+    // Task for the IMU readings
     xTaskCreate (task_IMU, "IMU", 2048, NULL, 10, NULL);
 }
 
