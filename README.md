@@ -2,7 +2,7 @@
 
 <div class="title_screenshot">
 <p align="center">
-![Picture of Glider](img/Glider.png)
+<img src="img/Glider.png">
 </p>
 </div>
 
