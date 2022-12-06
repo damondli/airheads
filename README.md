@@ -1,9 +1,9 @@
 #  ME507 Airheads Glider Project
 
 <div class="title_screenshot">
-
+<p align="center">
 ![Picture of Glider](img/Glider.png)
-
+</p>
 </div>
 
 This repository documents the development of a flight stabilization system for a glider.
@@ -24,7 +24,9 @@ This is a term project for Cal Poly's ME507 class. The scope of our project cons
 
 To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
 
+<p align="center">
 ![Custom Motor Bracket](img/Mount.png)
+</p>
 
 ## Custom PCB Design
 
@@ -34,7 +36,7 @@ Our custom PCB is designed to fit on an ESP32 feather board.
 
 The board supports:
 - Two DRV8871 Motor Driver Chips
-- Two [Potentiometers](class_potentiometer.html)
+- Two [Potentiometers](/class_potentiometer.html)
 - One HC-SR04 Ultrasonic Sensor
 - One LIS3MDL + LSM6DSOX IMU Breakout Board
 
