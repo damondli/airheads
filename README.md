@@ -2,7 +2,7 @@
 
 <div class="title_screenshot">
 <p align="center">
-![Picture of Glider](img/Glider.png)
+<img src="img/Glider.png">
 </p>
 </div>
 
@@ -25,14 +25,18 @@ This is a term project for Cal Poly's ME507 class. The scope of our project cons
 To make this project more challenging and more fitting for ME507, we decided to use micro servo body DC motors instead of servos. To implement some form of feedback for the position of the motors, a motor mount was designed to couple a potentiometer to the shaft of the motor.
 
 <p align="center">
-![Custom Motor Bracket](img/Mount.png)
+<img src="img/Mount.png">
 </p>
+<!--  ![Custom Motor Bracket](img/Mount.png) -->
 
 ## Custom PCB Design
 
 Our custom PCB is designed to fit on an ESP32 feather board.
 
-![Custom PCB](img/PCB_Board.png)
+<p align="center">
+<img src="img/PCB_Board.png">
+</p>
+<!-- ![Custom PCB](img/PCB_Board.png) -->
 
 The board supports:
 - Two DRV8871 Motor Driver Chips
@@ -56,7 +60,10 @@ Our program uses cooperative multitasking with FreeRTOS to "simultaneously" run 
 
 To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the user can interact with the flight control system.
 
-![Webpage Control Panel](img/Webpage.png)
+<p align="center">
+<img src="img/Webpage.png">
+</p>
+<!--  ![Webpage Control Panel](img/Webpage.png) -->
 
 ## Documentation
 
