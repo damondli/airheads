@@ -7,7 +7,7 @@
 </div>
 
 This repository documents the development of a flight stabilization system for a glider.
-To access our written report for this project, click [here](/Airheads%20Term%20Project%20Report%20ME507.pdf).
+To access our written report for this project, click [here](Airheads_Term_Project_Report_ME507.pdf).
 
 ## Background
 
@@ -70,4 +70,4 @@ Through the webpage, we have the capability to activate, deactivate, and calibra
 ## Documentation and Report
 
 For full documentation of our code, please visit [here](https://damondli.github.io/airheads/).
-Our written report for this project can be accessed [here](/Airheads%20Term%20Project%20Report%20ME507.pdf).
+Our written report for this project can be accessed [here](Airheads_Term_Project_Report_ME507.pdf).
