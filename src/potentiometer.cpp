@@ -1,9 +1,9 @@
 /** @file potentiometer.cpp
- * This is the source file containing the constructor and methods for
- * a generic potentiometer class.
+ *  @brief This is the source file containing the constructor and methods for
+ *         a generic potentiometer class.
  * 
- * @author  Damond Li
- * @date    2022-Nov-03 Original file
+ *  @author  Damond Li
+ *  @date    2022-Nov-03 Original file
  */
 
 #include <Arduino.h>

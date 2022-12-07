@@ -1,9 +1,9 @@
 /** @file potentiometer.h
- * The header file for a potentiometer class which reads the input voltage
- * from a GPIO pin on an ESP32.
+ *  @brief The header file for a potentiometer class which reads the input voltage
+ *         from a GPIO pin on an ESP32.
  * 
- * @author  Damond Li
- * @date    2022-Nov-03 Original file
+ *  @author  Damond Li
+ *  @date    2022-Nov-03 Original file
  */
 
 // Compile this header file only once

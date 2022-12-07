@@ -1,5 +1,5 @@
 /** @file ultrasonic.cpp
- *  The source file for an HC_SR04 Ultrasonic Sensor class
+ *  @brief The source file for an HC_SR04 Ultrasonic Sensor class
  * 
  *  Based on an examples by Arbi Abdul Jabbaar at 
  *  @c https://create.arduino.cc/projecthub/abdularbi17/ultrasonic-sensor-hc-sr04-with-arduino-tutorial-327ff6

@@ -1,5 +1,5 @@
 /** @file ultrasonic.h
- *  The header file for an HC_SR04 Ultrasonic Sensor class
+ *  @brief The header file for an HC_SR04 Ultrasonic Sensor class
  * 
  *  @author Damond Li
  *  @author Arielle Sampson

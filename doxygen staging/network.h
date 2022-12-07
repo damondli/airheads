@@ -1,9 +1,9 @@
 /** @file network.h
- * This header file contains the functions that main.cpp will need
- * in order to create a web page. This 
+ *  @brief This header file contains the functions that main.cpp will need
+ *         in order to create a web page. This 
  * 
- * @author Damond Li
- * @date 2022-Nov-28 Original file
+ *  @author Damond Li
+ *  @date 2022-Nov-28 Original file
  */
 
 #ifndef _NETWORK_

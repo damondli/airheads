@@ -1,6 +1,6 @@
 /** @file shares.h
- *  This file contains extern declarations of shares and queues which are used
- *  in more than one file of a demonstration project.
+ *  @brief This file contains extern declarations of shares and queues which are used
+ *         in more than one file of a demonstration project.
  * 
  *  @author JR Ridgely
  *  @author Damond Li edited file to be used for Airhead's ME507 Glider Project

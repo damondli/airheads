@@ -2,7 +2,7 @@
 
 <div class="title_screenshot">
 
-![Figure 1. Custom Motor Bracket](img/Glider.png)
+![Figure 1. Glider](img/Glider.png)
 
 </div>
 

@@ -1,7 +1,7 @@
 /** @file DRV8871.h
- * Header file for the DRV8871 motor driver. This contains the
- * class for the motor driver which is responsible for generating
- * the appropriate PWM wave for each instance of the motor object. 
+ *  @brief Header file for the DRV8871 motor driver. This contains the
+ *         class for the motor driver which is responsible for generating
+ *         the appropriate PWM wave for each instance of the motor object. 
  * 
  * @author  Damond Li
  * @date    2022-Oct-27 Original file

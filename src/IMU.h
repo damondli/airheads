@@ -17,7 +17,7 @@
 #include <Adafruit_LIS3MDL.h>
 #include <time.h>
 
-/// @brief Class to interface witch the magnetometer
+/// @brief Class to interface with the LIS3MDL magnetometer
 class LIS3MDL
 {
 protected:
@@ -68,7 +68,7 @@ public:
     void read_xyz_mag(int16_t& MAG_X, int16_t& MAG_Y,int16_t& MAG_Z);    
 
 };
-/// @brief Class to interface and get pitch, yaw, roll data from the accelerometer and gyroscope
+/// @brief Class to interface and get pitch, yaw, roll data from the LSM6DSOX accelerometer and gyroscope
 class LSM6DSOX
 {
 private:

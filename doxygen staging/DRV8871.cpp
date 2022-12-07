@@ -1,6 +1,6 @@
 /** @file DRV8871.cpp
- * The source file for a DRV8871 motor driver. This contains the methods that
- * construct an instance of the DRV8871 motor object and set the desired duty cycle.
+ *  @brief source file for a DRV8871 motor driver. This contains the methods that
+ *         construct an instance of the DRV8871 motor object and set the desired duty cycle.
  * 
  *  Based on an examples by A. Sinha at 
  *  @c https://randomnerdtutorials.com/esp32-pwm-arduino-ide/
