@@ -7,6 +7,7 @@
 </div>
 
 This repository documents the development of a flight stabilization system for a glider.
+To access our written report for this project, click [here](Airheads Term Project Report ME507.pdf).
 
 ## Background
 
@@ -66,6 +67,7 @@ To implement the IoT, the ESP32's Wi-Fi module is used to host webpage where the
 
 Through the webpage, we have the capability to activate, deactivate, and calibrate the flight control system. With more time, we would like to enable our program to support GET or POST requests to accept the user's typed input. This way we can seamlessly update our PID gains without recompiling and uploading our program for each iteration. 
 
-## Documentation
+## Documentation and Report
 
 For full documentation of our code, please visit [here](https://damondli.github.io/airheads/).
+Our written report for this project can be accessed [here](Airheads Term Project Report ME507.pdf).

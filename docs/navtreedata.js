@@ -31,7 +31,7 @@ var NAVTREE =
       [ "Custom PCB Design", "index.html#autotoc_md3", null ],
       [ "Software Design", "index.html#autotoc_md4", null ],
       [ "Internet of Things (IoT)", "index.html#autotoc_md5", null ],
-      [ "Documentation", "index.html#autotoc_md6", null ]
+      [ "Documentation and Report", "index.html#autotoc_md6", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -50,13 +50,14 @@ var NAVTREE =
         [ "Variables", "globals_vars.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Report", "Airheads Term Project Report ME507.pdf", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_d_r_v8871_8cpp.html"
+"Airheads Term Project Report ME507.pdf"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
