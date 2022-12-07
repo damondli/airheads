@@ -35,7 +35,7 @@
       <tab type="filelist" visible="yes" title="" intro=""/>
       <tab type="globals" visible="yes" title="" intro=""/>
     </tab>
-    <tab type="user" visible="yes" title="Report" url="Airheads Term Project Report ME507.pdf"/>
+    <tab type="user" visible="yes" title="Report" url="Airheads_Term_Project_Report_ME507.pdf"/>
     <tab type="examples" visible="yes" title="" intro=""/>
   </navindex>
 

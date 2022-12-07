@@ -51,13 +51,13 @@ var NAVTREE =
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
-    [ "Report", "Airheads Term Project Report ME507.pdf", null ]
+    [ "Report", "Airheads_Term_Project_Report_ME507.pdf", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"Airheads Term Project Report ME507.pdf"
+"Airheads_Term_Project_Report_ME507.pdf"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
